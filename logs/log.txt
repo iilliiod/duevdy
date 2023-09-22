@@ -1,0 +1,83 @@
+store gateway closed.
+Test 2023/01/01  record request sent.
+opened store store.
+browsing store with Test%2023!01!01%
+creating Test%2023!01!01%...
+stored Test 2023/01/01  as Test%2023!01!01%
+Test! 2023/01/01  record request sent.
+browsing store with Test!%2023!01!01%
+creating Test!%2023!01!01%...
+stored Test! 2023/01/01  as Test!%2023!01!01%
+Test2 2023/01/01 C record request sent.
+browsing store with Test2%2023!01!01%C
+creating Test2%2023!01!01%C...
+stored Test2 2023/01/01 C as Test2%2023!01!01%C
+Test 2023/01/01 
+Test! 2023/01/01 
+Test2 2023/01/01 C
+Mouse clicked
+ok ok  record request sent.
+browsing store with ok%ok%
+creating ok%ok%...
+stored ok ok  as ok%ok%
+ok ok 
+Mouse clicked
+Mouse clicked
+the log seems to be working nwo  record request sent.
+browsing store with the%log%seems%to%be%working%nwo%
+creating the%log%seems%to%be%working%nwo%...
+stored the log seems to be working nwo  as the%log%seems%to%be%working%nwo%
+the log seems to be working nwo 
+store gateway open.
+loaded Test!%2023!01!01%
+loaded Test%2023!01!01%
+loaded Test2%2023!01!01%C
+loaded ok%ok%
+loaded the%log%seems%to%be%working%nwo%
+Test 2023/01/01  record request sent.
+browsing store with Test%2023!01!01%
+Test! 2023/01/01  record request sent.
+browsing store with Test!%2023!01!01%
+Test2 2023/01/01 C record request sent.
+browsing store with Test2%2023!01!01%C
+Test! 2023!01!01 
+Test 2023!01!01 
+Test2 2023!01!01 C
+ok ok 
+the log 
+store gateway open.
+loaded Test!%2023!01!01%
+loaded Test%2023!01!01%
+loaded Test2%2023!01!01%C
+loaded ok%ok%
+loaded the%log%seems%to%be%working%nwo%
+Test 2023/01/01  record request sent.
+browsing store with Test%2023!01!01%
+Test! 2023/01/01  record request sent.
+browsing store with Test!%2023!01!01%
+Test2 2023/01/01 C record request sent.
+browsing store with Test2%2023!01!01%C
+Test! 2023!01!01 
+Test 2023!01!01 
+Test2 2023!01!01 C
+ok ok 
+the log 
+Mouse clicked
+store gateway open.
+loaded Test!%2023!01!01%
+loaded Test%2023!01!01%
+loaded Test2%2023!01!01%C
+loaded ok%ok%
+loaded the%log%seems%to%be%working%nwo%
+Test 2023/01/01  record request sent.
+browsing store with Test%2023!01!01%
+Test! 2023/01/01  record request sent.
+browsing store with Test!%2023!01!01%
+Test2 2023/01/01 C record request sent.
+browsing store with Test2%2023!01!01%C
+Test! 2023!01!01 
+Test 2023!01!01 
+Test2 2023!01!01 C
+ok ok 
+the log 
+Mouse clicked

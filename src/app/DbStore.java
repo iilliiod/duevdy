@@ -7,12 +7,14 @@ import java.io.IOException;
 import java.util.Comparator;
 import java.util.LinkedList;
 import app.Courses;
+import app.Logger;
 import java.util.regex.*;
 
 public class DbStore {
     private String filename;
     private final File dirpath = new File("store/");
     private LinkedList<Courses> courses = new LinkedList<Courses>();
+    private Logger logger = new Logger();
 
     public DbStore() {
         try {
@@ -44,14 +46,14 @@ public class DbStore {
     private void load() throws IOException {
         // read and parse files
         if(!this.dirpath.exists()) {
-            System.out.println(this.dirpath.toString() + " gateway closed.");
+            logger.out(this.dirpath.toString() + " gateway closed.");
             return;
         } 
 
         File path = new File(this.dirpath.toString());
         File[] files = path.listFiles();
         files = sortFiles(files);
-        System.out.println(path.toString() + " gateway open.");
+        logger.out(path.toString() + " gateway open.");
         
         // parse and handle empty contents[2]
         if(files != null) {
@@ -59,19 +61,19 @@ public class DbStore {
                 if(file.isFile() && file.getName().contains("%") && finder(file.getName())) {
                     String[] contents = file.getName().split("%");
                     this.courses.addLast(new Courses(contents[0], contents[1], (contents.length == 2 ? false : (contents[2].equals("C") ? true:false))));
-                    System.out.println("loaded " + file.getName());
+                    logger.out("loaded " + file.getName());
                 }
             }
         } else {
-            System.out.println("empty store.");
+            logger.out("empty store.");
         }
     }
 
     public Boolean addData(Courses course) {
         try {
-            System.out.println(course.toString() + " record request sent.");
+            logger.out(course.toString() + " record request sent.");
             if(storeData(course)) {
-                System.out.println("stored " + course.toString() + " as " + this.filename);
+                logger.out("stored " + course.toString() + " as " + this.filename);
                 this.courses.addLast(course);
                 return true;
             }
@@ -106,19 +108,19 @@ public class DbStore {
         // make folder
         if (!this.dirpath.exists()) {
             if (this.dirpath.mkdirs()) {
-                System.out.println("opened " + this.dirpath.toString() + " store.");
+                logger.out("opened " + this.dirpath.toString() + " store.");
             } else {
-                System.out.println("error opening store.");
+                logger.out("error opening store.");
                 return false;
             }
         }
         String fname = getFilename(course);
-        System.out.println("browsing store with " + fname);
+        logger.out("browsing store with " + fname);
         // make file
         File file = new File(this.dirpath.toString()+"/"+fname);
         if(!file.exists()){
             if(file.createNewFile()){
-                System.out.println("creating " + fname + "...");
+                logger.out("creating " + fname + "...");
                 return true;
             }
         }
