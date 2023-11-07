@@ -2,5 +2,5 @@
 
 ## Languages
 
-- [English](https://github.com/iilliiod/duevdy/blob/main/docs/en/Readme.md)
-- [Mandarin](https://github.com/iilliiod/duevdy/blob/main/docs/zh/Readme.md)
+- [English](./docs/en/Readme.md)
+- [Mandarin](./docs/zh/Readme.md)
