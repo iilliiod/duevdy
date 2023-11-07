@@ -1,0 +1,6 @@
+.root {
+  -fx-background-color: #e9edc9;
+}
+.unavailable-cursor:hover {
+  -fx-cursor: not-allowed;
+}

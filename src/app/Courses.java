@@ -1,12 +1,12 @@
 package app;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Courses {
     private String name;
-    private String dueDate;
+    private LocalDate dueDate;
     private Boolean completed;
 
-    public Courses(String name, String dueDate, Boolean completed) {
+    public Courses(String name, LocalDate dueDate, Boolean completed) {
         this.name = name;
         this.dueDate = dueDate;
         this.completed = completed;
@@ -19,11 +19,11 @@ public class Courses {
         this.name = name;
     }
 
-    public String getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(String dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 
@@ -35,6 +35,6 @@ public class Courses {
     }
 
     public String toString() {
-        return this.name + " " + this.dueDate + " " + (this.completed ? "C" : "");
+        return this.name + " " + this.dueDate.toString() + " " + (this.completed ? "C" : "");
     }
 }

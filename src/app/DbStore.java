@@ -2,6 +2,9 @@ package app;
 
 import java.io.File;
 import java.util.Arrays;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Comparator;
@@ -60,7 +63,9 @@ public class DbStore {
             for(File file : files) {
                 if(file.isFile() && file.getName().contains("%") && finder(file.getName())) {
                     String[] contents = file.getName().split("%");
-                    this.courses.addLast(new Courses(contents[0], contents[1], (contents.length == 2 ? false : (contents[2].equals("C") ? true:false))));
+                    DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDate date = LocalDate.parse(contents[1], format);
+                    this.courses.addLast(new Courses(contents[0], date, (contents.length == 2 ? false : (contents[2].equals("C") ? true:false))));
                     logger.out("loaded " + file.getName());
                 }
             }
@@ -95,7 +100,6 @@ public class DbStore {
     private String generateName(Courses course) {
         // add robustness later
         String output = course.toString().replaceAll(" ", "%");
-        output = output.replaceAll("/","!");
         return output;
     }
 
