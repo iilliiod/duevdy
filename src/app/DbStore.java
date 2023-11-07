@@ -61,11 +61,16 @@ public class DbStore {
         // parse and handle empty contents[2]
         if(files != null) {
             for(File file : files) {
+                System.out.println(file);
                 if(file.isFile() && file.getName().contains("%") && finder(file.getName())) {
                     String[] contents = file.getName().split("%");
                     DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    for(String c : contents) {
+                        System.out.println(c);
+                    }
                     LocalDate date = LocalDate.parse(contents[1], format);
-                    this.courses.addLast(new Courses(contents[0], date, (contents.length == 2 ? false : (contents[2].equals("C") ? true:false))));
+                    this.courses.addLast(new Courses(contents[0], date, 
+                                (contents.length == 2 ? false : (contents[2].equals("C") ? true:false))));
                     logger.out("loaded " + file.getName());
                 }
             }
