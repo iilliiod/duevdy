@@ -2,5 +2,5 @@
 
 ## Languages
 
-- [English](./main/docs/en/Readme.md)
-- [Mandarin](./main/docs/zh/Readme.md)
+- [English](./duevdy/docs/en/Readme.md)
+- [Mandarin](./duevdy/docs/zh/Readme.md)
