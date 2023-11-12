@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.Comparator;
 import java.util.LinkedList;
 import app.Courses;
@@ -61,13 +62,9 @@ public class DbStore {
         // parse and handle empty contents[2]
         if(files != null) {
             for(File file : files) {
-                System.out.println(file);
                 if(file.isFile() && file.getName().contains("%") && finder(file.getName())) {
                     String[] contents = file.getName().split("%");
                     DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                    for(String c : contents) {
-                        System.out.println(c);
-                    }
                     LocalDate date = LocalDate.parse(contents[1], format);
                     this.courses.addLast(new Courses(contents[0], date, 
                                 (contents.length == 2 ? false : (contents[2].equals("C") ? true:false))));
@@ -134,5 +131,19 @@ public class DbStore {
             }
         }
         return false;
+    }
+
+    private Boolean writeFile(File file, String content) {
+        // assumes file already exists and is opened
+        try {
+            FileWriter writer = new FileWriter(file);
+            writer.write(content);
+            writer.close();
+            return true;
+
+        } catch (IOException e) {
+            logger.out("cannot write to file " + file.getName() + " for whatever reason");
+            return false;
+        }
     }
 }

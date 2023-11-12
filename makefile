@@ -38,15 +38,3 @@ Main:
 clean:
 	$(RM) store/* store* logs/
 	find . -type f -name "*%*" -exec rm -f {} +
-
-##############################
-# original makefile contents #
-##############################
-# run : Main 
-# 	java -cp ./src/app:bin:/src/app --module-path $(JFX_SDK_PATH) --add-modules javafx.controls app.Main
-#
-# Main : 
-# 	javac -d bin src/app/*.java --module-path $(JFX_SDK_PATH) --add-modules javafx.controls
-#
-# clean :
-# 	rm -rf store/* store* logs/; find . -type f -name "*%*" -exec rm -f {} +

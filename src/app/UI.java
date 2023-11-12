@@ -24,6 +24,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.TilePane;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ScrollPane;
 
 import java.awt.Event;
 import java.time.LocalDate;
@@ -34,19 +35,22 @@ import app.DbStore;
 import app.Courses;
 import app.Controller;
 import app.Logger;
+import app.Card;
 
 public class UI {
     private Stage stage;
-    private TilePane container;
+    private ScrollPane scrollPane;
+    // private TilePane container;
     private DbStore dbStore;
     private Logger logger = new Logger();
     private int cardWidth = 150;
     private int cardHeight = 100;
+    private Card card;
     private final LocalDate dateToday = LocalDate.now();
 
     UI(Stage stage, DbStore dbStore) {
         this.stage = stage;
-        this.dbStore = dbStore;
+        this.dbStore = dbStore; // TODO : make Singleton
     }
 
     public void init() {
@@ -110,8 +114,9 @@ public class UI {
         vbox.setStyle("-fx-background-color: #dad7cd;");
 
         gridPane.getChildren().addAll(vbox);
+        scrollPane = new ScrollPane(gridPane);
 
-        Scene scene = new Scene(gridPane, 300, 250);
+        Scene scene = new Scene(scrollPane, 50, 50);
         scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
 
         stage.setTitle("duevdy");
@@ -127,14 +132,8 @@ public class UI {
 
         for (Courses c : dbStore.queryData()) {
             Courses course = c;
-            String courseName = course.getName();
-            LocalDate courseDate = course.getDueDate();
-            Rectangle cardBG = new Rectangle(this.cardWidth, this.cardHeight);
-            cardBG.setFill(Color.web("#a3b18a"));
-            TextField courseNameTextField = new TextField(courseName);
-            TextField courseDateTextField = new TextField(courseDate.toString());
-            courseNameTextField.setStyle("-fx-background-color: transparent;");
-            courseDateTextField.setStyle("-fx-background-color: transparent;");
+            card = new Card(course);
+            card.init();
             // courseNameTextField.setOnMouseExited((MouseEvent event) -> {
             // course.setName(courseNameTextField.getText());
             // });
@@ -142,85 +141,16 @@ public class UI {
             // course.setDueDate(courseDateTextField.getText());
             // });
 
-            VBox checkBox = new VBox(10);
-            checkBox.setPadding(new Insets(10));
-            CheckBox checkCompleted = new CheckBox("completed");
-            checkCompleted.setIndeterminate(false);
-            int val = course.getCompleted() ? 1 : 0;
-            switch (val) {
-                case 1:
-                    checkCompleted.setSelected(true);
-                    course.setCompleted(true);
-                    break;
-                default:
-                    checkCompleted.setSelected(false);
-                    course.setCompleted(false);
-                    break;
-            }
-            checkBox.getChildren().add(checkCompleted);
-
-            VBox cardBox = new VBox();
-            cardBox.getChildren().addAll(courseNameTextField, courseDateTextField, checkBox);
-
-            StackPane cardPane = new StackPane();
-            cardPane.getChildren().addAll(cardBG, cardBox);
-            cardPane.setAlignment(cardBG, Pos.TOP_LEFT);
-            cardPane.setAlignment(cardBox, Pos.CENTER_RIGHT);
-
-            DatePicker datePicker = new DatePicker();
-            datePicker.getStyleClass().add("no-prompt");
-            datePicker.setPromptText(courseDate.toString());
-            datePicker.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                }
-            });
-            HBox cardHbox = new HBox(cardPane, datePicker);
-
-            container.getChildren().addAll(cardHbox);
+            container.getChildren().addAll(card.getCardHbox());
             logger.out(course.toString());
         }
     }
 
     private void update(TilePane container, Courses course) {
-        String courseName = course.getName();
-        LocalDate courseDate = course.getDueDate();
-        Rectangle cardBG = new Rectangle(this.cardWidth, this.cardHeight);
-        cardBG.setFill(Color.web("#a3b18a"));
-        TextField courseNameTextField = new TextField(courseName);
-        TextField courseDateTextField = new TextField(courseDate.toString());
-        StackPane cardPane = new StackPane();
-        cardPane.getChildren().addAll(cardBG, courseNameTextField, courseDateTextField);
+        card = new Card(course);
+        card.init();
 
-        VBox checkBox = new VBox(10);
-        checkBox.setPadding(new Insets(10));
-        CheckBox checkCompleted = new CheckBox("completed");
-        checkCompleted.setIndeterminate(false);
-        int val = course.getCompleted() ? 1 : 0;
-        switch (val) {
-            case 1:
-                checkCompleted.setSelected(true);
-                course.setCompleted(true);
-                break;
-            default:
-                checkCompleted.setSelected(false);
-                course.setCompleted(false);
-                break;
-        }
-
-        DatePicker datePicker = new DatePicker();
-        datePicker.setPromptText(courseDate.toString());
-        datePicker.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                course.setDueDate(datePicker.getValue());
-            }
-        });
-
-        checkBox.getChildren().add(checkCompleted);
-        HBox cardHbox = new HBox(cardPane, checkBox, datePicker);
-
-        container.getChildren().addAll(cardHbox);
+        container.getChildren().addAll(card.getCardHbox());
         logger.out(course.toString());
     }
 }

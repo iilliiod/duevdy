@@ -1,10 +1,12 @@
 package app;
+// import java.io.File;
 import java.time.LocalDate;
 
 public class Courses {
     private String name;
     private LocalDate dueDate;
     private Boolean completed;
+    private String content;
 
     public Courses(String name, LocalDate dueDate, Boolean completed) {
         this.name = name;
@@ -32,6 +34,12 @@ public class Courses {
     }
     public void setCompleted(Boolean completed) {
         this.completed = completed;
+    }
+    public String getContent() {
+        return content;
+    }
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String toString() {
