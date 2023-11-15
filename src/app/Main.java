@@ -8,7 +8,7 @@ import app.UI;
 import app.Controller;
 
 public class Main extends Application {
-    private DbStore dbStore = new DbStore();
+    private DbStore dbStore = DbStore.getInstance(); 
     private UI ui;
 
     @Override

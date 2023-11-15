@@ -19,13 +19,21 @@ public class DbStore {
     private final File dirpath = new File("store/");
     private LinkedList<Courses> courses = new LinkedList<Courses>();
     private Logger logger = new Logger();
+    private static DbStore instance = null;
 
-    public DbStore() {
+    private DbStore() {
         try {
             load();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static synchronized DbStore getInstance() {
+        if (instance == null) {
+            instance = new DbStore();
+        }
+        return instance;
     }
 
     private Boolean finder(String string) {
