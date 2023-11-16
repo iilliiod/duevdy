@@ -3,4 +3,4 @@
 ## Languages
 
 - [English](docs/en/README.md)
-- [Mandarin](docs/zh/README.md)
+- [中文](docs/zh/README.md)

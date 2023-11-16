@@ -18,6 +18,7 @@ import javafx.geometry.Pos;
 import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import java.io.IOException;
 
 import java.awt.Event;
 import java.time.LocalDate;
@@ -101,6 +102,29 @@ public class Card {
                 course.setCompleted(false);
                 break;
         }
+
+        checkCompleted.setOnAction(event -> {
+            if(checkCompleted.isSelected()) {
+                try {
+                    System.out.println("set to: completed");
+                    course.setCompleted(true);
+                    DbStore.getInstance().update(course);
+
+                } catch (IOException e) {
+                    System.out.println(e);
+                }
+            } else {
+                try {
+                    System.out.println("set to: not completed");
+                    course.setCompleted(false);
+                    DbStore.getInstance().update(course);
+
+                } catch (IOException e) {
+                    System.out.println(e);
+                }
+            }
+        });
+
         checkBox.getChildren().add(checkCompleted);
     }
 

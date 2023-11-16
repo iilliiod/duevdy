@@ -43,6 +43,6 @@ public class Courses {
     }
 
     public String toString() {
-        return this.name + " " + this.dueDate.toString() + " " + (this.completed ? "C" : "");
+        return this.name + " " + this.dueDate.toString() + " " + (this.completed ? "C" : "X");
     }
 }

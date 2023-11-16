@@ -6,8 +6,13 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.io.FileWriter;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Comparator;
 import java.util.LinkedList;
 import app.Courses;
@@ -55,6 +60,26 @@ public class DbStore {
         return files;
     }
 
+    private void parseFile(File file) {
+        String title = "";
+        String[] contents = file.getName().split("%");
+        int len = contents.length;
+
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(contents[len - 2], format);
+
+        // set title
+        for(int i = 0; i < len - 2; i++) {
+            title = title + " " + contents[i];
+        }
+        // clean up on aisle title
+        title = title.trim();
+
+        this.courses.addLast(new Courses(title, date, 
+                    (contents[len - 1].equals("C") ? true:false)));
+        logger.out("loaded " + file.getName());
+    }
+
     private void load() throws IOException {
         // read and parse files
         if(!this.dirpath.exists()) {
@@ -71,17 +96,57 @@ public class DbStore {
         if(files != null) {
             for(File file : files) {
                 if(file.isFile() && file.getName().contains("%") && finder(file.getName())) {
-                    String[] contents = file.getName().split("%");
-                    DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                    LocalDate date = LocalDate.parse(contents[1], format);
-                    this.courses.addLast(new Courses(contents[0], date, 
-                                (contents.length == 2 ? false : (contents[2].equals("C") ? true:false))));
-                    logger.out("loaded " + file.getName());
+                    parseFile(file);
                 }
             }
         } else {
             logger.out("empty store.");
         }
+    }
+
+    private String getFilename(Courses course) {
+        // return the filename of the file's previous state 
+        String filename = generateName(course);
+        File file = findFile(filename);
+        filename = file.getName();
+        return filename;
+    }
+
+    private File findFile(String filename) {
+        // get the filename matching the file's previous state
+        System.out.println("in findFile: " + filename);
+        File file = new File(filename);
+        FilenameFilter filter = new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.startsWith(filename.substring(0, filename.length() - 2));
+            }
+        };
+
+        File[] list = new File(dirpath.toString()).listFiles(filter);
+
+        if (list != null) {
+            for (File f : list) { 
+                if(f.getName().startsWith(filename.substring(0, filename.length() - 2))) {
+                    return f;
+                }
+            } 
+        } 
+        return file;
+    }
+
+    public void update(Courses course) throws IOException {
+        System.out.println(course.toString());
+
+        // TODO clean this up a little
+        String fname = getFilename(course);
+        String rename = generateName(course);
+        System.out.println("renaming " + fname + " to " + rename);
+        // logger.out("renaming " + fname + " to " + rename);
+
+        // update file
+        Path file = Paths.get(this.dirpath.toString()+"/"+fname);
+        Files.move(file, file.resolveSibling(rename));
     }
 
     public Boolean addData(Courses course) {
@@ -100,7 +165,7 @@ public class DbStore {
 
     public void deleteData(Courses course) {
         // add robustness
-        this.courses.remove(course.getName());
+        this.courses.remove(course);
     }
 
     public LinkedList<Courses> queryData() {
@@ -113,8 +178,11 @@ public class DbStore {
         return output;
     }
 
-    public String getFilename(Courses course) {
+    private void setFileName(Courses course) {
         this.filename = generateName(course);
+    }
+
+    private String getFilename() {
         return this.filename;
     }
 
@@ -128,7 +196,8 @@ public class DbStore {
                 return false;
             }
         }
-        String fname = getFilename(course);
+        setFileName(course);
+        String fname = getFilename();
         logger.out("browsing store with " + fname);
         // make file
         File file = new File(this.dirpath.toString()+"/"+fname);

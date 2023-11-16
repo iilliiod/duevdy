@@ -10,7 +10,7 @@ else
     RM := rm -rf
     PATH_SEPARATOR := :
 	# Set JavaFX module path
-	JFX := ./utils/lib/
+	JFX := ./utils/mac/javafx-sdk-22/lib/
 endif
 
 # Set Java compiler
