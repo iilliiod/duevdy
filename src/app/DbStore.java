@@ -114,7 +114,6 @@ public class DbStore {
 
     private File findFile(String filename) {
         // get the filename matching the file's previous state
-        System.out.println("in findFile: " + filename);
         File file = new File(filename);
         FilenameFilter filter = new FilenameFilter() {
             @Override
@@ -136,12 +135,11 @@ public class DbStore {
     }
 
     public void update(Courses course) throws IOException {
-        System.out.println(course.toString());
 
         // TODO clean this up a little
         String fname = getFilename(course);
         String rename = generateName(course);
-        System.out.println("renaming " + fname + " to " + rename);
+        logger.out("renaming " + fname + " to " + rename);
         // logger.out("renaming " + fname + " to " + rename);
 
         // update file

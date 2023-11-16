@@ -1,6 +1,5 @@
 package app;
 
-import app.Courses;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.StackPane;
@@ -25,7 +24,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*; // List
 
+import app.Courses;
+import app.Logger;
+
 public class Card {
+    private Logger logger = new Logger();
     private String courseName;
     private LocalDate courseDate;
     private int cardWidth = 150;
@@ -106,7 +109,7 @@ public class Card {
         checkCompleted.setOnAction(event -> {
             if(checkCompleted.isSelected()) {
                 try {
-                    System.out.println("set to: completed");
+                    logger.out("set to: completed");
                     course.setCompleted(true);
                     DbStore.getInstance().update(course);
 
@@ -115,7 +118,7 @@ public class Card {
                 }
             } else {
                 try {
-                    System.out.println("set to: not completed");
+                    logger.out("set to: not completed");
                     course.setCompleted(false);
                     DbStore.getInstance().update(course);
 

@@ -41,25 +41,25 @@ import app.Courses;
 import app.Controller;
 import app.Logger;
 import app.Card;
+import app.Note;
 
 public class UI {
     private Stage stage;
     private ScrollPane scrollPane;
-    // private TilePane container;
     private DbStore dbStore = DbStore.getInstance();
     private Logger logger = new Logger();
     private int cardWidth = 150;
     private int cardHeight = 100;
     private Card card;
+    private Note note;
     private final LocalDate dateToday = LocalDate.now();
 
     UI(Stage stage, DbStore dbStore) {
         this.stage = stage;
-        this.dbStore = dbStore; 
     }
 
     // handy little function lolz
-    private void showMessage(String message, Duration duration) {
+    public static void showMessage(String message, Duration duration) {
         Alert msg = new Alert(AlertType.INFORMATION);
         msg.setHeaderText(null);
         msg.setContentText(message);
@@ -72,6 +72,7 @@ public class UI {
     }
 
     public void init() {
+        // set up main container
         TilePane cardContainer = new TilePane();
         cardContainer.setVgap(10);
         cardContainer.setHgap(10);
@@ -79,108 +80,9 @@ public class UI {
 
         load(cardContainer);
 
-        TextField courseNameTextField = new TextField("Course Name");
-        TextField courseDateTextField = new TextField("Course Date");
-        courseDateTextField.setEditable(false); // NOTE: set this to false to disable editing
-        courseDateTextField.getStyleClass().add("unavailable-cursor"); // NOTE: uncomment after setting courseDateTextField to false
-        courseNameTextField.setMaxWidth(100);
-        courseNameTextField.setMaxHeight(50);
-        courseDateTextField.setMaxWidth(100);
-        courseDateTextField.setMaxHeight(50);
+        note = new Note(this, cardContainer);
 
-        DatePicker courseDatePicker = new DatePicker();
-        TextArea newNoteTextArea = new TextArea("New note...");
-
-        courseDatePicker.setMaxWidth(25);
-        courseDatePicker.setShowWeekNumbers(false);
-        courseDatePicker.getEditor().setManaged(false);
-        courseDatePicker.getEditor().setVisible(false);
-
-        newNoteTextArea.setPrefRowCount(1);
-        newNoteTextArea.setEditable(true);
-        newNoteTextArea.setMaxHeight(100);
-        newNoteTextArea.setMaxWidth(Screen.getPrimary().getVisualBounds().getWidth() / 4);
-        System.out.println(Screen.getPrimary().getVisualBounds().getWidth());
-
-        newNoteTextArea.textProperty().addListener((observable, oldVal, newVal) -> {
-            int row = newNoteTextArea.getText().split("\n").length;
-            int col = newNoteTextArea.getText().split(" ").length;
-            newNoteTextArea.setPrefRowCount(row);
-            newNoteTextArea.setPrefColumnCount(col);
-        });
-
-        courseNameTextField.setOnMouseClicked((MouseEvent event) -> {
-            if(courseNameTextField.getText().equals("Course Name")) {
-                courseNameTextField.clear();
-            }
-            logger.out("Mouse clicked @courseNameTextField");
-        });
-
-        courseDateTextField.setOnMouseEntered((MouseEvent event) -> {
-            courseDateTextField.setText("Please select a date below.");
-            logger.out("Mouse clicked @courseDateTextField.");
-        });
-        courseDateTextField.setOnMouseExited((MouseEvent event) -> {
-            courseDateTextField.setText("Course Date");
-            logger.out("Mouse clicked @courseDateTextField.");
-        });
-
-        courseDateTextField.setOnMouseClicked((MouseEvent event) -> {
-            if (courseDateTextField.getText().equals("Course Date")) {
-                courseDateTextField.clear();
-            }
-            logger.out("Mouse clicked @courseDateTextField.");
-        });
-
-        newNoteTextArea.setOnMouseClicked((MouseEvent event) -> {
-            if(newNoteTextArea.getText().equals("New note...")) {
-                newNoteTextArea.clear();
-            }
-            logger.out("Mouse clicked @newNoteTextArea");
-        });
-
-        courseDatePicker.setOnAction(e -> {
-            // bind the text property of the textfield to the datepicker
-            courseDateTextField.textProperty().bind(courseDatePicker.valueProperty().asString());
-            courseDatePicker.valueProperty().addListener((obs, oldVal, newVal) -> {
-                if (newVal == null) {
-                    courseDateTextField.textProperty().unbind();
-                    courseDateTextField.setText("");
-                }
-            });
-        });
-
-        Button addCourseBtn = new Button();
-        addCourseBtn.setText("Add Course");
-        addCourseBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                String noteContent = newNoteTextArea.getText();
-                String courseName = courseNameTextField.getText();
-                DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                LocalDate courseDate = LocalDate.parse(courseDateTextField.getText(), format);
-                Courses newCourse = new Courses(courseName, courseDate, false);
-                if (!courseName.isEmpty()) {
-                    courseNameTextField.clear();
-                    courseDateTextField.clear();
-                    courseDatePicker.setValue(null);
-                    newNoteTextArea.clear();
-                    showMessage(noteContent, Duration.seconds(3));
-                    if(dbStore.addData(newCourse)) update(cardContainer, newCourse);
-                }
-            }
-        });
-
-
-        GridPane gridPane = new GridPane();
-
-        VBox vbox = new VBox(8);
-        vbox.getChildren().addAll(cardContainer, courseNameTextField, courseDateTextField, courseDatePicker, newNoteTextArea, addCourseBtn);
-        vbox.setStyle("-fx-background-color: #dad7cd;");
-
-        gridPane.getChildren().addAll(vbox);
-        scrollPane = new ScrollPane(gridPane);
-
+        scrollPane = new ScrollPane(note.getVbox());
         Scene scene = new Scene(scrollPane, 50, 50);
         scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
 
@@ -191,9 +93,10 @@ public class UI {
     }
 
     private void load(TilePane container) {
-        dbStore.addData(new Courses("Test", this.dateToday, false));
-        dbStore.addData(new Courses("Test!", this.dateToday, false));
-        dbStore.addData(new Courses("Test2", this.dateToday, true));
+        // TODO: uncomment when store empty
+        // dbStore.addData(new Courses("Test", this.dateToday, false));
+        // dbStore.addData(new Courses("Test!", this.dateToday, false));
+        // dbStore.addData(new Courses("Test2", this.dateToday, true));
 
         for (Courses c : dbStore.queryData()) {
             Courses course = c;
@@ -211,7 +114,7 @@ public class UI {
         }
     }
 
-    private void update(TilePane container, Courses course) {
+    public void update(TilePane container, Courses course) {
         card = new Card(course);
         card.init();
 
