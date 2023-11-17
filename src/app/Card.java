@@ -56,6 +56,8 @@ public class Card {
     private TextField setCourseDateTextField (LocalDate courseDate) {
         courseDateTextField = new TextField(courseDate.toString());
         courseDateTextField.setStyle("-fx-background-color: transparent;");
+        courseDateTextField.setEditable(false); // NOTE: set this to false to disable editing
+        courseDateTextField.getStyleClass().add("unavailable-cursor"); // NOTE: uncomment after setting courseDateTextField to false
         return courseDateTextField;
     }
 
@@ -72,15 +74,59 @@ public class Card {
         cardBG.setFill(Color.web("#a3b18a"));
         setCourseNameTextField(courseName);
         setCourseDateTextField(courseDate);
+
+        // Update courseName if changed
+        courseNameTextField.focusedProperty().addListener((obs, wasFocused, isFocused) -> {
+            if(!isFocused) {
+                String newName = courseNameTextField.getText();
+            // logger.out("updating courseName value...");
+                if(!newName.equals(course.getName())) {
+                    System.out.println("updating courseName value...");
+                    course.setName(newName);
+                    try {
+                        DbStore.getInstance().update(course);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } else {
+                logger.out("ERROR: updating courseName");
+            }
+        });
     }
     
     private void setDatePicker() {
         datePicker = new DatePicker();
         datePicker.getStyleClass().add("no-prompt");
         datePicker.setPromptText(courseDate.toString());
-        datePicker.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
+        datePicker.setMaxWidth(25);
+        datePicker.setShowWeekNumbers(false);
+        datePicker.getEditor().setManaged(false);
+        datePicker.getEditor().setVisible(false);
+
+        // Update courseDate based on the selected date
+        datePicker.valueProperty().addListener((obs, oldVal, newVal) -> {
+            logger.out("updating datePicker value...");
+            if (newVal != null) {
+                courseDate = newVal;
+                try {
+                    course.setDueDate(courseDate);
+                    DbStore.getInstance().update(course);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                logger.out("ERROR: updating datePicker");
+            }
+            courseDateTextField.textProperty().bind(datePicker.valueProperty().asString());
+        });
+
+        // might be dead code i think lolz
+        datePicker.valueProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal == null) {
+                logger.out("unbinding datePicker");
+                courseDateTextField.textProperty().unbind();
+                courseDateTextField.setText("");
             }
         });
     }
@@ -114,7 +160,7 @@ public class Card {
                     DbStore.getInstance().update(course);
 
                 } catch (IOException e) {
-                    System.out.println(e);
+                    e.printStackTrace();
                 }
             } else {
                 try {
@@ -123,7 +169,7 @@ public class Card {
                     DbStore.getInstance().update(course);
 
                 } catch (IOException e) {
-                    System.out.println(e);
+                    e.printStackTrace();
                 }
             }
         });

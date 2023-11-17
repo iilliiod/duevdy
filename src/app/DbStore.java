@@ -15,6 +15,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.UUID;
+
 import app.Courses;
 import app.Logger;
 import java.util.regex.*;
@@ -61,7 +63,6 @@ public class DbStore {
     }
 
     private void parseFile(File file) {
-        String title = "";
         String[] contents = file.getName().split("%");
         int len = contents.length;
 
@@ -69,13 +70,16 @@ public class DbStore {
         LocalDate date = LocalDate.parse(contents[len - 2], format);
 
         // set title
-        for(int i = 0; i < len - 2; i++) {
+        String title = contents[0];
+        for(int i = 1; i < len - 2; i++) {
             title = title + " " + contents[i];
         }
         // clean up on aisle title
+        String uuid = title.substring(0, 7);
         title = title.trim();
+        title = title.substring(8);
 
-        this.courses.addLast(new Courses(title, date, 
+        this.courses.addLast(new Courses(uuid, title, date, 
                     (contents[len - 1].equals("C") ? true:false)));
         logger.out("loaded " + file.getName());
     }
@@ -92,7 +96,7 @@ public class DbStore {
         files = sortFiles(files);
         logger.out(path.toString() + " gateway open.");
         
-        // parse and handle empty contents[2]
+        // parse 
         if(files != null) {
             for(File file : files) {
                 if(file.isFile() && file.getName().contains("%") && finder(file.getName())) {
@@ -106,40 +110,36 @@ public class DbStore {
 
     private String getFilename(Courses course) {
         // return the filename of the file's previous state 
-        String filename = generateName(course);
-        File file = findFile(filename);
-        filename = file.getName();
-        return filename;
+        File file = findFile(course.getID());
+        if(file != null) {
+            String filename = file.getName();
+            return filename;
+        }
+        return null;
     }
 
-    private File findFile(String filename) {
-        // get the filename matching the file's previous state
-        File file = new File(filename);
-        FilenameFilter filter = new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return name.startsWith(filename.substring(0, filename.length() - 2));
-            }
-        };
+    private File findFile(String uuid) {
+        // get the uuid matching the file's previous state
+        File[] list = new File(dirpath.toString()).listFiles();
 
-        File[] list = new File(dirpath.toString()).listFiles(filter);
-
-        if (list != null) {
+        if (list != null && list.length > 0) {
             for (File f : list) { 
-                if(f.getName().startsWith(filename.substring(0, filename.length() - 2))) {
+                if(f.getName().startsWith(uuid)) {
+                    logger.out("found " + f.getName());
                     return f;
                 }
             } 
         } 
-        return file;
+        return null;
     }
 
     public void update(Courses course) throws IOException {
-
         // TODO clean this up a little
+        // get ID
+        // keep ID, change whatever else is changed
         String fname = getFilename(course);
         String rename = generateName(course);
-        logger.out("renaming " + fname + " to " + rename);
+        System.out.println("renaming " + fname + " to " + rename);
         // logger.out("renaming " + fname + " to " + rename);
 
         // update file
@@ -147,18 +147,19 @@ public class DbStore {
         Files.move(file, file.resolveSibling(rename));
     }
 
-    public Boolean addData(Courses course) {
+    public Courses addData(String courseName, LocalDate courseDate) {
+        Courses course = new Courses (generateID(), courseName, courseDate, false);
         try {
             logger.out(course.toString() + " record request sent.");
             if(storeData(course)) {
                 logger.out("stored " + course.toString() + " as " + this.filename);
                 this.courses.addLast(course);
-                return true;
+                return course;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return false;
+        return course;
     }
 
     public void deleteData(Courses course) {
@@ -169,9 +170,16 @@ public class DbStore {
     public LinkedList<Courses> queryData() {
         return this.courses;
     }
+    private String generateID() {
+        String uuid = UUID.randomUUID().toString().replace("-", "");
+        uuid = uuid.substring(0, Math.min(uuid.length(), 8));
+        return uuid;
+    }
 
     private String generateName(Courses course) {
-        // add robustness later
+        if (course.getID() == null) {
+            System.out.println("huh ?");
+        }
         String output = course.toString().replaceAll(" ", "%");
         return output;
     }

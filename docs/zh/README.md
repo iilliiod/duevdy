@@ -38,14 +38,3 @@
 javac -d bin src/app/*.java --module-path ./utils/lib/ --add-modules javafx.controls
 java -cp ./src/app:bin:.src/app --module-path ./utils/lib/ --add-modules javafx.controls app.Main
 ```
-
-# Bug 报告
-
-目前，程序存在许多 bug（对不起，我写代码有道菜 😥）。
-
-其中一个重要的 bug 需要注意一下是，`Course Name`字段只能接受一个非空格分隔的字符串值。
-
-如果输入多个空格分隔的字符串值，程序将在重新启动时彻底崩溃成一百万个碎片。
-（夸张了一点，实际上只会抛出一个 parse error。）
-
-然而，选择不遵循说明并尝试的话，一个快速的解决方法是删除`store`文件夹及其所有内容。

@@ -1,6 +1,7 @@
 package app;
 
 import javafx.stage.Screen;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -36,6 +37,7 @@ import app.Logger;
 import app.Courses;
 import app.DbStore;
 import app.UI;
+import app.Library;
 
 public class Note {
     private DbStore dbStore = DbStore.getInstance();
@@ -60,6 +62,7 @@ public class Note {
         courseNameTextField = new TextField("Course Name");
         courseNameTextField.setMaxWidth(100);
         courseNameTextField.setMaxHeight(50);
+        Library.createTooltip(courseNameTextField, "Gotta have a name buddy.");
         courseNameTextField.setOnMouseClicked((MouseEvent event) -> {
             if(courseNameTextField.getText().equals("Course Name")) {
                 courseNameTextField.clear();
@@ -74,9 +77,9 @@ public class Note {
         courseDateTextField.getStyleClass().add("unavailable-cursor"); // NOTE: uncomment after setting courseDateTextField to false
         courseDateTextField.setMaxHeight(50);
         courseDateTextField.setMaxWidth(100);
+        Library.createTooltip(courseDateTextField, "Select a date from the date-picker below.");
         courseDateTextField.setOnMouseEntered((MouseEvent event) -> {
-            courseDateTextField.setText("Please select a date below.");
-            logger.out("Mouse clicked @courseDateTextField.");
+            logger.out("Mouse hover @courseDateTextField.");
         });
         courseDateTextField.setOnMouseExited((MouseEvent event) -> {
             courseDateTextField.setText("Course Date");
@@ -113,6 +116,7 @@ public class Note {
         newNoteTextArea.setEditable(true);
         newNoteTextArea.setMaxHeight(100);
         newNoteTextArea.setMaxWidth(Screen.getPrimary().getVisualBounds().getWidth() / 4);
+        Library.createTooltip(newNoteTextArea, "Got anything to say?");
         newNoteTextArea.textProperty().addListener((observable, oldVal, newVal) -> {
             int row = newNoteTextArea.getText().split("\n").length;
             int col = newNoteTextArea.getText().split(" ").length;
@@ -125,11 +129,18 @@ public class Note {
             }
             logger.out("Mouse clicked @newNoteTextArea");
         });
+        // TODO: fix later
+        // newNoteTextArea.setOnMouseExited((MouseEvent event) -> {
+        //     if(newNoteTextArea.getText().equals("")) {
+        //         newNoteTextArea.setText("New note...");
+        //     }
+        //     logger.out("Mouse exited @newNoteTextArea");
+        //});
     }
 
     private void createAddButton() {
         addBtn = new Button();
-        addBtn.setText("Add Course");
+        addBtn.setText("Add");
         addBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -137,14 +148,15 @@ public class Note {
                 String courseName = courseNameTextField.getText();
                 DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate courseDate = LocalDate.parse(courseDateTextField.getText(), format);
-                Courses newCourse = new Courses(courseName, courseDate, false);
                 if (!courseName.isEmpty()) {
                     courseNameTextField.clear();
                     courseDateTextField.clear();
                     courseDatePicker.setValue(null);
                     newNoteTextArea.clear();
-                    UI.showMessage(noteContent, Duration.seconds(3));
-                    if(dbStore.addData(newCourse)) ui.update(cardContainer, newCourse);
+                    Library.showMessage(noteContent, Duration.seconds(3));
+                    // add to database and get a Course object
+                    Courses newCourse = dbStore.addData(courseName, courseDate);
+                    if(newCourse != null) ui.update(cardContainer, newCourse);
                 }
             }
         });
@@ -152,7 +164,10 @@ public class Note {
 
     private void setVbox() {
         vbox = new VBox(8);
-        vbox.getChildren().addAll(cardContainer, courseNameTextField, courseDateTextField, courseDatePicker, newNoteTextArea, addBtn);
+        VBox newNoteLayout = new VBox(8);
+        newNoteLayout.setPadding(new Insets(20));
+        newNoteLayout.getChildren().addAll(courseNameTextField,courseDateTextField, courseDatePicker, newNoteTextArea, addBtn);
+        vbox.getChildren().addAll(cardContainer, newNoteLayout);
         vbox.setStyle("-fx-background-color: #dad7cd;");
     }
     private void setGridPane() {
@@ -173,6 +188,3 @@ public class Note {
         setGridPane();
     }
 }
-
-
-

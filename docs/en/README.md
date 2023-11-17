@@ -38,15 +38,3 @@ When running correctly, the command line will look something like this:
 javac -d bin src/app/*.java --module-path ./utils/lib/ --add-modules javafx.controls
 java -cp ./src/app:bin:.src/app --module-path ./utils/lib/ --add-modules javafx.controls app.Main
 ```
-
-# Bug Report
-
-At present, the program is quite buggy (I'm sorry, I kinda suck 😥).
-
-A major bug to note is the fact that the `Course Name` field can only accept a single non-space-separated string value.
-
-If more than one space-separated string value is entered, the program will literally crumble into a million pieces on relaunch.
-(Hyperbole, it'll just throw a parse error.)
-
-If you do, however, choose to not heed instructions and try it anyway, a quick hack around the problem is to delete the `store` folder
-and all its contents.

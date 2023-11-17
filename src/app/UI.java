@@ -1,8 +1,6 @@
 package app;
 
 import javafx.stage.Screen;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 import javafx.application.Application;
 import javafx.scene.input.MouseEvent;
@@ -29,7 +27,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.TilePane;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ScrollPane;
-import javafx.util.Duration;
 
 import java.awt.Event;
 import java.time.LocalDate;
@@ -42,6 +39,7 @@ import app.Controller;
 import app.Logger;
 import app.Card;
 import app.Note;
+import app.Library;
 
 public class UI {
     private Stage stage;
@@ -58,19 +56,6 @@ public class UI {
         this.stage = stage;
     }
 
-    // handy little function lolz
-    public static void showMessage(String message, Duration duration) {
-        Alert msg = new Alert(AlertType.INFORMATION);
-        msg.setHeaderText(null);
-        msg.setContentText(message);
-
-        javafx.animation.PauseTransition pause = new javafx.animation.PauseTransition(duration);
-        pause.setOnFinished(e -> msg.hide());
-
-        msg.show();
-        pause.play();
-    }
-
     public void init() {
         // set up main container
         TilePane cardContainer = new TilePane();
@@ -80,6 +65,7 @@ public class UI {
 
         load(cardContainer);
 
+        // add note
         note = new Note(this, cardContainer);
 
         scrollPane = new ScrollPane(note.getVbox());
@@ -93,7 +79,7 @@ public class UI {
     }
 
     private void load(TilePane container) {
-        // TODO: uncomment when store empty
+        // TODO: uncomment when store empty or fix to automate
         // dbStore.addData(new Courses("Test", this.dateToday, false));
         // dbStore.addData(new Courses("Test!", this.dateToday, false));
         // dbStore.addData(new Courses("Test2", this.dateToday, true));
@@ -102,12 +88,6 @@ public class UI {
             Courses course = c;
             card = new Card(course);
             card.init();
-            // courseNameTextField.setOnMouseExited((MouseEvent event) -> {
-            // course.setName(courseNameTextField.getText());
-            // });
-            // courseDateTextField.setOnMouseExited((MouseEvent event) -> {
-            // course.setDueDate(courseDateTextField.getText());
-            // });
 
             container.getChildren().addAll(card.getCardHbox());
             logger.out(course.toString());
