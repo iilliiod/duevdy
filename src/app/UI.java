@@ -43,6 +43,7 @@ import app.Library;
 
 public class UI {
     private Stage stage;
+    private VBox root;
     private ScrollPane scrollPane;
     private DbStore dbStore = DbStore.getInstance();
     private Logger logger = new Logger();
@@ -58,7 +59,11 @@ public class UI {
 
     public void init() {
         // set up main container
+        Label header = new Label("To-Do");
+        header.setId("header");
+        VBox headerBox = new VBox(header);
         TilePane cardContainer = new TilePane();
+        cardContainer.setId("tile-pane");
         cardContainer.setVgap(10);
         cardContainer.setHgap(10);
         cardContainer.setPadding(new Insets(20));
@@ -69,10 +74,15 @@ public class UI {
         note = new Note(this, cardContainer);
 
         scrollPane = new ScrollPane(note.getVbox());
-        Scene scene = new Scene(scrollPane, 50, 50);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
+        scrollPane.setId("scroll-pane");
+
+        root = new VBox(); 
+        root.getChildren().addAll(headerBox,scrollPane);
+        Scene scene = new Scene(root, 300, 600);
         scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
 
-        stage.setTitle("duevdy");
         stage.setScene(scene);
         stage.show();
 

@@ -26,7 +26,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.DatePicker;
-import javafx.util.Duration;
 
 import java.awt.Event;
 import java.time.LocalDate;
@@ -42,13 +41,13 @@ import app.Library;
 public class Note {
     private DbStore dbStore = DbStore.getInstance();
     private Logger logger = new Logger();
+    private GridPane gridPane;
     private TilePane cardContainer;
     private TextField courseNameTextField;
     private TextField courseDateTextField;
     private DatePicker courseDatePicker;
     private TextArea newNoteTextArea;
     private Button addBtn;
-    private GridPane gridPane;
     private VBox vbox;
     private UI ui;
 
@@ -153,7 +152,7 @@ public class Note {
                     courseDateTextField.clear();
                     courseDatePicker.setValue(null);
                     newNoteTextArea.clear();
-                    Library.showMessage(noteContent, Duration.seconds(3));
+                    Library.showMessage(noteContent, 3);
                     // add to database and get a Course object
                     Courses newCourse = dbStore.addData(courseName, courseDate);
                     if(newCourse != null) ui.update(cardContainer, newCourse);
@@ -168,7 +167,7 @@ public class Note {
         newNoteLayout.setPadding(new Insets(20));
         newNoteLayout.getChildren().addAll(courseNameTextField,courseDateTextField, courseDatePicker, newNoteTextArea, addBtn);
         vbox.getChildren().addAll(cardContainer, newNoteLayout);
-        vbox.setStyle("-fx-background-color: #dad7cd;");
+        vbox.setId("note-vbox");
     }
     private void setGridPane() {
         gridPane = new GridPane();

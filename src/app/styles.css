@@ -1,6 +1,138 @@
-.root {
-  -fx-background-color: #e9edc9;
+* {
+  -fx-primary-color: #e9ecef;
+  -fx-secondary-color: #4b6eaf;
+  -fx-light-grey-color: #d1d1d1;
+  -fx-black: #212529;
+  -fx-white: #f8f9fa;
+
+  -fx-focus-color: -fx-secondary-color;
 }
-.unavailable-cursor:hover {
-  -fx-cursor: not-allowed;
+
+.root {
+  -fx-background-color: -fx-white;
+  -fx-text-fill: red;
+  -fx-font-family: "Mona Sans", "sans-serif";
+  -fx-font-weight: 600;
+  -fx-font-size: 1em;
+}
+
+#header {
+  -fx-font-size: 24px;
+  -fx-font-weight: bold;
+  -fx-padding: 0.5em;
+}
+
+/* date-picker */
+.date-picker .arrow-button {
+  -fx-background-color: -fx-primary-color;
+  -fx-background-radius: 0;
+}
+.date-picker .arrow-button:hover {
+  -fx-background-color: -fx-secondary-color;
+}
+.date-picker .arrow-button .arrow {
+  -fx-background-color: white;
+}
+.date-picker .cell {
+  -fx-background-color: white;
+}
+.date-picker .cell:hover {
+  -fx-background-color: -fx-light-grey-color;
+}
+.date-picker .cell:focused {
+  -fx-background-color: -fx-light-grey-color;
+}
+.date-picker .selected {
+  -fx-background-color: -fx-primary-color;
+  -fx-text-fill: -fx-black;
+}
+.date-picker .selected:focused {
+  -fx-background-color: -fx-primary-color;
+  -fx-text-fill: -fx-black;
+}
+.date-picker-popup {
+  -fx-border-color: transparent;
+}
+.date-picker-popup .month-year-pane {
+  -fx-background-color: -fx-primary-color;
+}
+.date-picker-popup .month-year-pane .label {
+  -fx-text-fill: -fx-black;
+}
+.date-picker-popup .week-number-cell {
+  -fx-text-fill: -fx-secondary-color;
+}
+.date-picker-popup .spinner .button .left-arrow,
+.date-picker-popup .spinner .button .right-arrow {
+  -fx-background-color: white;
+}
+
+/* checkbox */
+.checkbox .box {
+  -fx-opacity: 0;
+}
+
+.checkbox .box:pressed {
+  -fx-opacity: 0;
+}
+
+.checkbox:selected .box {
+  -fx-opacity: 0;
+}
+
+/* card */
+
+#cardBG {
+  -fx-fill: -fx-primary-color;
+  -fx-opacity: 0;
+}
+#delBtn {
+  -fx-background-color: #e63946;
+}
+#note-vbox {
+  -fx-background-color: #f8f9fa;
+}
+#scroll-pane {
+  -fx-background-color: transparent;
+  -fx-border-color: transparent;
+}
+#scroll-pane .scroll-bar {
+  -fx-background-color: transparent;
+  -fx-pref-width: 10px;
+}
+#scroll-pane .scroll-bar-thumb {
+  -fx-background-color: transparent;
+}
+#scroll-pane .scroll-bar-track {
+  -fx-background-color: transparent;
+}
+
+#card-hbox {
+  /* -fx-background-color: red; */
+  /* -fx-effect: dropshadow( */
+  /*   gaussian, */
+  /*   rgba(17, 12, 46, 0.15), */
+  /*   0px, */
+  /*   48px, */
+  /*   100px, */
+  /*   0px */
+  /* ); */
+}
+#card-hbox:hover {
+  -fx-cursor: hand;
+  -fx-effect: dropshadow(gaussian, rgba(149, 157, 165, 0.2), 10, 0.1, 5px, 2px);
+}
+
+#card-pane {
+  -fx-background-color: -fx-primary-color;
+  -fx-background-radius: 10px;
+  -fx-opacity: 0.8;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
+}
+
+#tile-pane {
+  -fx-border-color: transparent;
+}
+#course-name-field:focused {
+  -fx-background-color: orange;
 }
