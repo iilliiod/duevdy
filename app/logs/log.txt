@@ -71,3 +71,14 @@ creating 44d527d8%this%was%so%annoying%man%wtf%2023-10-30%X...
 stored 44d527d8 this was so annoying man wtf 2023-10-30 X as 44d527d8%this%was%so%annoying%man%wtf%2023-10-30%X
 6897b77  Test! 2023-11-22 X
 Mouse clicked @newNoteTextArea
+store gateway open.
+loaded 2c0b732b%Test%2023-11-22%X
+loaded 2c2060b8%Test2%2023-11-22%X
+loaded 44d527d8%this%was%so%annoying%man%wtf%2023-10-30%X
+loaded 6897b77d%Test!%2023-11-22%X
+2c0b732  Test 2023-11-22 X
+2c2060b  Test2 2023-11-22 X
+44d527d  this was so annoying man wtf 2023-10-30 X
+6897b77  Test! 2023-11-22 X
+Mouse clicked @newNoteTextArea
+Mouse clicked @newNoteTextArea
