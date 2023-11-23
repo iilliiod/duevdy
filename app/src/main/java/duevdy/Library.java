@@ -5,16 +5,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.animation.ScaleTransition;
 import javafx.scene.control.Tooltip;
-import javafx.scene.control.TextInputControl;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.Node;
 import javafx.util.Duration;
-import javafx.stage.StageStyle;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.ButtonBar.ButtonData;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class Library {

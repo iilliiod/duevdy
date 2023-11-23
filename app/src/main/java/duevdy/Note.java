@@ -1,50 +1,20 @@
 package duevdy;
 
 import javafx.stage.Screen;
-import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.text.Text;
-import javafx.geometry.Pos;
-import javafx.collections.FXCollections;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.control.Label;
 import javafx.geometry.Insets;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.TilePane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.control.DatePicker;
-
-import java.awt.Event;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.*; // List
-
-import duevdy.Logger;
-import duevdy.Courses;
-import duevdy.DbStore;
-import duevdy.UI;
-import duevdy.Library;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 public class Note {
-    private DbStore dbStore = DbStore.getInstance();
     private Logger logger = new Logger();
     private GridPane gridPane;
     private TextArea newNoteTextArea;
     private VBox vbox;
+    private FontIcon icon = new FontIcon("mdi-plus");
 
     public Note() {
         init();
@@ -81,8 +51,10 @@ public class Note {
     private void setVbox() {
         vbox = new VBox(8);
         VBox newNoteLayout = new VBox(8);
+        Button btn = new Button("", icon);
+        btn.setId("note-btn");
         newNoteLayout.setPadding(new Insets(20));
-        newNoteLayout.getChildren().addAll(newNoteTextArea);
+        newNoteLayout.getChildren().addAll(newNoteTextArea, btn );
         newNoteLayout.setId("note-layout");
         // TODO: noteView needs noteLayout
         vbox.getChildren().addAll(newNoteLayout);

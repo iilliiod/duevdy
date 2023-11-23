@@ -2,60 +2,26 @@ package duevdy;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Screen;
 import javafx.scene.control.Separator;
 import javafx.scene.control.ToolBar;
-import javafx.scene.layout.GridPane;
-import javafx.application.Application;
-import javafx.scene.input.MouseEvent;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.text.Text;
-import javafx.geometry.Pos;
-import javafx.collections.FXCollections;
-import javafx.scene.layout.StackPane;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextArea;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.control.Label;
 import javafx.geometry.Insets;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.TilePane;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.ScrollPane;
 
-import java.awt.Event;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.*; // List
-
-import duevdy.DbStore;
-import duevdy.Courses;
-import duevdy.Controller;
-import duevdy.Logger;
-import duevdy.Card;
-import duevdy.Note;
-import duevdy.Library;
-import duevdy.NoteView;
 
 public class UI {
     private Stage stage;
     private VBox root = new VBox();
     private Scene scene; 
-    private Scene notesScene; 
     private ScrollPane scrollPane;
     private DbStore dbStore = DbStore.getInstance();
     private Logger logger = new Logger();
-    private int cardWidth = 150;
-    private int cardHeight = 100;
     private Card card;
     private Note note;
     private VBox toolBarBox;
@@ -92,7 +58,6 @@ public class UI {
         toolBar.setId("tool-bar");
 
         Button todoBtn = new Button();
-        boolean isHovered = false;
         Image todoIcon = new Image(getClass().getResourceAsStream("/todo-list-icon.png"));
         ImageView todoImageView = new ImageView(todoIcon);
         todoImageView.setFitWidth(16);
@@ -134,7 +99,6 @@ public class UI {
                 System.out.println("state: INIT");
             case NOTES:
                 System.out.println("state: NOTES");
-                ScrollPane notePane = new ScrollPane();
                 note = new Note();
 
                 VBox noteBox = new VBox();

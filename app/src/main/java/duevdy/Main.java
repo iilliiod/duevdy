@@ -2,10 +2,6 @@ package duevdy;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import duevdy.Courses;
-import duevdy.DbStore;
-import duevdy.UI;
-import duevdy.Controller;
 
 public class Main extends Application {
     private UI ui;

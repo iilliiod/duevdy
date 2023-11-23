@@ -1,36 +1,23 @@
 package duevdy;
 
-import javafx.scene.Cursor;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.TilePane;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.ScrollPane;
 import javafx.geometry.Pos;
 import javafx.scene.input.MouseEvent;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import java.io.IOException;
-import javafx.stage.Popup;
 
-import java.awt.Event;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*; // List
-
-import duevdy.Courses;
-import duevdy.Logger;
 
 public class Card {
     private Logger logger = new Logger();
@@ -285,8 +272,8 @@ public class Card {
     private void setCardPane() {
         cardPane = new StackPane();
         cardPane.getChildren().addAll(cardBox, cardContent);
-        cardPane.setAlignment(cardBG, Pos.TOP_LEFT);
-        cardPane.setAlignment(cardBox, Pos.CENTER_RIGHT);
+        StackPane.setAlignment(cardBG, Pos.TOP_LEFT);
+        StackPane.setAlignment(cardBox, Pos.CENTER_RIGHT);
         cardPane.setId("card-pane");
 
         cardHbox = new HBox(cardPane, datePicker, datePickerBtn, delBtn);

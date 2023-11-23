@@ -21,6 +21,9 @@ dependencies {
 
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:32.1.1-jre'
+
+    implementation 'org.kordamp.ikonli:ikonli-javafx:12.3.1'
+    implementation 'org.kordamp.ikonli:ikonli-materialdesign-pack:12.3.1'
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -32,7 +35,7 @@ java {
 
 javafx {
     version = '21.0.1'
-    modules = [ 'javafx.controls', 'javafx.graphics', 'javafx.fxml' ]
+    modules = [ 'javafx.base', 'javafx.controls', 'javafx.graphics' ]
 }
 
 application {
