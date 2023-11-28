@@ -1,0 +1,1519 @@
+store gateway closed.
+Test 2023-09-22  record request sent.
+opened store store.
+browsing store with Test%2023-09-22%
+creating Test%2023-09-22%...
+stored Test 2023-09-22  as Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+creating Test!%2023-09-22%...
+stored Test! 2023-09-22  as Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+creating Test2%2023-09-22%C...
+stored Test2 2023-09-22 C as Test2%2023-09-22%C
+Test 2023-09-22 
+Test! 2023-09-22 
+Test2 2023-09-22 C
+Mouse clicked
+Mouse clicked
+Mouse clicked
+Mouse clicked
+store gateway open.
+store gateway open.
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+Mouse clicked
+Mouse clicked
+Mouse clicked
+Mouse clicked
+Mouse clicked
+Mouse clicked
+Mouse clicked
+Mouse clicked
+Mouse clicked
+Mouse clicked
+Mouse clicked
+Mouse clicked
+Mouse clicked
+Mouse clicked
+Mouse clicked
+Mouse clicked
+Mouse clicked
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+Mouse clicked
+Mouse clicked
+Mouse clicked
+Mouse clicked
+Mouse clicked
+Mouse clicked
+Mouse clicked
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Mouse clicked
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+Aurelius.
+Aurelius.
+Mouse clicked
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+Aurelius.
+Aurelius.
+Mouse clicked
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-22  record request sent.
+browsing store with Test%2023-09-22%
+Test! 2023-09-22  record request sent.
+browsing store with Test!%2023-09-22%
+Test2 2023-09-22 C record request sent.
+browsing store with Test2%2023-09-22%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test%2023-09-22%
+loaded Test2%2023-09-22%C
+Test 2023-09-28  record request sent.
+browsing store with Test%2023-09-28%
+creating Test%2023-09-28%...
+stored Test 2023-09-28  as Test%2023-09-28%
+Test! 2023-09-28  record request sent.
+browsing store with Test!%2023-09-28%
+creating Test!%2023-09-28%...
+stored Test! 2023-09-28  as Test!%2023-09-28%
+Test2 2023-09-28 C record request sent.
+browsing store with Test2%2023-09-28%C
+creating Test2%2023-09-28%C...
+stored Test2 2023-09-28 C as Test2%2023-09-28%C
+Test! 2023-09-22 
+Test 2023-09-22 
+Test2 2023-09-22 C
+Test 2023-09-28 
+Test! 2023-09-28 
+Test2 2023-09-28 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test!%2023-09-28%
+loaded Test%2023-09-22%
+loaded Test%2023-09-28%
+loaded Test2%2023-09-22%C
+loaded Test2%2023-09-28%C
+Test 2023-11-07  record request sent.
+browsing store with Test%2023-11-07%
+creating Test%2023-11-07%...
+stored Test 2023-11-07  as Test%2023-11-07%
+Test! 2023-11-07  record request sent.
+browsing store with Test!%2023-11-07%
+creating Test!%2023-11-07%...
+stored Test! 2023-11-07  as Test!%2023-11-07%
+Test2 2023-11-07 C record request sent.
+browsing store with Test2%2023-11-07%C
+creating Test2%2023-11-07%C...
+stored Test2 2023-11-07 C as Test2%2023-11-07%C
+Test! 2023-09-22 
+Test! 2023-09-28 
+Test 2023-09-22 
+Test 2023-09-28 
+Test2 2023-09-22 C
+Test2 2023-09-28 C
+Test 2023-11-07 
+Test! 2023-11-07 
+Test2 2023-11-07 C
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Mouse clicked
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Mouse clicked
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test!%2023-09-28%
+loaded Test!%2023-11-07%
+loaded Test%2023-09-22%
+loaded Test%2023-09-28%
+loaded Test%2023-11-07%
+loaded Test2%2023-09-22%C
+loaded Test2%2023-09-28%C
+loaded Test2%2023-11-07%C
+Test 2023-11-07  record request sent.
+browsing store with Test%2023-11-07%
+Test! 2023-11-07  record request sent.
+browsing store with Test!%2023-11-07%
+Test2 2023-11-07 C record request sent.
+browsing store with Test2%2023-11-07%C
+Test! 2023-09-22 
+Test! 2023-09-28 
+Test! 2023-11-07 
+Test 2023-09-22 
+Test 2023-09-28 
+Test 2023-11-07 
+Test2 2023-09-22 C
+Test2 2023-09-28 C
+Test2 2023-11-07 C
+Mouse clicked
+Aurelius.
+Aurelius.
+Mouse clicked
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test!%2023-09-28%
+loaded Test!%2023-11-07%
+loaded Test%2023-09-22%
+loaded Test%2023-09-28%
+loaded Test%2023-11-07%
+loaded Test2%2023-09-22%C
+loaded Test2%2023-09-28%C
+loaded Test2%2023-11-07%C
+Test 2023-11-07  record request sent.
+browsing store with Test%2023-11-07%
+Test! 2023-11-07  record request sent.
+browsing store with Test!%2023-11-07%
+Test2 2023-11-07 C record request sent.
+browsing store with Test2%2023-11-07%C
+Test! 2023-09-22 
+Test! 2023-09-28 
+Test! 2023-11-07 
+Test 2023-09-22 
+Test 2023-09-28 
+Test 2023-11-07 
+Test2 2023-09-22 C
+Test2 2023-09-28 C
+Test2 2023-11-07 C
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test!%2023-09-28%
+loaded Test!%2023-11-07%
+loaded Test%2023-09-22%
+loaded Test%2023-09-28%
+loaded Test%2023-11-07%
+loaded Test2%2023-09-22%C
+loaded Test2%2023-09-28%C
+loaded Test2%2023-11-07%C
+Test 2023-11-07  record request sent.
+browsing store with Test%2023-11-07%
+Test! 2023-11-07  record request sent.
+browsing store with Test!%2023-11-07%
+Test2 2023-11-07 C record request sent.
+browsing store with Test2%2023-11-07%C
+Test! 2023-09-22 
+Test! 2023-09-28 
+Test! 2023-11-07 
+Test 2023-09-22 
+Test 2023-09-28 
+Test 2023-11-07 
+Test2 2023-09-22 C
+Test2 2023-09-28 C
+Test2 2023-11-07 C
+Aurelius.
+Aurelius.
+Mouse clicked
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+Aurelius.
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test!%2023-09-28%
+loaded Test!%2023-11-07%
+loaded Test%2023-09-22%
+loaded Test%2023-09-28%
+loaded Test%2023-11-07%
+loaded Test2%2023-09-22%C
+loaded Test2%2023-09-28%C
+loaded Test2%2023-11-07%C
+Test 2023-11-07  record request sent.
+browsing store with Test%2023-11-07%
+Test! 2023-11-07  record request sent.
+browsing store with Test!%2023-11-07%
+Test2 2023-11-07 C record request sent.
+browsing store with Test2%2023-11-07%C
+Test! 2023-09-22 
+Test! 2023-09-28 
+Test! 2023-11-07 
+Test 2023-09-22 
+Test 2023-09-28 
+Test 2023-11-07 
+Test2 2023-09-22 C
+Test2 2023-09-28 C
+Test2 2023-11-07 C
+Mouse clicked
+Mouse clicked @courseDateTextField.
+Mouse clicked
+apples 2023-12-01  record request sent.
+browsing store with apples%2023-12-01%
+creating apples%2023-12-01%...
+stored apples 2023-12-01  as apples%2023-12-01%
+apples 2023-12-01 
+Mouse clicked
+Mouse clicked
+six 2023-11-01  record request sent.
+browsing store with six%2023-11-01%
+creating six%2023-11-01%...
+stored six 2023-11-01  as six%2023-11-01%
+six 2023-11-01 
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test!%2023-09-28%
+loaded Test!%2023-11-07%
+loaded Test%2023-09-22%
+loaded Test%2023-09-28%
+loaded Test%2023-11-07%
+loaded Test2%2023-09-22%C
+loaded Test2%2023-09-28%C
+loaded Test2%2023-11-07%C
+loaded apples%2023-12-01%
+loaded six%2023-11-01%
+Test 2023-11-07  record request sent.
+browsing store with Test%2023-11-07%
+Test! 2023-11-07  record request sent.
+browsing store with Test!%2023-11-07%
+Test2 2023-11-07 C record request sent.
+browsing store with Test2%2023-11-07%C
+Test! 2023-09-22 
+Test! 2023-09-28 
+Test! 2023-11-07 
+Test 2023-09-22 
+Test 2023-09-28 
+Test 2023-11-07 
+Test2 2023-09-22 C
+Test2 2023-09-28 C
+Test2 2023-11-07 C
+apples 2023-12-01 
+six 2023-11-01 
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test!%2023-09-28%
+loaded Test!%2023-11-07%
+loaded Test%2023-09-22%
+loaded Test%2023-09-28%
+loaded Test%2023-11-07%
+loaded Test2%2023-09-22%C
+loaded Test2%2023-09-28%C
+loaded Test2%2023-11-07%C
+loaded apples%2023-12-01%
+loaded six%2023-11-01%
+Test 2023-11-07  record request sent.
+browsing store with Test%2023-11-07%
+Test! 2023-11-07  record request sent.
+browsing store with Test!%2023-11-07%
+Test2 2023-11-07 C record request sent.
+browsing store with Test2%2023-11-07%C
+Test! 2023-09-22 
+Test! 2023-09-28 
+Test! 2023-11-07 
+Test 2023-09-22 
+Test 2023-09-28 
+Test 2023-11-07 
+Test2 2023-09-22 C
+Test2 2023-09-28 C
+Test2 2023-11-07 C
+apples 2023-12-01 
+six 2023-11-01 
+Mouse clicked
+test 2023-11-04  record request sent.
+browsing store with test%2023-11-04%
+creating test%2023-11-04%...
+stored test 2023-11-04  as test%2023-11-04%
+test 2023-11-04 
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test!%2023-09-28%
+loaded Test!%2023-11-07%
+loaded Test%2023-09-22%
+loaded Test%2023-09-28%
+loaded Test%2023-11-07%
+loaded Test2%2023-09-22%C
+loaded Test2%2023-09-28%C
+loaded Test2%2023-11-07%C
+loaded apples%2023-12-01%
+loaded six%2023-11-01%
+loaded test%2023-11-04%
+Test 2023-11-07  record request sent.
+browsing store with Test%2023-11-07%
+Test! 2023-11-07  record request sent.
+browsing store with Test!%2023-11-07%
+Test2 2023-11-07 C record request sent.
+browsing store with Test2%2023-11-07%C
+Test! 2023-09-22 
+Test! 2023-09-28 
+Test! 2023-11-07 
+Test 2023-09-22 
+Test 2023-09-28 
+Test 2023-11-07 
+Test2 2023-09-22 C
+Test2 2023-09-28 C
+Test2 2023-11-07 C
+apples 2023-12-01 
+six 2023-11-01 
+test 2023-11-04 
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test!%2023-09-28%
+loaded Test!%2023-11-07%
+loaded Test%2023-09-22%
+loaded Test%2023-09-28%
+loaded Test%2023-11-07%
+loaded Test2%2023-09-22%C
+loaded Test2%2023-09-28%C
+loaded Test2%2023-11-07%C
+loaded apples%2023-12-01%
+loaded six%2023-11-01%
+loaded test%2023-11-04%
+Test 2023-11-07  record request sent.
+browsing store with Test%2023-11-07%
+Test! 2023-11-07  record request sent.
+browsing store with Test!%2023-11-07%
+Test2 2023-11-07 C record request sent.
+browsing store with Test2%2023-11-07%C
+Test! 2023-09-22 
+Test! 2023-09-28 
+Test! 2023-11-07 
+Test 2023-09-22 
+Test 2023-09-28 
+Test 2023-11-07 
+Test2 2023-09-22 C
+Test2 2023-09-28 C
+Test2 2023-11-07 C
+apples 2023-12-01 
+six 2023-11-01 
+test 2023-11-04 
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test!%2023-09-28%
+loaded Test!%2023-11-07%
+loaded Test%2023-09-22%
+loaded Test%2023-09-28%
+loaded Test%2023-11-07%
+loaded Test2%2023-09-22%C
+loaded Test2%2023-09-28%C
+loaded Test2%2023-11-07%C
+loaded apples%2023-12-01%
+loaded six%2023-11-01%
+loaded test%2023-11-04%
+Test 2023-11-07  record request sent.
+browsing store with Test%2023-11-07%
+Test! 2023-11-07  record request sent.
+browsing store with Test!%2023-11-07%
+Test2 2023-11-07 C record request sent.
+browsing store with Test2%2023-11-07%C
+Test! 2023-09-22 
+Test! 2023-09-28 
+Test! 2023-11-07 
+Test 2023-09-22 
+Test 2023-09-28 
+Test 2023-11-07 
+Test2 2023-09-22 C
+Test2 2023-09-28 C
+Test2 2023-11-07 C
+apples 2023-12-01 
+six 2023-11-01 
+test 2023-11-04 
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test!%2023-09-28%
+loaded Test!%2023-11-07%
+loaded Test%2023-09-22%
+loaded Test%2023-09-28%
+loaded Test%2023-11-07%
+loaded Test2%2023-09-22%C
+loaded Test2%2023-09-28%C
+loaded Test2%2023-11-07%C
+loaded apples%2023-12-01%
+loaded six%2023-11-01%
+loaded test%2023-11-04%
+Test 2023-11-07  record request sent.
+browsing store with Test%2023-11-07%
+Test! 2023-11-07  record request sent.
+browsing store with Test!%2023-11-07%
+Test2 2023-11-07 C record request sent.
+browsing store with Test2%2023-11-07%C
+Test! 2023-09-22 
+Test! 2023-09-28 
+Test! 2023-11-07 
+Test 2023-09-22 
+Test 2023-09-28 
+Test 2023-11-07 
+Test2 2023-09-22 C
+Test2 2023-09-28 C
+Test2 2023-11-07 C
+apples 2023-12-01 
+six 2023-11-01 
+test 2023-11-04 
+store gateway open.
+loaded Test!%2023-09-22%
+loaded Test!%2023-09-28%
+loaded Test!%2023-11-07%
+loaded Test%2023-09-22%
+loaded Test%2023-09-28%
+loaded Test%2023-11-07%
+loaded Test2%2023-09-22%C
+loaded Test2%2023-09-28%C
+loaded Test2%2023-11-07%C
+loaded apples%2023-12-01%
+loaded six%2023-11-01%
+loaded test%2023-11-04%
+Test 2023-11-07  record request sent.
+browsing store with Test%2023-11-07%
+Test! 2023-11-07  record request sent.
+browsing store with Test!%2023-11-07%
+Test2 2023-11-07 C record request sent.
+browsing store with Test2%2023-11-07%C
+Test! 2023-09-22 
+Test! 2023-09-28 
+Test! 2023-11-07 
+Test 2023-09-22 
+Test 2023-09-28 
+Test 2023-11-07 
+Test2 2023-09-22 C
+Test2 2023-09-28 C
+Test2 2023-11-07 C
+apples 2023-12-01 
+six 2023-11-01 
+test 2023-11-04 
+store gateway closed.
+Test 2023-11-07  record request sent.
+opened store store.
+browsing store with Test%2023-11-07%
+creating Test%2023-11-07%...
+stored Test 2023-11-07  as Test%2023-11-07%
+Test! 2023-11-07  record request sent.
+browsing store with Test!%2023-11-07%
+creating Test!%2023-11-07%...
+stored Test! 2023-11-07  as Test!%2023-11-07%
+Test2 2023-11-07 C record request sent.
+browsing store with Test2%2023-11-07%C
+creating Test2%2023-11-07%C...
+stored Test2 2023-11-07 C as Test2%2023-11-07%C
+Test 2023-11-07 
+Test! 2023-11-07 
+Test2 2023-11-07 C
+Mouse clicked
+2023 2023-11-01  record request sent.
+browsing store with 2023%2023-11-01%
+creating 2023%2023-11-01%...
+stored 2023 2023-11-01  as 2023%2023-11-01%
+2023 2023-11-01 
+store gateway open.
+loaded 2023%2023-11-01%
+loaded Test!%2023-11-07%
+loaded Test%2023-11-07%
+loaded Test2%2023-11-07%C
+Test 2023-11-07  record request sent.
+browsing store with Test%2023-11-07%
+Test! 2023-11-07  record request sent.
+browsing store with Test!%2023-11-07%
+Test2 2023-11-07 C record request sent.
+browsing store with Test2%2023-11-07%C
+2023 2023-11-01 
+Test! 2023-11-07 
+Test 2023-11-07 
+Test2 2023-11-07 C
+store gateway open.
+loaded 2023%2023-11-01%
+loaded Test!%2023-11-07%
+loaded Test%2023-11-07%
+loaded Test2%2023-11-07%C
+Test 2023-11-07  record request sent.
+browsing store with Test%2023-11-07%
+Test! 2023-11-07  record request sent.
+browsing store with Test!%2023-11-07%
+Test2 2023-11-07 C record request sent.
+browsing store with Test2%2023-11-07%C
+2023 2023-11-01 
+Test! 2023-11-07 
+Test 2023-11-07 
+Test2 2023-11-07 C
+Mouse clicked
+Mouse clicked @courseDateTextField.
+store gateway open.
+loaded 2023%2023-11-01%
+loaded Test!%2023-11-07%
+loaded Test%2023-11-07%
+loaded Test2%2023-11-07%C
+Test 2023-11-07  record request sent.
+browsing store with Test%2023-11-07%
+Test! 2023-11-07  record request sent.
+browsing store with Test!%2023-11-07%
+Test2 2023-11-07 C record request sent.
+browsing store with Test2%2023-11-07%C
+2023 2023-11-01 
+Test! 2023-11-07 
+Test 2023-11-07 
+Test2 2023-11-07 C
+store gateway open.
+loaded 2023%2023-11-01%
+loaded Test!%2023-11-07%
+loaded Test%2023-11-07%
+loaded Test2%2023-11-07%C
+Test 2023-11-07  record request sent.
+browsing store with Test%2023-11-07%
+Test! 2023-11-07  record request sent.
+browsing store with Test!%2023-11-07%
+Test2 2023-11-07 C record request sent.
+browsing store with Test2%2023-11-07%C
+2023 2023-11-01 
+Test! 2023-11-07 
+Test 2023-11-07 
+Test2 2023-11-07 C
+store gateway open.
+loaded 2023%2023-11-01%
+loaded Test!%2023-11-07%
+loaded Test%2023-11-07%
+loaded Test2%2023-11-07%C
+Test 2023-11-07  record request sent.
+browsing store with Test%2023-11-07%
+Test! 2023-11-07  record request sent.
+browsing store with Test!%2023-11-07%
+Test2 2023-11-07 C record request sent.
+browsing store with Test2%2023-11-07%C
+2023 2023-11-01 
+Test! 2023-11-07 
+Test 2023-11-07 
+Test2 2023-11-07 C
+Mouse clicked
+ok so what 2023-01-12  record request sent.
+browsing store with ok%so%what%2023-01-12%
+creating ok%so%what%2023-01-12%...
+stored ok so what 2023-01-12  as ok%so%what%2023-01-12%
+ok so what 2023-01-12 
+store gateway open.
+loaded 2023%2023-11-01%
+loaded Test!%2023-11-07%
+loaded Test%2023-11-07%
+loaded Test2%2023-11-07%C
+store gateway open.
+loaded 2023%2023-11-01%
+loaded Test!%2023-11-07%
+loaded Test%2023-11-07%
+loaded Test2%2023-11-07%C
+store gateway closed.
+Test 2023-11-07  record request sent.
+opened store store.
+browsing store with Test%2023-11-07%
+creating Test%2023-11-07%...
+stored Test 2023-11-07  as Test%2023-11-07%
+Test! 2023-11-07  record request sent.
+browsing store with Test!%2023-11-07%
+creating Test!%2023-11-07%...
+stored Test! 2023-11-07  as Test!%2023-11-07%
+Test2 2023-11-07 C record request sent.
+browsing store with Test2%2023-11-07%C
+creating Test2%2023-11-07%C...
+stored Test2 2023-11-07 C as Test2%2023-11-07%C
+Test 2023-11-07 
+Test! 2023-11-07 
+Test2 2023-11-07 C

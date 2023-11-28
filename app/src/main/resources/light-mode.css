@@ -6,6 +6,7 @@
   -fx-black: #212529;
   -fx-white: #f8f9fa;
   -fx-red: #e63946;
+  -fx-green: #6a994e;
 
   -fx-focus-color: -fx-secondary-color;
 }
@@ -102,14 +103,26 @@
 #cardHover {
   -fx-fill: -fx-secondary-color;
 }
+#card-incomplete {
+  -fx-background-color: -fx-red;
+  -fx-opacity: 0.8;
+  -fx-background-radius: 10px;
+}
+#card-complete {
+  -fx-background-color: -fx-green;
+  -fx-opacity: 0.8;
+  -fx-background-radius: 10px;
+}
 
 #del-btn {
   -fx-background-color: -fx-red;
   -fx-background-radius: 10px;
+  -fx-opacity: 0.8;
 }
 #date-picker-btn {
   -fx-background-color: -fx-light-grey-color;
   -fx-background-radius: 10px;
+  -fx-opacity: 0.8;
 }
 #note-vbox {
   -fx-background-color: transparent;
@@ -196,6 +209,9 @@
 #main-container {
   -fx-background-color: transparent;
 }
+#main-card-container {
+  -fx-background-color: -fx-primary-color;
+}
 
 #note-layout {
   -fx-border-color: transparent;
@@ -216,6 +232,7 @@
 #nav-side-bar {
   -fx-padding: 20px;
   -fx-background-color: transparent;
+  -fx-margin-bottom: 20px;
 }
 
 #nav-notes-btn,
@@ -224,5 +241,30 @@
 }
 #nav-notes-btn:hover,
 #nav-todo-btn:hover {
+  -fx-background-color: -fx-secondary-color;
+}
+#nav-content-container {
+  -fx-background-color: transparent;
+  -fx-border-color: transparent;
+}
+#nav-notes-list {
+  -fx-border-color: transparent;
+}
+#nav-progress-bar {
+  -fx-accent: -fx-green;
+  -fx-pref-height: 15px;
+  -fx-opacity: 0.8;
+}
+#nav-progress-box {
+  -fx-background-color: transparent;
+  -fx-padding: 10px;
+}
+
+#submit-btn {
+  -fx-background-color: transparent;
+  -fx-border-style: dashed;
+  -fx-border-color: -fx-black;
+}
+#submit-btn:hover {
   -fx-background-color: -fx-secondary-color;
 }

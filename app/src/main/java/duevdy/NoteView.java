@@ -12,16 +12,17 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Label;
+import javafx.scene.Node;
 import javafx.geometry.Orientation;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.Scanner;
+
 import javafx.collections.ObservableList;
 import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.ListCell;
 import javafx.collections.FXCollections;
-
 import org.kordamp.ikonli.javafx.FontIcon;
 
 public class NoteView {
@@ -29,8 +30,8 @@ public class NoteView {
     private FlowPane container = new FlowPane();
     private GridPane gridPane;
     private TextArea newNoteTextArea;
-    private ListView<String> notesList = new ListView<>();
-    private ObservableList<String> notes = FXCollections.observableArrayList();
+    private ObservableList<Note> notes = FXCollections.observableArrayList();
+    private ListView<Note> notesList = new ListView<>(notes);
     private String noteUUID;
     private VBox vbox;
     private HBox layout;
@@ -76,15 +77,25 @@ public class NoteView {
     public void loadNote(String uuid) {
         // get file based on uuid
         System.out.println("adding " + uuid);
+        Note currentNote = null;
         File file = DbStore.getInstance().getNote(uuid);
+
+        for(Note note : DbStore.getInstance().queryNotes()) {
+            if(note.getID().equals(uuid)) {
+                currentNote = note; 
+                break;
+            }
+        }
+
+        System.out.println(currentNote.toString());
         String content = "";
         String title = "";
         try {
             Scanner scanner = new Scanner(file);
             content = scanner.nextLine();
             System.out.println("content: " + content);
-            if(content.length() > 50) {
-                title = content.substring(0, 50);
+            if(content.length() > 25) {
+                title = content.substring(0, 25) + "...";
             } else {
                 title = content;
             }
@@ -93,12 +104,14 @@ public class NoteView {
         } catch (FileNotFoundException e){
             e.printStackTrace();
         } 
-        notes.add(title);
+        notes.add(currentNote);
         notesList.setItems(notes);
-        Button deleteButton = new Button();
+        notesList.setId("nav-notes-list");
+        Button deleteButton = new Button("Delete", deleteIcon);
         notesList.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            System.out.println("selected: " + newSelection);
+            System.out.println("selected: " + newSelection.getID());
             // show note contents
+
             deleteButton.setOnAction(event -> {
                 System.out.println("clicked button");
                 notesList.getItems().remove(newSelection);
@@ -107,32 +120,21 @@ public class NoteView {
              // Get selected cell
 
         });
-        // notesList.setCellFactory(lv -> new ListCell<>() {
-        //     @Override
-        //     public void updateItem(String item, boolean empty) {
-        //         super.updateItem(item, empty);
-        //         if (empty) {
-        //             setText(null);
-        //             setGraphic(null);
-        //         } else {
-        //             setText(item);
-        //             if(isSelected()) {
-        //                 System.out.println("clicked");
-        //                 setGraphic(deleteIcon);
-        //             } else {
-        //                 setGraphic(null);
-        //             }
-        //         }
-        //     }
-        // });
 
+        deleteButton.setOnAction(event -> {
+            System.out.println("clicked button");
+        });
         Label label = new Label(title);
         label.setId("note-label");
         layout = new HBox(20);
         layout.setId("note-layout");
-        layout.getChildren().add(label);
+        layout.getChildren().addAll(label, deleteButton);
 
         updateContainer();
+    }
+
+    public Node getLayout() {
+        return notesList;
     }
 
     private void setVbox() {
@@ -149,7 +151,6 @@ public class NoteView {
                 // add to database (returns a Note object)
                 Note newNote = DbStore.getInstance().addNote(title, this.dateToday, content);
                 if(newNote != null) {
-                    Library.showMessage(content, 3);
                     logger.out("added " + newNote.getID());
                     loadNote(newNote.getID());
                     logger.out(newNote.toString());

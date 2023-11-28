@@ -44,6 +44,7 @@ public class Card {
     private Pane container;
     private FontIcon addIcon = new FontIcon("mdi-plus");
     private FontIcon datePickerIcon = new FontIcon("mdi-calendar-text");
+    private FontIcon newTodoDatePickerIcon = new FontIcon("mdi-calendar-text");
     private FontIcon deleteIcon = new FontIcon("mdi-delete");
     private FontIcon unCheckedBoxIcon = new FontIcon("mdi-checkbox-blank-circle-outline");
     private FontIcon checkedBoxIcon = new FontIcon("mdi-checkbox-marked-circle");
@@ -62,6 +63,7 @@ public class Card {
     private Button addBtn;
     private VBox newTodoLayout;
     private int todoViewInstance = 0;
+    private Button newTodoDatePickerBtn = new Button();
 
     public Card(Pane container, Todo todo) {
         setTodo(todo);
@@ -100,7 +102,7 @@ public class Card {
 
     private void setTextFields() {
         todoName = todo.getName();
-        todoDate = todo.getDueDate();
+        todoDate = todo.getDate();
         cardBG.setId("cardBG");
         // TODO: rethink the hover functionality
         // cardHover.setId("cardHover");
@@ -220,35 +222,21 @@ public class Card {
         checkCompleted.setSelected(todo.getCompleted());
         setCheckBoxIcon();
 
-        checkCompleted.setOnAction(event -> {
-            boolean selected = checkCompleted.isSelected();
-            todo.setCompleted(selected);
-            try {
-                if (selected) {
-                    logger.out("set to: completed");
-                    // System.out.println("set to: completed");
-
-                } else {
-                    logger.out("set to: not completed");
-                    // System.out.println("set to: not completed");
-                }
-                DbStore.getInstance().update(todo);
-                setCheckBoxIcon();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-
         checkBox.getChildren().add(checkCompleted);
     }
 
     private void setCheckBoxIcon() {
         // TODO : change box color!
         if (checkCompleted.isSelected()) {
+            System.out.println("int it to " + DbStore.getInstance().getCompletedTodoCnt());
+            DbStore.getInstance().setCompletedTodoCnt();
             todo.setCompleted(true);
+            cardContent.setId("card-complete");
             // Library.fadeTransition(uncheckedBoxIcon, checkedBoxIcon, iconView);
         } else {
             todo.setCompleted(false);
+            System.out.println("winner " + DbStore.getInstance().getCompletedTodoCnt());
+            cardContent.setId("card-incomplete");
             // Library.fadeTransition(checkedBoxIcon, uncheckedBoxIcon, iconView);
         }
         checkCompleted.setGraphic(checkCompleted.isSelected() ? checkedBoxIcon : unCheckedBoxIcon);
@@ -282,6 +270,8 @@ public class Card {
                 if (selected) {
                     todo.setCompleted(false);
                     checkCompleted.setSelected(false);
+                    System.out.println("in ???");
+                    DbStore.getInstance().setIncompletedTodoCnt();
                     logger.out("set to: not completed");
                     // System.out.println("set to: completed");
 
@@ -312,8 +302,17 @@ public class Card {
             submitBtn.setId("submit-btn");
             createNewTodo();
             System.out.println("in the bayou");
+            newTodoDatePickerBtn.setOnAction(event -> {
+                newTodoDatePicker.show();
+                System.out.println("clicked datePickerIcon");
+            });
+            newTodoDatePickerBtn.setId("date-picker-btn");
+            newTodoDatePickerBtn.setGraphic(newTodoDatePickerIcon);
+            Library.createScaleTransition(newTodoDatePickerBtn, 1.0);
+            Library.createTooltip(newTodoDatePickerBtn, "Yes, this changes the date.");
 
-            newTodoLayout.getChildren().addAll(newTodoNameTextField, newTodoDateTextField, newTodoDatePicker,
+            StackPane newTodoDatePickerElements = new StackPane(newTodoDatePicker, newTodoDatePickerBtn);
+            newTodoLayout.getChildren().addAll(newTodoNameTextField, newTodoDateTextField, newTodoDatePickerElements,
                     submitBtn);
             container.getChildren().add(newTodoLayout);
             todoViewInstance++;
@@ -355,7 +354,7 @@ public class Card {
         newTodoDatePicker.setMaxWidth(25);
         newTodoDatePicker.setShowWeekNumbers(false);
         newTodoDatePicker.getEditor().setManaged(false);
-        newTodoDatePicker.getEditor().setVisible(false);
+        newTodoDatePicker.setVisible(false);
         newTodoDatePicker.setOnAction(e -> {
             // bind the text property of the textfield to the datepicker
             newTodoDateTextField.textProperty().bind(newTodoDatePicker.valueProperty().asString());

@@ -23,7 +23,7 @@ public class Todo implements AppElement {
         this.name = name;
     }
 
-    public LocalDate getDueDate() {
+    public LocalDate getDate() {
         return dueDate;
     }
 

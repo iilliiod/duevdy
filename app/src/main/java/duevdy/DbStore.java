@@ -13,6 +13,9 @@ import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.UUID;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ObservableValue;
 
 import duevdy.Settings;
 
@@ -29,11 +32,28 @@ public class DbStore {
     private Logger logger = new Logger();
     private static DbStore instance = null;
 
+    private IntegerProperty completedTodoCnt = new SimpleIntegerProperty(0);
+
+    public void setCompletedTodoCnt() {
+        completedTodoCnt.set(completedTodoCnt.get() + 1);
+    }
+    public void setIncompletedTodoCnt() {
+        completedTodoCnt.set(completedTodoCnt.get() - 1);
+    }
+    public int getCompletedTodoCnt() {
+        return completedTodoCnt.get();
+    }
+    public IntegerProperty completedTodoCntProperty() {
+        return completedTodoCnt;
+    }
+
     private DbStore() {
         try {
             load(todoDir);
             load(noteDir);
             load(settingsDir);
+            sortTodo(todos);
+            sortList(notes);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -60,9 +80,12 @@ public class DbStore {
         return false;
     }
 
-    private File[] sortFiles(File[] files) {
-        Arrays.sort(files, Comparator.comparing(File::getName));
-        return files;
+    private <T extends AppElement> void sortList(LinkedList<T> elements) {
+        elements.sort(Comparator.comparing(AppElement::getDate).reversed());
+    }
+    private void sortTodo(LinkedList todos) {
+        sortList(todos);
+        todos.sort(Comparator.comparing(Todo::getCompleted));
     }
 
     private void parseSettings(File file) {
@@ -130,7 +153,6 @@ public class DbStore {
 
         File path = new File(dirpath.toString());
         File[] files = path.listFiles();
-        files = sortFiles(files);
         logger.out(path.toString() + " gateway open.");
 
         // parse

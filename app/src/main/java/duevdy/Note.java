@@ -20,7 +20,7 @@ public class Note implements AppElement {
     public void setTitle(String title) {
         this.title = title;
     }
-    public LocalDate getDateModified() {
+    public LocalDate getDate() {
         return dateModified;
     }
     public void setDateModified(LocalDate dateModified) {

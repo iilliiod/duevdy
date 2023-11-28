@@ -18,6 +18,9 @@ import javafx.geometry.Orientation;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+
 import java.io.File;
 import java.time.LocalDate;
 
@@ -56,7 +59,7 @@ public class UI {
         cardContainer.setHgap(10);
         cardContainer.setPadding(new Insets(20));
 
-        root.setId("main-cardContainer");
+        root.setId("main-card-container");
         load(cardContainer);
 
         scrollPane = new ScrollPane(cardContainer);
@@ -105,6 +108,7 @@ public class UI {
                 root.setTop(headerBox);
                 root.setCenter(noteBox);
                 root.setLeft(nav.getContainer());
+                nav.setNavBarContent(noteView.getLayout());
 
                 if(scene == null) {
                     scene = new Scene(root, 300, 600);
@@ -126,6 +130,16 @@ public class UI {
                 root.setTop(headerBox);
                 root.setCenter(scrollPane);
                 root.setLeft(nav.getContainer());
+                nav.setProgressBar();
+
+                ChangeListener<Number> listener = new ChangeListener<>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Number> obs, Number oldVal, Number newVal) {
+                        System.out.println("updating progress bar. .. .");
+                        nav.setProgressBar();
+                    }
+                };
+                DbStore.getInstance().completedTodoCntProperty().addListener(listener);
 
                 if(scene == null) {
                     scene = new Scene(root, 300, 600);
@@ -162,9 +176,4 @@ public class UI {
         }
     }
 
-    public void update(TilePane cardContainer, Todo todo) {
-        card = new Card(cardContainer, todo);
-
-        logger.out(todo.toString());
-    }
 }
