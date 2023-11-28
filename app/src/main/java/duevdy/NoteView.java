@@ -18,6 +18,7 @@ import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.Scanner;
 import javafx.collections.ObservableList;
+import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.ListCell;
 import javafx.collections.FXCollections;
 
@@ -34,6 +35,7 @@ public class NoteView {
     private VBox vbox;
     private HBox layout;
     private FontIcon icon = new FontIcon("mdi-plus");
+    private FontIcon deleteIcon = new FontIcon("mdi-delete");
     private final LocalDate dateToday = LocalDate.now();
 
     public NoteView() {
@@ -93,22 +95,36 @@ public class NoteView {
         } 
         notes.add(title);
         notesList.setItems(notes);
+        Button deleteButton = new Button();
         notesList.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             System.out.println("selected: " + newSelection);
             // show note contents
+            deleteButton.setOnAction(event -> {
+                System.out.println("clicked button");
+                notesList.getItems().remove(newSelection);
+            });
             // show delete button
+             // Get selected cell
+
         });
-        notesList.setCellFactory(lv -> new ListCell<>() {
-            @Override
-            public void updateItem(String item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty) {
-                    setText(null);
-                } else {
-                    setText(item);
-                }
-            }
-        });
+        // notesList.setCellFactory(lv -> new ListCell<>() {
+        //     @Override
+        //     public void updateItem(String item, boolean empty) {
+        //         super.updateItem(item, empty);
+        //         if (empty) {
+        //             setText(null);
+        //             setGraphic(null);
+        //         } else {
+        //             setText(item);
+        //             if(isSelected()) {
+        //                 System.out.println("clicked");
+        //                 setGraphic(deleteIcon);
+        //             } else {
+        //                 setGraphic(null);
+        //             }
+        //         }
+        //     }
+        // });
 
         Label label = new Label(title);
         label.setId("note-label");

@@ -18,9 +18,12 @@ import duevdy.Settings;
 
 public class DbStore {
     private String filename;
-    private final File todoDirpath = new File("store/todo/");
-    private final File noteDirpath = new File("store/notes/");
-    private final File settingsDirpath = new File("settings/");
+    private final Path todoDirpath = Paths.get("store/todo/");
+    private final Path noteDirpath = Paths.get("store/notes/");
+    private final Path settingsDirpath = Paths.get("settings/");
+    private final File todoDir = new File(todoDirpath.toString());
+    private final File noteDir = new File(noteDirpath.toString());
+    private final File settingsDir = new File(settingsDirpath.toString());
     private LinkedList<Todo> todos = new LinkedList<Todo>();
     private LinkedList<Note> notes = new LinkedList<Note>();
     private Logger logger = new Logger();
@@ -28,9 +31,9 @@ public class DbStore {
 
     private DbStore() {
         try {
-            load(todoDirpath);
-            load(noteDirpath);
-            load(settingsDirpath);
+            load(todoDir);
+            load(noteDir);
+            load(settingsDir);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -134,17 +137,16 @@ public class DbStore {
         if (files != null) {
             for (File file : files) {
                 if (file.isFile() && file.getName().contains("%") && finder(file.getName())) {
-                    switch(dirpath.toString()) {
-                        case "store/notes":
-                            parseNotes(file);
-                            break;
-                        case "store/todo":
-                            parseTodo(file);
-                            break;
-                        case "settings/": // TODO : fixup
-                            parseSettings(file);
-                        default:
-                            System.out.println("error");
+                    String dirPath = dirpath.toString();
+
+                    if (dirPath.equals(noteDirpath.toString())) {
+                        parseNotes(file);
+                    } else if (dirPath.equals(todoDirpath.toString())) {
+                        parseTodo(file);  
+                    } else if (dirPath.equals(settingsDirpath.toString())) {
+                        parseSettings(file);
+                    } else {
+                        System.out.println("Error"); 
                     }
                 }
             }
@@ -156,7 +158,7 @@ public class DbStore {
     private String getFileName(Todo todo) {
         // TODO: refactor for Notes to be able to use it as well
         // return the filename of the file's previous state
-        File file = findFile(todo.getID(), todoDirpath);
+        File file = findFile(todo.getID(), todoDir);
         if (file != null) {
             String filename = file.getName();
             return filename;
@@ -186,14 +188,14 @@ public class DbStore {
         logger.out("renaming " + fname + " to " + rename);
 
         // update file
-        Path file = Paths.get(this.todoDirpath.toString() + "/" + fname);
+        Path file = Paths.get(this.todoDir.toString() + "/" + fname);
         Files.move(file, file.resolveSibling(rename));
     }
 
     public Boolean addSettings(Settings settings, String content) throws IOException {
-        if (!this.settingsDirpath.exists()) {
-            if (this.settingsDirpath.mkdirs()) {
-                logger.out("opened " + this.settingsDirpath.toString() + " settings.");
+        if (!this.settingsDir.exists()) {
+            if (this.settingsDir.mkdirs()) {
+                logger.out("opened " + this.settingsDir.toString() + " settings.");
             } else {
                 logger.out("error opening settings.");
                 return false;
@@ -203,7 +205,7 @@ public class DbStore {
         String fname = getActiveFilename();
         logger.out("browsing settings with " + fname);
         // make file
-        File file = new File(this.settingsDirpath.toString() + "/" + fname);
+        File file = new File(this.settingsDir.toString() + "/" + fname);
         if (!file.exists()) {
             if (file.createNewFile()) {
                 logger.out("creating " + fname + "...");
@@ -281,9 +283,9 @@ public class DbStore {
     }
     private Boolean storeNote(Note note, String content) throws IOException {
         // make folder
-        if (!this.noteDirpath.exists()) {
-            if (this.noteDirpath.mkdirs()) {
-                logger.out("opened " + this.noteDirpath.toString() + " store.");
+        if (!this.noteDir.exists()) {
+            if (this.noteDir.mkdirs()) {
+                logger.out("opened " + this.noteDir.toString() + " store.");
             } else {
                 logger.out("error opening store.");
                 return false;
@@ -293,7 +295,7 @@ public class DbStore {
         String fname = getActiveFilename();
         logger.out("browsing store with " + fname);
         // make file
-        File file = new File(this.noteDirpath.toString() + "/" + fname);
+        File file = new File(this.noteDir.toString() + "/" + fname);
         if (!file.exists()) {
             if (file.createNewFile()) {
                 logger.out("creating " + fname + "...");
@@ -329,16 +331,16 @@ public class DbStore {
     public File getNote(String uuid) {
         // gets file based on uuid
         // returns file location
-        File file = findFile(uuid, noteDirpath);
+        File file = findFile(uuid, noteDir);
 
         return file;
     }
 
     private Boolean storeTodo(Todo todo) throws IOException {
         // make folder
-        if (!this.todoDirpath.exists()) {
-            if (this.todoDirpath.mkdirs()) {
-                logger.out("opened " + this.todoDirpath.toString() + " store.");
+        if (!this.todoDir.exists()) {
+            if (this.todoDir.mkdirs()) {
+                logger.out("opened " + this.todoDir.toString() + " store.");
             } else {
                 logger.out("error opening store.");
                 return false;
@@ -348,7 +350,7 @@ public class DbStore {
         String fname = getActiveFilename();
         logger.out("browsing store with " + fname);
         // make file
-        File file = new File(this.todoDirpath.toString() + "/" + fname);
+        File file = new File(this.todoDir.toString() + "/" + fname);
         if (!file.exists()) {
             if (file.createNewFile()) {
                 logger.out("creating " + fname + "...");
