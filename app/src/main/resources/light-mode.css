@@ -1,0 +1,228 @@
+* {
+  -fx-primary-color: #f8f9fa;
+  -fx-secondary-color: #6c757d;
+  -fx-light-grey-color: #d1d1d1;
+  -fx-accent-color: #dedbd2;
+  -fx-black: #212529;
+  -fx-white: #f8f9fa;
+  -fx-red: #e63946;
+
+  -fx-focus-color: -fx-secondary-color;
+}
+
+.root {
+  -fx-background-color: -fx-primary-color;
+  -fx-font-family: "Mona Sans", "sans-serif";
+  -fx-font-weight: 600;
+  -fx-font-size: 1em;
+  -fx-border-color: transparent;
+}
+
+#header {
+  -fx-font-size: 24px;
+  -fx-font-weight: bold;
+  -fx-padding: 0.5em;
+}
+
+#header-box {
+  -fx-background-color: transparent;
+}
+#header-box #add-todo-btn {
+  -fx-border-style: dashed;
+}
+
+/* date-picker */
+.date-picker .arrow-button {
+  -fx-background-color: -fx-primary-color;
+  -fx-background-radius: 0;
+}
+.date-picker .arrow-button:hover {
+  -fx-background-color: -fx-secondary-color;
+}
+.date-picker .arrow-button .arrow {
+  -fx-background-color: white;
+}
+.date-picker .cell {
+  -fx-background-color: white;
+}
+.date-picker .cell:hover {
+  -fx-background-color: -fx-light-grey-color;
+}
+.date-picker .cell:focused {
+  -fx-background-color: -fx-light-grey-color;
+}
+.date-picker .selected {
+  -fx-background-color: -fx-primary-color;
+  -fx-text-fill: -fx-black;
+}
+.date-picker .selected:focused {
+  -fx-background-color: -fx-primary-color;
+  -fx-text-fill: -fx-black;
+}
+.date-picker-popup {
+  -fx-border-color: transparent;
+}
+.date-picker-popup .month-year-pane {
+  -fx-background-color: -fx-primary-color;
+}
+.date-picker-popup .month-year-pane .label {
+  -fx-text-fill: -fx-black;
+}
+.date-picker-popup .week-number-cell {
+  -fx-text-fill: -fx-secondary-color;
+}
+.date-picker-popup .spinner .button .left-arrow,
+.date-picker-popup .spinner .button .right-arrow {
+  -fx-background-color: white;
+}
+
+/* checkbox */
+.checkbox .box {
+  -fx-opacity: 0;
+}
+
+.checkbox .box:pressed {
+  -fx-opacity: 0;
+}
+
+.checkbox:selected .box {
+  -fx-opacity: 0;
+}
+
+/* card */
+
+#card-content {
+  -fx-background-color: transparent;
+}
+
+#cardBG {
+  -fx-fill: -fx-primary-color;
+  -fx-opacity: 0;
+}
+#cardHover {
+  -fx-fill: -fx-secondary-color;
+}
+
+#del-btn {
+  -fx-background-color: -fx-red;
+  -fx-background-radius: 10px;
+}
+#date-picker-btn {
+  -fx-background-color: -fx-light-grey-color;
+  -fx-background-radius: 10px;
+}
+#note-vbox {
+  -fx-background-color: transparent;
+  /* -fx-border-color: yellow; */
+}
+#note-label {
+  -fx-font-weight: bold;
+}
+#scroll-pane {
+  /* -fx-background-color: red; */
+  -fx-border-color: transparent;
+  /* -fx-border-width: 10px; */
+}
+#scroll-pane .scroll-bar {
+  -fx-background-color: transparent;
+  -fx-pref-width: 10px;
+}
+#scroll-pane .scroll-bar-thumb {
+  -fx-background-color: transparent;
+}
+#scroll-pane .scroll-bar-track {
+  -fx-background-color: transparent;
+}
+
+#card-hbox {
+  /* -fx-effect: dropshadow( */
+  /*   gaussian, */
+  /*   rgba(17, 12, 46, 0.15), */
+  /*   0px, */
+  /*   48px, */
+  /*   100px, */
+  /*   0px */
+  /* ); */
+  -fx-padding: 20px;
+}
+
+#card-hbox:hover {
+  -fx-cursor: hand;
+  -fx-effect: dropshadow(gaussian, rgba(149, 157, 165, 0.2), 10, 0.1, 5px, 2px);
+}
+
+#card-pane {
+  -fx-background-color: -fx-primary-color;
+  -fx-background-radius: 10px;
+  -fx-opacity: 0.8;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
+}
+
+#tile-pane {
+  -fx-border-color: transparent;
+}
+#tool-bar-box {
+  /* -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 0); */
+  -fx-padding: 50px;
+  /* -fx-border-color: orange; */
+}
+#tool-bar {
+  -fx-padding: 10px;
+  /* -fx-border-color: red; */
+  -fx-alignment: baseline-center;
+  -fx-background-color: transparent;
+}
+
+#notes-btn,
+#todo-btn {
+  -fx-background-color: transparent;
+}
+#todo-name-field:focused {
+  -fx-background-color: -fx-white;
+}
+#add-todo-btn {
+  -fx-background-color: transparent;
+  -fx-border-color: transparent;
+  -fx-border-radius: 30px;
+}
+#add-todo-btn:hover {
+  -fx-border-color: -fx-black;
+}
+
+#note-layout {
+  /* -fx-background-color: pink; */
+}
+
+#main-container {
+  -fx-background-color: transparent;
+}
+
+#note-layout {
+  -fx-border-color: transparent;
+  -fx-padding: 10px;
+  -fx-background-color: transparent;
+}
+
+#new-note-btn {
+  -fx-background-color: transparent;
+}
+#new-note-btn:hover {
+  -fx-background-color: -fx-secondary-color;
+}
+#note-container {
+  -fx-background-color: transparent;
+}
+
+#nav-side-bar {
+  -fx-padding: 20px;
+  -fx-background-color: transparent;
+}
+
+#nav-notes-btn,
+#nav-todo-btn {
+  -fx-background-color: transparent;
+}
+#nav-notes-btn:hover,
+#nav-todo-btn:hover {
+  -fx-background-color: -fx-secondary-color;
+}

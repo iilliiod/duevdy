@@ -9,7 +9,7 @@
 }
 
 .root {
-  -fx-background-color: skyblue;
+  -fx-background-color: -fx-black;
   -fx-text-fill: red;
   -fx-font-family: "Mona Sans", "sans-serif";
   -fx-font-weight: 600;
@@ -95,7 +95,7 @@
   -fx-fill: -fx-secondary-color;
 }
 
-#delBtn {
+#del-btn {
   -fx-background-color: #e63946;
 }
 #note-vbox {
@@ -160,6 +160,9 @@
 }
 
 #notes-btn,
+#todo-name-field {
+  -fx-background-color: pink;
+}
 #todo-btn {
   -fx-background-color: transparent;
 }
@@ -169,4 +172,20 @@
 
 #main-container {
   -fx-background-color: transparent;
+}
+
+#note-layout {
+  -fx-border-color: red;
+  -fx-padding: 10px;
+  -fx-alignment: center;
+  -fx-background-color: -fx-light-grey-color;
+  -fx-transition: -fx-background-color 1s;
+}
+
+#note-layout:hover {
+  -fx-background-color: transparent;
+}
+
+#note-container {
+  -fx-background-color: -fx-primary-color;
 }

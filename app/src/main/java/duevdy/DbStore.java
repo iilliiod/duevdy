@@ -1,5 +1,6 @@
 package duevdy;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.util.Arrays;
 import java.time.LocalDate;
@@ -13,16 +14,23 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.UUID;
 
+import duevdy.Settings;
+
 public class DbStore {
     private String filename;
-    private final File dirpath = new File("store/");
-    private LinkedList<Courses> courses = new LinkedList<Courses>();
+    private final File todoDirpath = new File("store/todo/");
+    private final File noteDirpath = new File("store/notes/");
+    private final File settingsDirpath = new File("settings/");
+    private LinkedList<Todo> todos = new LinkedList<Todo>();
+    private LinkedList<Note> notes = new LinkedList<Note>();
     private Logger logger = new Logger();
     private static DbStore instance = null;
 
     private DbStore() {
         try {
-            load();
+            load(todoDirpath);
+            load(noteDirpath);
+            load(settingsDirpath);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -54,7 +62,41 @@ public class DbStore {
         return files;
     }
 
-    private void parseFile(File file) {
+    private void parseSettings(File file) {
+        String fname = file.getName();
+
+        if(fname != "settings") {
+            System.out.println("settings file not loaded");
+        } else System.out.println("settings loaded.");
+
+        // clean up on aisle title
+        Settings.getInstance();
+        logger.out("loaded " + file.getName());
+    }
+
+    
+    private void parseNotes(File file) {
+        String[] contents = file.getName().split("%");
+        int len = contents.length;
+
+        // set title
+        String title = contents[0];
+        for (int i = 1; i < len - 1; i++) {
+            title = title + " " + contents[i];
+        }
+        // clean up on aisle title
+        String uuid = title.substring(0, 7);
+        title = title.trim();
+        title = title.substring(8);
+
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(contents[len - 1], format);
+
+        this.notes.addLast(new Note(uuid, title, date));
+        logger.out("loaded " + file.getName());
+    }
+
+    private void parseTodo(File file) {
         String[] contents = file.getName().split("%");
         int len = contents.length;
 
@@ -63,7 +105,7 @@ public class DbStore {
 
         // set title
         String title = contents[0];
-        for(int i = 1; i < len - 2; i++) {
+        for (int i = 1; i < len - 2; i++) {
             title = title + " " + contents[i];
         }
         // clean up on aisle title
@@ -71,28 +113,39 @@ public class DbStore {
         title = title.trim();
         title = title.substring(8);
 
-        this.courses.addLast(new Courses(uuid, title, date, 
-                    (contents[len - 1].equals("C") ? true:false)));
+        this.todos.addLast(new Todo(uuid, title, date,
+                (contents[len - 1].equals("C") ? true : false)));
         logger.out("loaded " + file.getName());
     }
 
-    private void load() throws IOException {
+    private void load(File dirpath) throws IOException {
         // read and parse files
-        if(!this.dirpath.exists()) {
-            logger.out(this.dirpath.toString() + " gateway closed.");
+        if (!dirpath.exists()) {
+            logger.out(dirpath.toString() + " gateway closed.");
             return;
-        } 
+        }
 
-        File path = new File(this.dirpath.toString());
+        File path = new File(dirpath.toString());
         File[] files = path.listFiles();
         files = sortFiles(files);
         logger.out(path.toString() + " gateway open.");
-        
-        // parse 
-        if(files != null) {
-            for(File file : files) {
-                if(file.isFile() && file.getName().contains("%") && finder(file.getName())) {
-                    parseFile(file);
+
+        // parse
+        if (files != null) {
+            for (File file : files) {
+                if (file.isFile() && file.getName().contains("%") && finder(file.getName())) {
+                    switch(dirpath.toString()) {
+                        case "store/notes":
+                            parseNotes(file);
+                            break;
+                        case "store/todo":
+                            parseTodo(file);
+                            break;
+                        case "settings/": // TODO : fixup
+                            parseSettings(file);
+                        default:
+                            System.out.println("error");
+                    }
                 }
             }
         } else {
@@ -100,105 +153,151 @@ public class DbStore {
         }
     }
 
-    private String getFileName(Courses course) {
-        // return the filename of the file's previous state 
-        File file = findFile(course.getID());
-        if(file != null) {
+    private String getFileName(Todo todo) {
+        // TODO: refactor for Notes to be able to use it as well
+        // return the filename of the file's previous state
+        File file = findFile(todo.getID(), todoDirpath);
+        if (file != null) {
             String filename = file.getName();
             return filename;
         }
         return null;
     }
 
-    private File findFile(String uuid) {
+    private File findFile(String uuid, File dirpath) {
         // get the uuid matching the file's previous state
         File[] list = new File(dirpath.toString()).listFiles();
 
         if (list != null && list.length > 0) {
-            for (File f : list) { 
-                if(f.getName().startsWith(uuid)) {
+            for (File f : list) {
+                if (f.getName().startsWith(uuid)) {
                     logger.out("found " + f.getName());
                     return f;
                 }
-            } 
-        } 
+            }
+        }
         return null;
     }
 
-    public void update(Courses course) throws IOException {
-        String fname = getFileName(course);
-        String rename = generateName(course);
+    public void update(Todo todo) throws IOException {
+        String fname = getFileName(todo);
+        String rename = generateName(todo);
         // System.out.println("renaming " + fname + " to " + rename);
         logger.out("renaming " + fname + " to " + rename);
 
         // update file
-        Path file = Paths.get(this.dirpath.toString()+"/"+fname);
+        Path file = Paths.get(this.todoDirpath.toString() + "/" + fname);
         Files.move(file, file.resolveSibling(rename));
     }
 
-    public Courses addData(String courseName, LocalDate courseDate) {
-        Courses course = new Courses (generateID(), courseName, courseDate, false);
+    public Boolean addSettings(Settings settings, String content) throws IOException {
+        if (!this.settingsDirpath.exists()) {
+            if (this.settingsDirpath.mkdirs()) {
+                logger.out("opened " + this.settingsDirpath.toString() + " settings.");
+            } else {
+                logger.out("error opening settings.");
+                return false;
+            }
+        }
+        this.filename = "settings";
+        String fname = getActiveFilename();
+        logger.out("browsing settings with " + fname);
+        // make file
+        File file = new File(this.settingsDirpath.toString() + "/" + fname);
+        if (!file.exists()) {
+            if (file.createNewFile()) {
+                logger.out("creating " + fname + "...");
+                writeFile(file, content);
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    public Todo addTodo(String todoName, LocalDate todoDate) {
+        Todo todo = new Todo(generateID(), todoName, todoDate, false);
         try {
-            logger.out(course.toString() + " record request sent.");
-            if(storeData(course)) {
-                logger.out("stored " + course.toString() + " as " + this.filename);
-                this.courses.addLast(course);
-                return course;
+            logger.out(todo.toString() + " todo record request sent.");
+            if (storeTodo(todo)) {
+                logger.out("stored " + todo.toString() + " as " + this.filename);
+                this.todos.addLast(todo);
+                return todo;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return course;
+        return todo;
     }
 
-    public void deleteData(Courses course) {
+    public Note addNote(String title, LocalDate timeNow, String content) {
+        Note note = new Note(generateID(), title, timeNow);
+        try {
+            logger.out(note.toString() + " note record request sent.");
+            if (storeNote(note, content)) {
+                logger.out("stored " + note.toString() + " as " + this.filename);
+                System.out.println("stored " + note.toString() + " as " + this.filename);
+                this.notes.addLast(note);
+                return note;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return note;
+    }
+
+    public void deleteData(Todo todo) {
         // add robustness
-        this.courses.remove(course);
+        this.todos.remove(todo);
     }
 
-    public LinkedList<Courses> queryData() {
-        return this.courses;
+    public LinkedList<Todo> queryTodo() {
+        return this.todos;
     }
+    public LinkedList<Note> queryNotes() {
+        return this.notes;
+    }
+
     private String generateID() {
         String uuid = UUID.randomUUID().toString().replace("-", "");
         uuid = uuid.substring(0, Math.min(uuid.length(), 8));
         return uuid;
     }
 
-    private String generateName(Courses course) {
-        if (course.getID() == null) {
+    private <T extends AppElement> String generateName(T element) {
+        if (element.getID() == null) {
             System.out.println("huh ?");
         }
-        String output = course.toString().replaceAll(" ", "%");
+        String output = element.toString().replaceAll(" ", "%");
         return output;
     }
 
-    private void setActiveFileName(Courses course) {
-        this.filename = generateName(course);
+    private <T extends AppElement> void setActiveFileName(T element) {
+        this.filename = generateName(element);
     }
 
     private String getActiveFilename() {
         return this.filename;
     }
-
-    private Boolean storeData(Courses course) throws IOException {
+    private Boolean storeNote(Note note, String content) throws IOException {
         // make folder
-        if (!this.dirpath.exists()) {
-            if (this.dirpath.mkdirs()) {
-                logger.out("opened " + this.dirpath.toString() + " store.");
+        if (!this.noteDirpath.exists()) {
+            if (this.noteDirpath.mkdirs()) {
+                logger.out("opened " + this.noteDirpath.toString() + " store.");
             } else {
                 logger.out("error opening store.");
                 return false;
             }
         }
-        setActiveFileName(course);
+        setActiveFileName(note);
         String fname = getActiveFilename();
         logger.out("browsing store with " + fname);
         // make file
-        File file = new File(this.dirpath.toString()+"/"+fname);
-        if(!file.exists()){
-            if(file.createNewFile()){
+        File file = new File(this.noteDirpath.toString() + "/" + fname);
+        if (!file.exists()) {
+            if (file.createNewFile()) {
                 logger.out("creating " + fname + "...");
+                writeFile(file, content);
                 return true;
             }
         }
@@ -208,6 +307,7 @@ public class DbStore {
     private Boolean writeFile(File file, String content) {
         // assumes file already exists and is opened
         try {
+            // TODO: might need bufferedwriter for appending
             FileWriter writer = new FileWriter(file);
             writer.write(content);
             writer.close();
@@ -219,13 +319,52 @@ public class DbStore {
         }
     }
 
-    public Boolean deleteTodo(Courses course) {
-        System.out.println("in the db rn with " + course.toString());
-        setActiveFileName(course);
+    public String getNoteContents(String uuid) { // TODO: make a content class & return Content class
+        // gets file based on uuid
+        // returns note contents
+        String content = "";
+
+        return content;
+    }
+    public File getNote(String uuid) {
+        // gets file based on uuid
+        // returns file location
+        File file = findFile(uuid, noteDirpath);
+
+        return file;
+    }
+
+    private Boolean storeTodo(Todo todo) throws IOException {
+        // make folder
+        if (!this.todoDirpath.exists()) {
+            if (this.todoDirpath.mkdirs()) {
+                logger.out("opened " + this.todoDirpath.toString() + " store.");
+            } else {
+                logger.out("error opening store.");
+                return false;
+            }
+        }
+        setActiveFileName(todo);
+        String fname = getActiveFilename();
+        logger.out("browsing store with " + fname);
+        // make file
+        File file = new File(this.todoDirpath.toString() + "/" + fname);
+        if (!file.exists()) {
+            if (file.createNewFile()) {
+                logger.out("creating " + fname + "...");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Boolean deleteTodo(Todo todo) {
+        System.out.println("in the db rn with " + todo.toString());
+        setActiveFileName(todo);
         String fname = getActiveFilename();
 
         System.out.println("deleting " + fname + "...");
-        deleteData(course);
+        deleteData(todo);
         // get the file
         // remove the file
         // remove the file from the list

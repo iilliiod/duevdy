@@ -1,15 +1,15 @@
 package duevdy;
-// import java.io.File;
 import java.time.LocalDate;
+import duevdy.AppElement;
 
-public class Courses {
+public class Todo implements AppElement {
     private String name;
     private LocalDate dueDate;
     private Boolean completed;
     private String content;
     private final String ID;
 
-    public Courses(String uuid, String name, LocalDate dueDate, Boolean completed) {
+    public Todo (String uuid, String name, LocalDate dueDate, Boolean completed) {
         this.ID = uuid;
         this.name = name;
         this.dueDate = dueDate;

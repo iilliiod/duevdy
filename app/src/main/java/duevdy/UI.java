@@ -7,113 +7,109 @@ import javafx.scene.control.ToolBar;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.geometry.Insets;
 import javafx.scene.layout.TilePane;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.FlowPane;
+import javafx.geometry.Orientation;
+import javafx.scene.control.SplitPane;
+import javafx.scene.layout.BorderPane;
 
+import java.io.File;
 import java.time.LocalDate;
 
+
 public class UI {
+    private Nav nav;
     private Stage stage;
-    private VBox root = new VBox();
+    private BorderPane root = new BorderPane();
     private Scene scene; 
     private ScrollPane scrollPane;
     private DbStore dbStore = DbStore.getInstance();
     private Logger logger = new Logger();
     private Card card;
-    private Note note;
-    private VBox toolBarBox;
-    private VBox headerBox;
+    private NoteView noteView = new NoteView();
+    private HBox headerBox;
     private Label header;
+    private Settings settings;
     private final LocalDate dateToday = LocalDate.now();
+    
     enum ProgramState {
         INIT,
         NOTES,
         TODO
     }
-    ProgramState programState = ProgramState.INIT;
+    public ProgramState state = ProgramState.INIT;
 
     UI(Stage stage) {
         this.stage = stage;
     }
 
     public void init() {
-        // set up main container
+        // set up main cardContainer
         TilePane cardContainer = new TilePane();
         cardContainer.setId("tile-pane");
         cardContainer.setVgap(10);
         cardContainer.setHgap(10);
         cardContainer.setPadding(new Insets(20));
 
-        root.setId("main-container");
+        root.setId("main-cardContainer");
         load(cardContainer);
 
         scrollPane = new ScrollPane(cardContainer);
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
         scrollPane.setId("scroll-pane");
-        ToolBar toolBar = new ToolBar();
-        toolBar.setId("tool-bar");
-
-        Button todoBtn = new Button();
-        Image todoIcon = new Image(getClass().getResourceAsStream("/todo-list-icon.png"));
-        ImageView todoImageView = new ImageView(todoIcon);
-        todoImageView.setFitWidth(16);
-        todoImageView.setFitHeight(16);
-        todoBtn.setGraphic(todoImageView);
-        todoBtn.setId("todo-btn");
-        todoBtn.setOnAction(event -> {
-            System.out.println("switching to todo");
-            programState = ProgramState.TODO;
-            System.out.println(programState);
-            updateScene();
-        });
-
-        Button notesBtn = new Button();
-        Image notesIcon = new Image(getClass().getResourceAsStream("/notes-icon.png"));
-        ImageView notesImageView = new ImageView(notesIcon);
-        notesImageView.setFitWidth(16);
-        notesImageView.setFitHeight(16);
-        notesBtn.setGraphic(notesImageView);
-        notesBtn.setId("notes-btn");
-        notesBtn.setOnAction(event -> {
-            System.out.println("switching to notes");
-            programState = ProgramState.NOTES;
-            System.out.println(programState);
-            updateScene();
-        });
-
-        toolBar.getItems().addAll(todoBtn, new Separator(), notesBtn);
-        toolBarBox = new VBox(toolBar);
-        toolBarBox.setSpacing(10);
-        toolBarBox.setId("tool-bar-box");
+        nav = new Nav(this);
 
         updateScene();
     }
 
-    private void updateScene() {
-        switch(programState) {
+    private void setColorScheme() {
+        // read from settings file
+        // int val = 0;
+        // switch (val) {
+        //     case 1:
+        //         theme = ProgramTheme.DARK;
+        //         scene.getStylesheets().add(getClass().getResource("/dark-mode.css").toExternalForm());
+        //         break;
+        //     case 0:
+        //         theme = ProgramTheme.LIGHT;
+        //         scene.getStylesheets().add(getClass().getResource("/light-mode.css").toExternalForm());
+        //         break;
+        //     default:
+        //         theme = ProgramTheme.DARK;
+        //         scene.getStylesheets().add(getClass().getResource("/dark-mode.css").toExternalForm());
+        // }
+    }
+
+    public void updateScene() {
+        switch(state) {
             case INIT:
                 System.out.println("state: INIT");
             case NOTES:
                 System.out.println("state: NOTES");
-                note = new Note();
+                // noteView = new NoteView();
 
                 VBox noteBox = new VBox();
-                noteBox.getChildren().addAll(new Label("idek"), note.getVbox());
+                noteBox.getChildren().add(noteView.getVbox());
                 header = new Label("Notes");
-                headerBox = new VBox(header);
+                headerBox = new HBox(header);
                 header.setId("header");
 
                 // TODO: consider refactor by using a method
                 root.getChildren().clear();
-                root.getChildren().addAll(headerBox, noteBox, toolBarBox);
+                root.setTop(headerBox);
+                root.setCenter(noteBox);
+                root.setLeft(nav.getContainer());
 
                 if(scene == null) {
                     scene = new Scene(root, 300, 600);
-                    scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+                    // setColorScheme();
+                    scene.getStylesheets().add(getClass().getResource("/light-mode.css").toExternalForm());
 
                     stage.setScene(scene);
                 }
@@ -121,16 +117,20 @@ public class UI {
             case TODO:
                 System.out.println("state: TODO");
                 header = new Label("To-Do");
-                headerBox = new VBox(header);
+                headerBox = new HBox(header);
                 headerBox.getChildren().add(card.getTodoAddBtn());
                 header.setId("header");
+                headerBox.setId("header-box");
 
                 root.getChildren().clear();
-                root.getChildren().addAll(headerBox, scrollPane, toolBarBox);
+                root.setTop(headerBox);
+                root.setCenter(scrollPane);
+                root.setLeft(nav.getContainer());
 
                 if(scene == null) {
                     scene = new Scene(root, 300, 600);
-                    scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+                    // setColorScheme();
+                    scene.getStylesheets().add(getClass().getResource("/light-mode.css").toExternalForm());
 
                     stage.setScene(scene);
                 }
@@ -141,25 +141,30 @@ public class UI {
         stage.show();
     }
 
-    private void load(TilePane container) {
-        if(DbStore.getInstance().queryData().size() <= 0) {
+    private void load(TilePane cardContainer) {
+        if(DbStore.getInstance().queryTodo().size() <= 0) {
             System.out.println("no existing data found, initializing defaults...");
-            dbStore.addData("Test", this.dateToday);
-            dbStore.addData("Test!", this.dateToday);
-            dbStore.addData("Test2", this.dateToday);
+            dbStore.addTodo("Test", this.dateToday);
+            dbStore.addTodo("Test!", this.dateToday);
+            dbStore.addTodo("Test2", this.dateToday);
         }
 
-        for (Courses c : dbStore.queryData()) {
-            Courses course = c;
-            card = new Card(container, course);
+        for (Todo c : dbStore.queryTodo()) {
+            Todo todo = c;
+            card = new Card(cardContainer, todo);
 
-            logger.out(course.toString());
+            logger.out(todo.toString());
+        }
+
+        for (Note n : dbStore.queryNotes()) {
+            System.out.println("in load: " + n.toString());
+            noteView.loadNote(n.getID());
         }
     }
 
-    public void update(TilePane container, Courses course) {
-        card = new Card(container, course);
+    public void update(TilePane cardContainer, Todo todo) {
+        card = new Card(cardContainer, todo);
 
-        logger.out(course.toString());
+        logger.out(todo.toString());
     }
 }
