@@ -191,7 +191,9 @@ public class NoteView {
         newNoteLayout.setPadding(new Insets(20));
         newNoteLayout.getChildren().addAll(newNoteTextArea, newNoteBtn);
         newNoteLayout.setId("note-layout");
+
         // TODO: noteView needs noteLayout
+
         System.out.println("adding flowpane " + container.getChildren());
         vbox.getChildren().addAll(notesList, container, newNoteLayout);
         vbox.setId("note-vbox");
