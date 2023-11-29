@@ -1,8 +1,12 @@
 package duevdy;
 
+import java.util.Scanner;
+import java.io.IOException;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.util.Arrays;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.io.FileWriter;
@@ -100,7 +104,6 @@ public class DbStore {
         logger.out("loaded " + file.getName());
     }
 
-    
     private void parseNotes(File file) {
         String[] contents = file.getName().split("%");
         int len = contents.length;
@@ -117,6 +120,19 @@ public class DbStore {
 
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate date = LocalDate.parse(contents[len - 1], format);
+
+        // open file for title
+        // take max first 25 chars of first line
+        try {
+            Scanner scanner = new Scanner(file);
+            title = scanner.nextLine();
+            if(title.length() > 25) {
+                title = title.substring(0, 25) + "...";
+            } 
+            scanner.close();
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
+        } 
 
         this.notes.addLast(new Note(uuid, title, date));
         logger.out("loaded " + file.getName());
@@ -342,20 +358,78 @@ public class DbStore {
             return false;
         }
     }
+    int c = 0;
 
-    public String getNoteContents(String uuid) { // TODO: make a content class & return Content class
-        // gets file based on uuid
-        // returns note contents
-        String content = "";
+    public String[] getNoteTitleContent(String uuid) { // TODO: make a content class & return Content class
+        /*
+           output[0] = title;
+           output[1] = content;
+        */
+        // get file based on uuid
+        String[] output = new String[2];
 
-        return content;
+        File file = getNote(uuid);
+        StringBuilder content = new StringBuilder();
+        String title = "";
+        c++;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            System.out.println(c);
+            String line;
+            int lineCount = 0;
+            while((line = reader.readLine()) != null) {
+                System.out.println("lines: " + line);
+                if(lineCount < 1) {
+                    title = line;
+                }
+                lineCount++;
+                System.out.println("the line is: " + line);
+                if(lineCount >= 1) {
+                    content.append(line).append("\n");
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("note title: " + title);
+        System.out.println("content: " + content.substring(content.indexOf("\n") + 1).toString());
+
+        output[0] = title;
+        output[1] = content.substring(content.indexOf("\n") + 1).toString().trim();
+
+        return output;
     }
+
     public File getNote(String uuid) {
         // gets file based on uuid
         // returns file location
         File file = findFile(uuid, noteDir);
 
         return file;
+    }
+
+    public void updateNote(String uuid, String title, String content, LocalDate dateModified) {
+        // get file
+        // rewrite file contents NOTE: not an optimal solution, but it works for now
+        // change Note title if title changed
+
+        logger.out("db note content: " + content);
+        for(Note n : queryNotes()) {
+            if (n.getID().equals(uuid)) {
+                String oldTitle = n.getTitle();
+                n.setDateModified(dateModified);
+                if(!oldTitle.equals(title)) {
+                    n.setTitle(title);
+                }
+                break;
+            }
+        }
+
+        StringBuilder newFileContents = new StringBuilder(title).append("\n").append(content);
+
+        File file = getNote(uuid);
+        writeFile(file, newFileContents.toString());
     }
 
     private Boolean storeTodo(Todo todo) throws IOException {

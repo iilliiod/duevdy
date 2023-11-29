@@ -1,10 +1,8 @@
 .git
-store/
+# store/
 logs/
 bin
 archive*
-app/store
-app/logs
 
 # Ignore Gradle project-specific cache directory
 .gradle

@@ -35,6 +35,7 @@ public class NoteView {
     private String noteUUID;
     private VBox vbox;
     private HBox layout;
+    private VBox newNoteLayout = new VBox(8);
     private FontIcon icon = new FontIcon("mdi-plus");
     private FontIcon deleteIcon = new FontIcon("mdi-delete");
     private final LocalDate dateToday = LocalDate.now();
@@ -87,30 +88,48 @@ public class NoteView {
             }
         }
 
-        System.out.println(currentNote.toString());
+        // set title based on content length
         String content = "";
         String title = "";
         try {
             Scanner scanner = new Scanner(file);
             content = scanner.nextLine();
             System.out.println("content: " + content);
-            if(content.length() > 25) {
-                title = content.substring(0, 25) + "...";
+            if(currentNote.getTitle().equals("")) {
+                if(content.length() > 25) {
+                    title = content.substring(0, 25) + "...";
+                } else {
+                    title = content;
+                }
             } else {
-                title = content;
+                title = currentNote.getTitle();
             }
             logger.out("note title: " + title);
             scanner.close();
         } catch (FileNotFoundException e){
             e.printStackTrace();
         } 
+
+        // update note title
+        currentNote.setTitle(title);
+
+        // update display
+        setNoteList(currentNote, title, content);
+        updateContainer();
+    }
+
+    private void setNoteList(Note currentNote, String title, String content) {
+        // display note in list
         notes.add(currentNote);
         notesList.setItems(notes);
         notesList.setId("nav-notes-list");
+        Editor.display(newNoteLayout);
+
         Button deleteButton = new Button("Delete", deleteIcon);
         notesList.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             System.out.println("selected: " + newSelection.getID());
             // show note contents
+            Editor.display(newSelection.getID());
 
             deleteButton.setOnAction(event -> {
                 System.out.println("clicked button");
@@ -121,16 +140,27 @@ public class NoteView {
 
         });
 
+        notesList.setCellFactory(param -> new ListCell<>() {
+            @Override
+            protected void updateItem(Note item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.getTitle());
+                }
+            }
+        });
+
         deleteButton.setOnAction(event -> {
             System.out.println("clicked button");
         });
+
         Label label = new Label(title);
         label.setId("note-label");
         layout = new HBox(20);
         layout.setId("note-layout");
         layout.getChildren().addAll(label, deleteButton);
-
-        updateContainer();
     }
 
     public Node getLayout() {
@@ -139,7 +169,6 @@ public class NoteView {
 
     private void setVbox() {
         vbox = new VBox(8);
-        VBox newNoteLayout = new VBox(8);
         Button newNoteBtn = new Button("New note", icon);
         newNoteBtn.setId("new-note-btn");
         newNoteBtn.setOnAction(event -> {
@@ -176,11 +205,16 @@ public class NoteView {
         return vbox;
     }
 
+    public VBox getNewNoteLayout() {
+        return newNoteLayout;
+    }
+
     private void updateContainer() {
         // container.getChildren().clear();
         if(container.getChildren().size() > 0 ) {
             container.getChildren().add(layout);
         }
+        // TODO refresh container
     }
 
     private void init() {

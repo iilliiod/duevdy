@@ -4,7 +4,7 @@ import duevdy.AppElement;
 import java.time.LocalDate;
 
 public class Note implements AppElement {
-    private String title;
+    private String title = "";
     private LocalDate dateModified;
     private final String ID;
 

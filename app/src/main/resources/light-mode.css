@@ -104,7 +104,7 @@
   -fx-fill: -fx-secondary-color;
 }
 #card-incomplete {
-  -fx-background-color: -fx-red;
+  -fx-fill: -fx-primary-color;
   -fx-opacity: 0.8;
   -fx-background-radius: 10px;
 }
@@ -132,10 +132,10 @@
   -fx-font-weight: bold;
 }
 #scroll-pane {
-  /* -fx-background-color: red; */
+  -fx-background-color: transparent;
   -fx-border-color: transparent;
-  /* -fx-border-width: 10px; */
 }
+
 #scroll-pane .scroll-bar {
   -fx-background-color: transparent;
   -fx-pref-width: 10px;
@@ -156,7 +156,9 @@
   /*   100px, */
   /*   0px */
   /* ); */
+  -fx-opacity: 0.8;
   -fx-padding: 20px;
+  -fx-border-radius: 30px;
 }
 
 #card-hbox:hover {
@@ -235,6 +237,10 @@
   -fx-margin-bottom: 20px;
 }
 
+#nav-content-notes {
+  -fx-background-color: transparent;
+}
+
 #nav-notes-btn,
 #nav-todo-btn {
   -fx-background-color: transparent;
@@ -267,4 +273,21 @@
 }
 #submit-btn:hover {
   -fx-background-color: -fx-secondary-color;
+}
+
+#editor-title-box,
+#editor-note-title {
+  -fx-background-color: transparent;
+  -fx-font-weight: bold;
+  -fx-font-size: 20px;
+}
+#editor-container-box {
+  -fx-background-color: transparent;
+}
+#editor-text-area {
+  -fx-background-color: transparent;
+  -fx-control-inner-background: -fx-white;
+}
+#editor-container {
+  -fx-background-color: transparent;
 }

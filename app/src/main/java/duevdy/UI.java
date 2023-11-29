@@ -106,7 +106,8 @@ public class UI {
                 // TODO: consider refactor by using a method
                 root.getChildren().clear();
                 root.setTop(headerBox);
-                root.setCenter(noteBox);
+                root.setCenter(Editor.getTextArea());
+                root.setBottom(noteBox);
                 root.setLeft(nav.getContainer());
                 nav.setNavBarContent(noteView.getLayout());
 

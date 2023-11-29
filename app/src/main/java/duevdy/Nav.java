@@ -65,15 +65,16 @@ public class Nav {
     }
 
     public void setNavBarContent(Node contentContainer) {
-        contentContainer.setId("nav-content-notes");
+        contentContainer.setId("scroll-pane");
         sideBarStack.setId("nav-content-notes");
         sideBarStack.getChildren().clear();
         sideBarStack.getChildren().add(contentContainer);
+        VBox.setVgrow(sideBarStack, javafx.scene.layout.Priority.ALWAYS);
         sideBar.getChildren().remove(sideBarStack);
         sideBar.getChildren().add(sideBarStack);
     }
     public void setProgressBar() {
-        Label label = new Label("To-Do progress:", progressIcon);
+        Label label = new Label("To-Do Progress:", progressIcon);
         DoubleProperty completedTasks = new SimpleDoubleProperty(DbStore.getInstance().getCompletedTodoCnt());
         DoubleProperty totalTasks = new SimpleDoubleProperty(DbStore.getInstance().queryTodo().size());
         logger.out(DbStore.getInstance().getCompletedTodoCnt() + "/" + DbStore.getInstance().queryTodo().size());
