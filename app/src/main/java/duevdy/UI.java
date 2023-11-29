@@ -17,12 +17,15 @@ import javafx.scene.layout.FlowPane;
 import javafx.geometry.Orientation;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
 import java.io.File;
 import java.time.LocalDate;
+import duevdy.Nav;
 
 
 public class UI {
@@ -123,7 +126,11 @@ public class UI {
                 System.out.println("state: TODO");
                 header = new Label("To-Do");
                 headerBox = new HBox(header);
-                headerBox.getChildren().add(card.getTodoAddBtn());
+                HBox cardTodoBox = new  HBox(card.getTodoAddBtn());
+                cardTodoBox.setId("card-todo-btn-box");
+                Region spacer = new Region();
+                HBox.setHgrow(spacer, Priority.ALWAYS);
+                headerBox.getChildren().addAll(spacer, cardTodoBox);
                 header.setId("header");
                 headerBox.setId("header-box");
 

@@ -12,6 +12,8 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.Node;
 import javafx.collections.FXCollections;
 import org.kordamp.ikonli.javafx.FontIcon;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 
 import duevdy.Logger;
 import duevdy.DbStore;
@@ -28,6 +30,7 @@ public class Nav {
     private FontIcon noteIcon = new FontIcon("mdi-note-text");
     private FontIcon progressIcon = new FontIcon("mdi-creation");
     private UI ui;
+    private Region spacer = new Region();
 
     public Nav(UI ui) {
         this.ui = ui;
@@ -53,14 +56,30 @@ public class Nav {
         });
     }
 
-    public Button getTodoBtn() {
+    private Button getTodoBtn() {
         return todoBtn;
     }
-    public Button getNotesBtn() {
+    private Button getNotesBtn() {
         return notesBtn;
     }
 
     public VBox getContainer() {
+        switch (ui.state) {
+            case NOTES -> {
+                setTodoBtn();
+                content.getChildren().clear();
+                content.getChildren().addAll(todoBtn, spacer);
+                sideBar.getChildren().clear();
+                sideBar.getChildren().add(content);
+            }
+            case TODO -> {
+                setNoteBtn();
+                content.getChildren().clear();
+                content.getChildren().addAll(notesBtn, spacer);
+                sideBar.getChildren().clear();
+                sideBar.getChildren().add(content);
+            }
+        }
         return sideBar;
     }
 
@@ -95,7 +114,9 @@ public class Nav {
     private void init() {
         setNoteBtn();
         setTodoBtn();
-        content.getChildren().addAll(todoBtn, notesBtn);
+        // content.getChildren().addAll(todoBtn, notesBtn); // TODO : fix 
+        spacer.setId("nav-spacer");
+        content.getChildren().addAll(todoBtn, spacer);
         sideBar.getChildren().add(content);
         sideBar.setId("nav-side-bar");
     }
