@@ -33,6 +33,10 @@ public class Nav {
     private Region spacer = new Region();
 
     public Nav(UI ui) {
+        todoIcon.setId("icon-todo"); 
+        noteIcon.setId("icon-note"); 
+        progressIcon.setId("icon-progress"); 
+
         this.ui = ui;
         content = new VBox();
         sideBar = new VBox();
@@ -94,6 +98,7 @@ public class Nav {
     }
     public void setProgressBar() {
         Label label = new Label("To-Do Progress:", progressIcon);
+        label.setId("nav-progress-label");
         DoubleProperty completedTasks = new SimpleDoubleProperty(DbStore.getInstance().getCompletedTodoCnt());
         DoubleProperty totalTasks = new SimpleDoubleProperty(DbStore.getInstance().queryTodo().size());
         logger.out(DbStore.getInstance().getCompletedTodoCnt() + "/" + DbStore.getInstance().queryTodo().size());

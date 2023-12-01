@@ -29,26 +29,27 @@ import duevdy.Nav;
 
 
 public class UI {
-    private Nav nav;
-    private Stage stage;
-    private BorderPane root = new BorderPane();
-    private Scene scene; 
-    private ScrollPane scrollPane;
-    private DbStore dbStore = DbStore.getInstance();
-    private Logger logger = new Logger();
-    private Card card;
-    private NoteView noteView = new NoteView();
-    private HBox headerBox;
-    private Label header;
-    private Settings settings;
-    private final LocalDate dateToday = LocalDate.now();
+    private static Nav nav;
+    private static Stage stage;
+    private static BorderPane root = new BorderPane();
+    private static Scene scene; 
+    private static ScrollPane scrollPane;
+    private static DbStore dbStore = DbStore.getInstance();
+    private static Logger logger = new Logger();
+    private static Card card;
+    private static NoteView noteView = new NoteView();
+    private static HBox headerBox;
+    private static Label header;
+    private static Settings settings;
+    private static Region spacer = new Region();
+    private static final LocalDate dateToday = LocalDate.now();
     
-    enum ProgramState {
+    static enum ProgramState {
         INIT,
         NOTES,
         TODO
     }
-    public ProgramState state = ProgramState.INIT;
+    public static ProgramState state = ProgramState.INIT;
 
     UI(Stage stage) {
         this.stage = stage;
@@ -80,44 +81,48 @@ public class UI {
         // switch (val) {
         //     case 1:
         //         theme = ProgramTheme.DARK;
-        //         scene.getStylesheets().add(getClass().getResource("/dark-mode.css").toExternalForm());
+        //         scene.getStylesheets().add(UI.class().getResource("/dark-mode.css").toExternalForm());
         //         break;
         //     case 0:
         //         theme = ProgramTheme.LIGHT;
-        //         scene.getStylesheets().add(getClass().getResource("/light-mode.css").toExternalForm());
+        //         scene.getStylesheets().add(UI.class().getResource("/light-mode.css").toExternalForm());
         //         break;
         //     default:
         //         theme = ProgramTheme.DARK;
-        //         scene.getStylesheets().add(getClass().getResource("/dark-mode.css").toExternalForm());
+        //         scene.getStylesheets().add(UI.class().getResource("/dark-mode.css").toExternalForm());
         // }
     }
 
-    public void updateScene() {
+    public static void updateScene() {
+        System.out.println("UPDATING SCENE");
         switch(state) {
             case INIT:
                 System.out.println("state: INIT");
+                // TODO: create a splash screen
             case NOTES:
                 System.out.println("state: NOTES");
                 // noteView = new NoteView();
 
-                VBox noteBox = new VBox();
-                noteBox.getChildren().add(noteView.getVbox());
                 header = new Label("Notes");
                 headerBox = new HBox(header);
+                HBox noteTodoBox = new HBox(noteView.getDeleteButton(), noteView.getAddNewNoteButton());
+                noteTodoBox.setId("header-btn-box");
+                HBox.setHgrow(spacer, Priority.ALWAYS);
+                headerBox.getChildren().addAll(spacer, noteTodoBox);
                 header.setId("header");
+                headerBox.setId("header-box");
 
                 // TODO: consider refactor by using a method
                 root.getChildren().clear();
                 root.setTop(headerBox);
                 root.setCenter(Editor.getTextArea());
-                root.setBottom(noteBox);
                 root.setLeft(nav.getContainer());
                 nav.setNavBarContent(noteView.getLayout());
 
                 if(scene == null) {
                     scene = new Scene(root, 300, 600);
                     // setColorScheme();
-                    scene.getStylesheets().add(getClass().getResource("/light-mode.css").toExternalForm());
+                    scene.getStylesheets().add(UI.class.getResource("/light-mode.css").toExternalForm());
 
                     stage.setScene(scene);
                 }
@@ -126,9 +131,8 @@ public class UI {
                 System.out.println("state: TODO");
                 header = new Label("To-Do");
                 headerBox = new HBox(header);
-                HBox cardTodoBox = new  HBox(card.getTodoAddBtn());
-                cardTodoBox.setId("card-todo-btn-box");
-                Region spacer = new Region();
+                HBox cardTodoBox = new HBox(card.getTodoAddBtn());
+                cardTodoBox.setId("header-btn-box");
                 HBox.setHgrow(spacer, Priority.ALWAYS);
                 headerBox.getChildren().addAll(spacer, cardTodoBox);
                 header.setId("header");
@@ -143,7 +147,7 @@ public class UI {
                 ChangeListener<Number> listener = new ChangeListener<>() {
                     @Override
                     public void changed(ObservableValue<? extends Number> obs, Number oldVal, Number newVal) {
-                        System.out.println("updating progress bar. .. .");
+                        System.out.println("updating progress bar...");
                         nav.setProgressBar();
                     }
                 };
@@ -152,7 +156,7 @@ public class UI {
                 if(scene == null) {
                     scene = new Scene(root, 300, 600);
                     // setColorScheme();
-                    scene.getStylesheets().add(getClass().getResource("/light-mode.css").toExternalForm());
+                    scene.getStylesheets().add(UI.class.getResource("/light-mode.css").toExternalForm());
 
                     stage.setScene(scene);
                 }

@@ -4,6 +4,7 @@
   -fx-light-grey-color: #d1d1d1;
   -fx-accent-color: #dedbd2;
   -fx-black: #212529;
+  -fx-icon-black: #343a40;
   -fx-white: #f8f9fa;
   -fx-red: #e63946;
   -fx-green: #6a994e;
@@ -28,7 +29,9 @@
 #header-box {
   -fx-background-color: transparent;
 }
-#header-box #add-todo-btn {
+#header-box #add-new-btn,
+#delete-btn {
+  -fx-opacity: 0.8;
   -fx-border-style: dashed;
 }
 
@@ -41,10 +44,10 @@
   -fx-background-color: -fx-secondary-color;
 }
 .date-picker .arrow-button .arrow {
-  -fx-background-color: white;
+  -fx-background-color: -fx-white;
 }
 .date-picker .cell {
-  -fx-background-color: white;
+  -fx-background-color: -fx-white;
 }
 .date-picker .cell:hover {
   -fx-background-color: -fx-light-grey-color;
@@ -113,20 +116,33 @@
   -fx-opacity: 0.8;
   -fx-background-radius: 10px;
 }
+#card-util-btn-box {
+  -fx-alignment: center;
+  -fx-opacity: 0.8;
+  -fx-padding: 10px;
+}
 
 #del-btn {
-  -fx-background-color: -fx-red;
-  -fx-background-radius: 10px;
-  -fx-opacity: 0.8;
+  -fx-background-color: transparent;
 }
 #date-picker-btn {
-  -fx-background-color: -fx-light-grey-color;
-  -fx-background-radius: 10px;
-  -fx-opacity: 0.8;
+  -fx-background-color: transparent;
+}
+#del-btn:hover {
+  -fx-border-color: -fx-red;
+  -fx-border-radius: 30px;
+  -fx-border-style: dashed;
+}
+#date-picker-btn:hover {
+  -fx-border-color: -fx-secondary-color;
+  -fx-border-radius: 30px;
+  -fx-border-style: dashed;
+}
+#note-grid-pane {
+  -fx-border-color: -fx-green;
 }
 #note-vbox {
   -fx-background-color: transparent;
-  /* -fx-border-color: yellow; */
 }
 #note-label {
   -fx-font-weight: bold;
@@ -156,12 +172,12 @@
   /*   100px, */
   /*   0px */
   /* ); */
-  -fx-opacity: 0.8;
+  -fx-background-color: transparent;
   -fx-padding: 20px;
   -fx-border-radius: 30px;
 }
 
-#card-todo-btn-box {
+#header-btn-box {
   -fx-background-color: transparent;
   -fx-alignment: center;
   -fx-padding: 0 30 0 0;
@@ -181,17 +197,7 @@
 
 #tile-pane {
   -fx-border-color: transparent;
-}
-#tool-bar-box {
-  /* -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 0); */
-  -fx-padding: 50px;
-  /* -fx-border-color: orange; */
-}
-#tool-bar {
-  -fx-padding: 10px;
-  /* -fx-border-color: red; */
-  -fx-alignment: baseline-center;
-  -fx-background-color: transparent;
+  -fx-background-color: -fx-white;
 }
 
 #notes-btn,
@@ -201,17 +207,18 @@
 #todo-name-field:focused {
   -fx-background-color: -fx-white;
 }
-#add-todo-btn {
+#add-new-btn,
+#delete-btn {
   -fx-background-color: transparent;
   -fx-border-color: transparent;
   -fx-border-radius: 30px;
 }
-#add-todo-btn:hover {
+#add-new-btn:hover {
   -fx-border-color: -fx-black;
 }
-
-#note-layout {
-  /* -fx-background-color: pink; */
+#delete-btn:hover {
+  -fx-border-color: -fx-red;
+  -fx-fill: -fx-red;
 }
 
 #main-container {
@@ -219,6 +226,7 @@
 }
 #main-card-container {
   -fx-background-color: -fx-primary-color;
+  -fx-margin: 20;
 }
 
 #note-layout {
@@ -257,7 +265,10 @@
 }
 #nav-notes-btn:hover,
 #nav-todo-btn:hover {
-  -fx-background-color: -fx-secondary-color;
+  -fx-border-color: -fx-black;
+  -fx-border-style: dashed;
+  -fx-border-radius: 30px;
+  -fx-background-color: transparent;
 }
 #nav-content-container {
   -fx-background-color: transparent;
@@ -278,15 +289,16 @@
 
 #submit-btn {
   -fx-background-color: transparent;
-  -fx-border-style: dashed;
-  -fx-border-color: -fx-black;
 }
 #submit-btn:hover {
-  -fx-background-color: -fx-secondary-color;
+  -fx-border-color: -fx-black;
+  -fx-border-style: dashed;
+  -fx-border-radius: 30px;
 }
 
 #editor-title-box,
-#editor-note-title {
+#editor-note-title,
+#editor-new-note-title {
   -fx-background-color: -fx-white;
   -fx-font-weight: bold;
   -fx-font-size: 20px;
@@ -299,6 +311,31 @@
   -fx-background-color: transparent;
   -fx-control-inner-background: -fx-white;
 }
+#editor-new-note-title {
+  -fx-text-fill: #6c757d;
+}
+#editor-new-text-area {
+  -fx-background-color: transparent;
+  -fx-control-inner-background: -fx-white;
+  -fx-text-fill: #6c757d;
+}
 #editor-container {
   -fx-background-color: transparent;
+}
+
+#icon-add,
+#icon-delete,
+#icon-date-picker,
+#icon-checked,
+#icon-unchecked,
+#icon-todo,
+#icon-progress,
+#icon-note {
+  -fx-icon-size: 16px;
+  -fx-fill: -fx-icon-black;
+}
+
+#icon-delete:hover {
+  -fx-fill: -fx-red;
+  -fx-border-color: -fx-red;
 }

@@ -349,6 +349,7 @@ public class DbStore {
         try {
             // TODO: might need bufferedwriter for appending
             FileWriter writer = new FileWriter(file);
+            System.out.println("WRITING: " + content);
             writer.write(content);
             writer.close();
             return true;

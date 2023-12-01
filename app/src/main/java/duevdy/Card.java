@@ -15,6 +15,8 @@ import javafx.scene.control.DatePicker;
 import javafx.geometry.Pos;
 import javafx.scene.input.MouseEvent;
 import java.io.IOException;
+import javafx.animation.AnimationTimer;
+
 import javafx.collections.FXCollections;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -25,7 +27,7 @@ public class Card {
     private Logger logger = new Logger();
     private String todoName;
     private LocalDate todoDate;
-    private int cardWidth = 150;
+    private int cardWidth = 75;
     private int cardHeight = 100;
     private Todo todo;
     private TextField todoNameTextField;
@@ -38,7 +40,6 @@ public class Card {
     private StackPane cardPane;
     private HBox cardHbox;
     private Rectangle cardBG = new Rectangle(this.cardWidth, this.cardHeight);
-    // private Rectangle cardHover = new Rectangle(this.cardWidth, this.cardHeight);
     private CheckBox checkCompleted = new CheckBox();
     private StackPane cardContent = new StackPane();
     private Pane container;
@@ -48,15 +49,6 @@ public class Card {
     private FontIcon deleteIcon = new FontIcon("mdi-delete");
     private FontIcon unCheckedBoxIcon = new FontIcon("mdi-checkbox-blank-circle-outline");
     private FontIcon checkedBoxIcon = new FontIcon("mdi-checkbox-marked-circle");
-
-    // public enum HoverState {
-    //     NORMAL,
-    //     HOVERED,
-    //     DISABLED
-    // }
-    //
-    // private HoverState hoverState = HoverState.NORMAL;
-
     private TextField newTodoNameTextField;
     private TextField newTodoDateTextField;
     private DatePicker newTodoDatePicker;
@@ -66,6 +58,13 @@ public class Card {
     private Button newTodoDatePickerBtn = new Button();
 
     public Card(Pane container, Todo todo) {
+        addIcon.setId("icon-add");
+        datePickerIcon.setId("icon-date-picker"); 
+        newTodoDatePickerIcon.setId("icon-date-picker"); 
+        deleteIcon.setId("icon-delete"); 
+        unCheckedBoxIcon.setId("icon-unchecked"); 
+        checkedBoxIcon.setId("icon-checked"); 
+
         setTodo(todo);
         setContainer(container);
         init();
@@ -104,17 +103,6 @@ public class Card {
         todoName = todo.getName();
         todoDate = todo.getDate();
         cardBG.setId("cardBG");
-        // TODO: rethink the hover functionality
-        // cardHover.setId("cardHover");
-        // cardHover.setOpacity(0);
-        // cardHover.setOnMouseEntered(event -> {
-        //     System.out.println("in the event");
-        //     Library.cardHoverTransition(cardHover, cardBG);
-        // });
-        // if(!cardContent.getChildren().contains(cardBG) &&
-        // !cardContent.getChildren().contains(cardHover)) {
-        // cardContent.getChildren().clear();
-        // }
         cardContent.getChildren().add(cardBG);
         setTodoNameTextField(todoName);
         setTodoDateTextField(todoDate);
@@ -123,9 +111,8 @@ public class Card {
         // Update todoName if changed
         todoNameTextField.focusedProperty().addListener((obs, wasFocused, isFocused) -> {
             if (!isFocused) {
-                System.out.println("in here!!!");
                 String newName = todoNameTextField.getText();
-                // logger.out("updating todoName value...");
+                logger.out("updating todoName value...");
                 if (!newName.equals(todo.getName())) {
                     System.out.println("updating todoName value...");
                     todo.setName(newName);
@@ -187,14 +174,14 @@ public class Card {
         });
         datePickerBtn.setId("date-picker-btn");
         datePickerBtn.setGraphic(datePickerIcon);
-        Library.createScaleTransition(datePickerBtn, 1.0);
+        // Library.createScaleTransition(datePickerBtn, 1.0);
         Library.createTooltip(datePickerBtn, "Yes, this changes the date.");
     }
 
     private void createDelBtn() {
         delBtn = new Button();
         delBtn.setOnAction(event -> {
-            Library.showConfirmationDialog("Are you sure you want to delete this?\nThere's no coming back from this...")
+            Library.showConfirmationDialog("You sure?")
                     .thenAccept(result -> {
                         if (result) {
                             System.out.println("clicked delete on " + todo.toString());
@@ -205,7 +192,7 @@ public class Card {
         });
         delBtn.setId("del-btn");
         delBtn.setGraphic(deleteIcon);
-        Library.createScaleTransition(delBtn, 1.0);
+        // Library.createScaleTransition(delBtn, 1.0);
         Library.createTooltip(delBtn, "You know what a delete button does, right?");
     }
 
@@ -226,18 +213,13 @@ public class Card {
     }
 
     private void setCheckBoxIcon() {
-        // TODO : change box color!
         if (checkCompleted.isSelected()) {
-            System.out.println("int it to " + DbStore.getInstance().getCompletedTodoCnt());
             DbStore.getInstance().setCompletedTodoCnt();
             todo.setCompleted(true);
             cardContent.setId("card-complete");
-            // Library.fadeTransition(uncheckedBoxIcon, checkedBoxIcon, iconView);
         } else {
             todo.setCompleted(false);
-            System.out.println("winner " + DbStore.getInstance().getCompletedTodoCnt());
             cardContent.setId("card-incomplete");
-            // Library.fadeTransition(checkedBoxIcon, uncheckedBoxIcon, iconView);
         }
         checkCompleted.setGraphic(checkCompleted.isSelected() ? checkedBoxIcon : unCheckedBoxIcon);
     }
@@ -260,7 +242,10 @@ public class Card {
         cardPane.setId("card-pane");
 
         StackPane datePickerElements = new StackPane(datePicker, datePickerBtn);
-        cardHbox = new HBox(cardPane, datePickerElements, delBtn);
+        VBox utilBtnBox = new VBox(datePickerElements, delBtn);
+        utilBtnBox.setId("card-util-btn-box");
+        cardHbox = new HBox(cardPane, utilBtnBox);
+        utilBtnBox.setVisible(false);
         cardHbox.setId("card-hbox");
         checkCompleted.setSelected(todo.getCompleted());
         cardHbox.setOnMouseClicked(event -> {
@@ -270,7 +255,6 @@ public class Card {
                 if (selected) {
                     todo.setCompleted(false);
                     checkCompleted.setSelected(false);
-                    System.out.println("in ???");
                     DbStore.getInstance().setIncompletedTodoCnt();
                     logger.out("set to: not completed");
                     // System.out.println("set to: completed");
@@ -286,6 +270,37 @@ public class Card {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        });
+
+        cardHbox.setOnMouseEntered(event -> {
+            // display the utilBtnBox
+            utilBtnBox.setVisible(true);
+            Library.fadeInTransition(utilBtnBox);
+        });
+        cardHbox.setOnMouseExited(event -> {
+            // display the utilBtnBox
+            Library.fadeOutTransition(utilBtnBox);
+            long delayMillis = 750; 
+            long startTime = System.currentTimeMillis();
+
+            AnimationTimer timer = new AnimationTimer() {
+                @Override
+                public void handle(long now) {
+                    long elapsedTime = System.currentTimeMillis() - startTime;
+                    if (elapsedTime >= delayMillis) {
+                        // Call the method or perform the desired action
+                        System.out.println("opacity value: " + utilBtnBox.getOpacity());
+
+                        // Stop the timer
+                        stop();
+                        utilBtnBox.setVisible(false);
+                    }
+                }
+            };
+
+            // Start the timer
+            timer.start();
+
         });
     }
 
@@ -308,7 +323,7 @@ public class Card {
             });
             newTodoDatePickerBtn.setId("date-picker-btn");
             newTodoDatePickerBtn.setGraphic(newTodoDatePickerIcon);
-            Library.createScaleTransition(newTodoDatePickerBtn, 1.0);
+            // Library.createScaleTransition(newTodoDatePickerBtn, 1.0);
             Library.createTooltip(newTodoDatePickerBtn, "Yes, this changes the date.");
 
             StackPane newTodoDatePickerElements = new StackPane(newTodoDatePicker, newTodoDatePickerBtn);
@@ -341,7 +356,7 @@ public class Card {
     private void createAddButton() {
         addBtn = new Button("", addIcon);
         // addBtn.setText("Add");
-        addBtn.setId("add-todo-btn");
+        addBtn.setId("add-new-btn");
         addBtn.setOnAction(event -> {
             // might need to ensure only a single view is created
             System.out.println("add button click registered.");

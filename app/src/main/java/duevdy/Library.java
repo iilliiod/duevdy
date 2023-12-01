@@ -38,16 +38,16 @@ public class Library {
         dialog.setHeaderText(null);
         dialog.setContentText(message);
 
-        ButtonType yesButton = new ButtonType("Yes", ButtonData.YES);
-        ButtonType noButton = new ButtonType("No", ButtonData.NO);
+        ButtonType yesBtn = new ButtonType("Yes", ButtonData.YES);
+        ButtonType noBtn = new ButtonType("No", ButtonData.NO);
 
-        dialog.getDialogPane().getButtonTypes().addAll(yesButton, noButton);
+        dialog.getDialogPane().getButtonTypes().addAll(noBtn, yesBtn);
 
         CompletableFuture<Boolean> confirmed = new CompletableFuture<>();
         dialog.showAndWait().ifPresent(response -> {
-            if (response == yesButton) {
+            if (response == yesBtn) {
                 confirmed.complete(true);
-            } else if (response == noButton) {
+            } else if (response == noBtn) {
                 confirmed.complete(false);
             } else {
                 confirmed.complete(false);
@@ -60,9 +60,9 @@ public class Library {
     public static void createScaleTransition(Node node, double seconds) {
         ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(seconds), node);
         scaleTransition.setFromX(1.0);
-        scaleTransition.setToX(1.5);
+        scaleTransition.setToX(1.2);
         scaleTransition.setFromY(1.0);
-        scaleTransition.setToY(1.5);
+        scaleTransition.setToY(1.2);
         scaleTransition.setAutoReverse(true);
         scaleTransition.setCycleCount(ScaleTransition.INDEFINITE);
 
@@ -77,46 +77,25 @@ public class Library {
         });
     }
 
-    public static void fadeTransition(Image image1, Image image2, ImageView imageView) {
+    public static void fadeOutTransition(Node node) {
         // Set initial opacity
-        imageView.setOpacity(1.0);
+        node.setOpacity(0.8);
 
         // Create a FadeTransition for the fade out animation
-        FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(0.75), imageView);
-        fadeOutTransition.setFromValue(1.0);
+        FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(0.75), node);
+        fadeOutTransition.setFromValue(0.8);
         fadeOutTransition.setToValue(0.0);
-        fadeOutTransition.setOnFinished(event -> {
-            // Switch to the new image once the fade out animation is complete
-            imageView.setImage(image2);
-
-            // Create a FadeTransition for the fade in animation
-            FadeTransition fadeInTransition = new FadeTransition(Duration.seconds(0.75), imageView);
-            fadeInTransition.setFromValue(0.0);
-            fadeInTransition.setToValue(1.0);
-            fadeInTransition.play();
-        });
-
-        // Start the fade out transition
         fadeOutTransition.play();
     }
 
-    public static void cardHoverTransition(Node overlayNode, Node mainNode) {
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), overlayNode);
-        fadeTransition.setFromValue(0);
-        fadeTransition.setToValue(1);
-        System.out.println("transitioning from fitting in to standing out");
-        // TODO: disable mainNode functionality until exit
+    public static void fadeInTransition(Node node) {
+        // Set initial opacity
+        node.setOpacity(0.0);
 
-        
-
-        // Register mouse event handlers
-        fadeTransition.play(); // Start the fade transition when the mouse enters the main node
-
-        overlayNode.setOnMouseExited(event -> {
-            fadeTransition.stop(); // Stop the fade transition when the mouse exits the main node
-            mainNode.setMouseTransparent(false);
-            System.out.println("main node bye");
-            overlayNode.setOpacity(0); // Reset the opacity of the overlay node
-        });
+        // Create a FadeTransition for the fade in animation
+        FadeTransition fadeInTransition = new FadeTransition(Duration.seconds(0.75), node);
+        fadeInTransition.setFromValue(0.0);
+        fadeInTransition.setToValue(0.8);
+        fadeInTransition.play();
     }
 }

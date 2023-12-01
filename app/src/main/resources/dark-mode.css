@@ -1,26 +1,39 @@
 * {
-  -fx-primary-color: #e9ecef;
+  -fx-primary-color: #f8f9fa;
   -fx-secondary-color: #6c757d;
   -fx-light-grey-color: #d1d1d1;
+  -fx-accent-color: #dedbd2;
   -fx-black: #212529;
+  -fx-icon-black: #343a40;
   -fx-white: #f8f9fa;
+  -fx-red: #e63946;
+  -fx-green: #6a994e;
 
   -fx-focus-color: -fx-secondary-color;
 }
 
 .root {
   -fx-background-color: -fx-black;
-  -fx-text-fill: red;
   -fx-font-family: "Mona Sans", "sans-serif";
   -fx-font-weight: 600;
   -fx-font-size: 1em;
-  -fx-border-color: blue;
+  -fx-border-color: transparent;
 }
 
 #header {
-  -fx-font-size: 24px;
+  -fx-font-size: 36px;
   -fx-font-weight: bold;
-  -fx-padding: 0.5em;
+  -fx-padding: 20 0 10 30;
+  -fx-text-fill: -fx-white;
+}
+
+#header-box {
+  -fx-background-color: transparent;
+}
+#header-box #add-new-btn,
+#delete-btn {
+  -fx-opacity: 0.8;
+  -fx-border-style: dashed;
 }
 
 /* date-picker */
@@ -32,10 +45,10 @@
   -fx-background-color: -fx-secondary-color;
 }
 .date-picker .arrow-button .arrow {
-  -fx-background-color: white;
+  -fx-background-color: -fx-white;
 }
 .date-picker .cell {
-  -fx-background-color: white;
+  -fx-background-color: -fx-white;
 }
 .date-picker .cell:hover {
   -fx-background-color: -fx-light-grey-color;
@@ -94,19 +107,54 @@
 #cardHover {
   -fx-fill: -fx-secondary-color;
 }
+#card-incomplete {
+  -fx-fill: -fx-primary-color;
+  -fx-opacity: 0.8;
+  -fx-background-radius: 10px;
+}
+#card-complete {
+  -fx-background-color: -fx-green;
+  -fx-opacity: 0.8;
+  -fx-background-radius: 10px;
+}
+#card-util-btn-box {
+  -fx-alignment: center;
+  -fx-opacity: 0.8;
+  -fx-padding: 10px;
+}
 
 #del-btn {
-  -fx-background-color: #e63946;
+  -fx-background-color: transparent;
+  -fx-fill: -fx-white;
+}
+#date-picker-btn {
+  -fx-fill: -fx-white;
+  -fx-background-color: transparent;
+}
+#del-btn:hover {
+  -fx-border-color: -fx-red;
+  -fx-border-radius: 30px;
+  -fx-border-style: dashed;
+}
+#date-picker-btn:hover {
+  -fx-border-color: -fx-secondary-color;
+  -fx-border-radius: 30px;
+  -fx-border-style: dashed;
+}
+#note-grid-pane {
+  -fx-border-color: -fx-green;
 }
 #note-vbox {
   -fx-background-color: transparent;
-  /* -fx-border-color: yellow; */
+}
+#note-label {
+  -fx-font-weight: bold;
 }
 #scroll-pane {
-  /* -fx-background-color: red; */
+  -fx-background-color: transparent;
   -fx-border-color: transparent;
-  /* -fx-border-width: 10px; */
 }
+
 #scroll-pane .scroll-bar {
   -fx-background-color: transparent;
   -fx-pref-width: 10px;
@@ -127,7 +175,17 @@
   /*   100px, */
   /*   0px */
   /* ); */
+  -fx-background-color: transparent;
+  -fx-padding: 20px;
+  -fx-border-radius: 30px;
 }
+
+#header-btn-box {
+  -fx-background-color: transparent;
+  -fx-alignment: center;
+  -fx-padding: 0 30 0 0;
+}
+
 #card-hbox:hover {
   -fx-cursor: hand;
   -fx-effect: dropshadow(gaussian, rgba(149, 157, 165, 0.2), 10, 0.1, 5px, 2px);
@@ -142,50 +200,159 @@
 
 #tile-pane {
   -fx-border-color: transparent;
-}
-#course-name-field:focused {
-  /* -fx-background-color: orange; */
-}
-
-#tool-bar-box {
-  /* -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 0); */
-  -fx-padding: 50px;
-  /* -fx-border-color: orange; */
-}
-#tool-bar {
-  -fx-padding: 10px;
-  /* -fx-border-color: red; */
-  -fx-alignment: baseline-center;
-  -fx-background-color: transparent;
+  -fx-background-color: -fx-black;
 }
 
 #notes-btn,
-#todo-name-field {
-  -fx-background-color: pink;
-}
 #todo-btn {
   -fx-background-color: transparent;
 }
-#note-layout {
-  /* -fx-background-color: pink; */
+#todo-name-field:focused {
+  -fx-background-color: -fx-black;
+}
+#add-new-btn,
+#delete-btn {
+  -fx-background-color: transparent;
+  -fx-border-color: transparent;
+  -fx-border-radius: 30px;
+}
+#add-new-btn:hover {
+  -fx-border-color: -fx-white;
+}
+#delete-btn:hover {
+  -fx-border-color: -fx-red;
+  -fx-fill: -fx-red;
 }
 
 #main-container {
-  -fx-background-color: transparent;
+  -fx-background-color: -fx-black;
+  -fx-text-fill: -fx-white;
+}
+#main-card-container {
+  -fx-background-color: -fx-black;
+  -fx-text-fill: -fx-white;
+  -fx-margin: 20;
 }
 
 #note-layout {
-  -fx-border-color: red;
+  -fx-border-color: transparent;
   -fx-padding: 10px;
-  -fx-alignment: center;
-  -fx-background-color: -fx-light-grey-color;
-  -fx-transition: -fx-background-color 1s;
-}
-
-#note-layout:hover {
   -fx-background-color: transparent;
 }
 
+#new-note-btn {
+  -fx-background-color: transparent;
+}
+#new-note-btn:hover {
+  -fx-background-color: -fx-secondary-color;
+}
 #note-container {
-  -fx-background-color: -fx-primary-color;
+  -fx-background-color: transparent;
+}
+
+#nav-side-bar {
+  -fx-padding: 20px;
+  -fx-background-color: transparent;
+  -fx-margin-bottom: 20px;
+  -fx-text-fill: -fx-white;
+}
+
+#nav-spacer {
+  -fx-padding: 20 0 0 0;
+}
+
+#nav-content-notes {
+  -fx-background-color: -fx-black;
+  -fx-text-fill: -fx-white;
+}
+
+#nav-notes-btn,
+#nav-todo-btn {
+  -fx-background-color: transparent;
+  -fx-text-fill: -fx-white;
+}
+#nav-notes-btn:hover,
+#nav-todo-btn:hover {
+  -fx-border-color: -fx-white;
+  -fx-border-style: dashed;
+  -fx-border-radius: 30px;
+  -fx-background-color: transparent;
+}
+#nav-content-container {
+  -fx-background-color: transparent;
+  -fx-border-color: transparent;
+}
+#nav-notes-list {
+  -fx-border-color: transparent;
+}
+#nav-progress-bar {
+  -fx-accent: -fx-green;
+  -fx-pref-height: 15px;
+  -fx-opacity: 0.8;
+}
+#nav-progress-box {
+  -fx-background-color: transparent;
+  -fx-padding: 10px;
+}
+#nav-progress-label {
+  -fx-text-fill: -fx-white;
+}
+
+#submit-btn {
+  -fx-background-color: transparent;
+  -fx-text-fill: -fx-white;
+}
+#submit-btn:hover {
+  -fx-border-color: -fx-white;
+  -fx-border-style: dashed;
+  -fx-border-radius: 30px;
+}
+
+#editor-title-box,
+#editor-note-title,
+#editor-new-note-title {
+  -fx-background-color: -fx-black;
+  -fx-font-weight: bold;
+  -fx-font-size: 20px;
+  -fx-padding: 5;
+  -fx-border-color: -fx-black;
+}
+#editor-container-box {
+  -fx-background-color: transparent;
+  -fx-border-color: -fx-black;
+}
+#editor-text-area {
+  -fx-background-color: transparent;
+  -fx-control-inner-background: -fx-black;
+  -fx-border-color: -fx-black;
+}
+#editor-new-note-title {
+  -fx-text-fill: #6c757d;
+}
+#editor-new-text-area {
+  -fx-background-color: transparent;
+  -fx-control-inner-background: -fx-black;
+  -fx-text-fill: #6c757d;
+  -fx-border-color: -fx-black;
+}
+#editor-container {
+  -fx-background-color: transparent;
+  -fx-border-color: -fx-black;
+}
+
+#icon-add,
+#icon-delete,
+#icon-date-picker,
+#icon-checked,
+#icon-unchecked,
+#icon-todo,
+#icon-progress,
+#icon-note {
+  -fx-icon-size: 16px;
+  -fx-fill: -fx-white;
+}
+
+#icon-delete:hover {
+  -fx-fill: -fx-red;
+  -fx-border-color: -fx-red;
 }

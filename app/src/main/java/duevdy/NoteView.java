@@ -8,7 +8,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ListView;
 import javafx.geometry.Insets;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Label;
@@ -28,51 +27,38 @@ import org.kordamp.ikonli.javafx.FontIcon;
 public class NoteView {
     private Logger logger = new Logger();
     private FlowPane container = new FlowPane();
-    private GridPane gridPane;
     private TextArea newNoteTextArea;
     private ObservableList<Note> notes = FXCollections.observableArrayList();
     private ListView<Note> notesList = new ListView<>(notes);
     private String noteUUID;
-    private VBox vbox;
     private HBox layout;
-    private VBox newNoteLayout = new VBox(8);
     private FontIcon icon = new FontIcon("mdi-plus");
+    private FontIcon addIcon = new FontIcon("mdi-plus");
     private FontIcon deleteIcon = new FontIcon("mdi-delete");
     private final LocalDate dateToday = LocalDate.now();
+    private Button addBtn;
+    private Button deleteButton = new Button("", deleteIcon);
 
     public NoteView() {
+        icon.setId("icon-add");
+        addIcon.setId("icon-add");
+        deleteIcon.setId("icon-delete");
+
         container.setId("note-container");
         container.setPrefWrapLength(20);
         container.setOrientation(Orientation.HORIZONTAL);
         init();
     }
 
-    private void createNewNoteTextArea() {
-        newNoteTextArea = new TextArea("New note...");
-        newNoteTextArea.setPrefRowCount(1);
-        newNoteTextArea.setEditable(true);
-        newNoteTextArea.setMaxHeight(100);
-        newNoteTextArea.setMaxWidth(Screen.getPrimary().getVisualBounds().getWidth() / 4);
-        Library.createTooltip(newNoteTextArea, "Got anything to say?");
-        newNoteTextArea.textProperty().addListener((observable, oldVal, newVal) -> {
-            int row = newNoteTextArea.getText().split("\n").length;
-            int col = newNoteTextArea.getText().split(" ").length;
-            newNoteTextArea.setPrefRowCount(row);
-            newNoteTextArea.setPrefColumnCount(col);
+    private void createAddButton() {
+        addBtn = new Button("", addIcon);
+        // addBtn.setText("Add");
+        addBtn.setId("add-new-btn");
+        addBtn.setOnAction(event -> {
+            // might need to ensure only a single view is created
+            System.out.println("add button click registered.");
+            Editor.display();
         });
-        newNoteTextArea.setOnMouseClicked((MouseEvent event) -> {
-            if(newNoteTextArea.getText().equals("New note...")) {
-                newNoteTextArea.clear();
-            }
-            logger.out("Mouse clicked @newNoteTextArea");
-        });
-        // TODO: fix later
-        // newNoteTextArea.setOnMouseExited((MouseEvent event) -> {
-        //     if(newNoteTextArea.getText().equals("")) {
-        //         newNoteTextArea.setText("New note...");
-        //     }
-        //     logger.out("Mouse exited @newNoteTextArea");
-        //});
     }
 
     public void loadNote(String uuid) {
@@ -114,8 +100,14 @@ public class NoteView {
         currentNote.setTitle(title);
 
         // update display
+        System.out.println(currentNote.toString() + ": " + title + " " + content);
         setNoteList(currentNote, title, content);
         updateContainer();
+    }
+
+    public Button getDeleteButton() {
+        deleteButton.setId("delete-btn");
+        return deleteButton;
     }
 
     private void setNoteList(Note currentNote, String title, String content) {
@@ -123,9 +115,8 @@ public class NoteView {
         notes.add(currentNote);
         notesList.setItems(notes);
         notesList.setId("nav-notes-list");
-        Editor.display(newNoteLayout);
+        Editor.display();
 
-        Button deleteButton = new Button("Delete", deleteIcon);
         notesList.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             System.out.println("selected: " + newSelection.getID());
             // show note contents
@@ -135,9 +126,6 @@ public class NoteView {
                 System.out.println("clicked button");
                 notesList.getItems().remove(newSelection);
             });
-            // show delete button
-             // Get selected cell
-
         });
 
         notesList.setCellFactory(param -> new ListCell<>() {
@@ -160,58 +148,19 @@ public class NoteView {
         label.setId("note-label");
         layout = new HBox(20);
         layout.setId("note-layout");
-        layout.getChildren().addAll(label, deleteButton);
+        layout.getChildren().addAll(label);
     }
 
     public Node getLayout() {
         return notesList;
     }
 
-    private void setVbox() {
-        vbox = new VBox(8);
-        Button newNoteBtn = new Button("New note", icon);
-        newNoteBtn.setId("new-note-btn");
-        newNoteBtn.setOnAction(event -> {
-            System.out.println("adding a new note");
-            String content = newNoteTextArea.getText();
-            String title = content.substring(0, content.indexOf(" "));
-            if (!content.isEmpty()) {
-                newNoteTextArea.clear();
-                // add to database (returns a Note object)
-                Note newNote = DbStore.getInstance().addNote(title, this.dateToday, content);
-                if(newNote != null) {
-                    logger.out("added " + newNote.getID());
-                    loadNote(newNote.getID());
-                    logger.out(newNote.toString());
-                }
-            } else {
-                System.out.println("content?");
-            }
-        });
-        newNoteLayout.setPadding(new Insets(20));
-        newNoteLayout.getChildren().addAll(newNoteTextArea, newNoteBtn);
-        newNoteLayout.setId("note-layout");
-
-        // TODO: noteView needs noteLayout
-
-        System.out.println("adding flowpane " + container.getChildren());
-        vbox.getChildren().addAll(notesList, container, newNoteLayout);
-        vbox.setId("note-vbox");
-    }
-
-    private void setGridPane() {
-        gridPane = new GridPane();
-        gridPane.getChildren().addAll(vbox);
-    }
-    public VBox getVbox() {
-        return vbox;
-    }
-
-    public VBox getNewNoteLayout() {
-        return newNoteLayout;
+    public Button getAddNewNoteButton() {
+        return addBtn;
     }
 
     private void updateContainer() {
+        System.out.println("UPDATING CONTAINER");
         // container.getChildren().clear();
         if(container.getChildren().size() > 0 ) {
             container.getChildren().add(layout);
@@ -220,9 +169,8 @@ public class NoteView {
     }
 
     private void init() {
-        createNewNoteTextArea();
-        setVbox();
-        setGridPane();
+        createAddButton();
         updateContainer();
+        Editor.display();
     }
 }
