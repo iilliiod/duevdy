@@ -86,7 +86,7 @@ public class Card {
 
     private TextField setTodoDateTextField(LocalDate todoDate) {
         todoDateTextField = new TextField(todoDate.toString());
-        todoDateTextField.setStyle("-fx-background-color: transparent;");
+        todoDateTextField.setId("todo-date-field");
         todoDateTextField.setEditable(false); // NOTE: set this to false to disable editing
         return todoDateTextField;
     }
@@ -240,6 +240,7 @@ public class Card {
         StackPane.setAlignment(cardBG, Pos.TOP_LEFT);
         StackPane.setAlignment(cardBox, Pos.CENTER_RIGHT);
         cardPane.setId("card-pane");
+        cardPane.setPrefHeight(200);
 
         StackPane datePickerElements = new StackPane(datePicker, datePickerBtn);
         VBox utilBtnBox = new VBox(datePickerElements, delBtn);
@@ -327,8 +328,11 @@ public class Card {
             Library.createTooltip(newTodoDatePickerBtn, "Yes, this changes the date.");
 
             StackPane newTodoDatePickerElements = new StackPane(newTodoDatePicker, newTodoDatePickerBtn);
+            newTodoDatePickerElements.setId("date-picker-elements");
             newTodoLayout.getChildren().addAll(newTodoNameTextField, newTodoDateTextField, newTodoDatePickerElements,
                     submitBtn);
+            newTodoLayout.setId("new-todo-layout");
+            newTodoLayout.setPrefHeight(200);
             container.getChildren().add(newTodoLayout);
             todoViewInstance++;
             submitBtn.setOnAction(event -> {
@@ -384,8 +388,10 @@ public class Card {
 
     private void createNameTextField() {
         newTodoNameTextField = new TextField("Todo Name");
+        newTodoNameTextField.setId("new-todo-name-field");
         newTodoNameTextField.setMaxWidth(100);
         newTodoNameTextField.setMaxHeight(50);
+
         Library.createTooltip(newTodoNameTextField, "Gotta have a name buddy.");
         newTodoNameTextField.setOnMouseClicked((MouseEvent event) -> {
             if (newTodoNameTextField.getText().equals("Todo Name")) {
@@ -398,9 +404,11 @@ public class Card {
 
     private void createDateTextField() {
         newTodoDateTextField = new TextField("Todo Date");
+        newTodoDateTextField.setId("new-todo-date-field");
         newTodoDateTextField.setEditable(false); // NOTE: set this to false to disable editing
         newTodoDateTextField.setMaxHeight(50);
         newTodoDateTextField.setMaxWidth(100);
+
         Library.createTooltip(newTodoDateTextField, "Select a date from the date-picker below.");
         newTodoDateTextField.setOnMouseEntered((MouseEvent event) -> {
             logger.out("Mouse hover @newTodoDateTextField.");

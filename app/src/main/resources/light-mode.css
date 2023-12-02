@@ -207,6 +207,20 @@
 #todo-name-field:focused {
   -fx-background-color: -fx-white;
 }
+#todo-date-field {
+  -fx-background-color: transparent;
+}
+#todo-name-field:focused {
+  -fx-background-color: -fx-black;
+}
+#new-todo-name-field,
+#new-todo-date-field {
+  -fx-background-color: transparent;
+}
+#new-todo-layout {
+  -fx-padding: 10px;
+  -fx-alignment: baseline-left;
+}
 #add-new-btn,
 #delete-btn {
   -fx-background-color: transparent;
@@ -223,6 +237,7 @@
 
 #main-container {
   -fx-background-color: transparent;
+  -fx-alignment: center;
 }
 #main-card-container {
   -fx-background-color: -fx-primary-color;

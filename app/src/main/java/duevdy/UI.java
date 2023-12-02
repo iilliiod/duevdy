@@ -81,7 +81,7 @@ public class UI {
         // switch (val) {
         //     case 1:
         //         theme = ProgramTheme.DARK;
-        //         scene.getStylesheets().add(UI.class().getResource("/dark-mode.css").toExternalForm());
+        //         scene.getStylesheets().add(UI.class().getResource("/light-mode.css").toExternalForm());
         //         break;
         //     case 0:
         //         theme = ProgramTheme.LIGHT;
@@ -89,7 +89,7 @@ public class UI {
         //         break;
         //     default:
         //         theme = ProgramTheme.DARK;
-        //         scene.getStylesheets().add(UI.class().getResource("/dark-mode.css").toExternalForm());
+        //         scene.getStylesheets().add(UI.class().getResource("/light-mode.css").toExternalForm());
         // }
     }
 
@@ -122,7 +122,7 @@ public class UI {
                 if(scene == null) {
                     scene = new Scene(root, 300, 600);
                     // setColorScheme();
-                    scene.getStylesheets().add(UI.class.getResource("/light-mode.css").toExternalForm());
+                    scene.getStylesheets().add(UI.class.getResource("/dark-mode.css").toExternalForm());
 
                     stage.setScene(scene);
                 }
@@ -156,7 +156,7 @@ public class UI {
                 if(scene == null) {
                     scene = new Scene(root, 300, 600);
                     // setColorScheme();
-                    scene.getStylesheets().add(UI.class.getResource("/light-mode.css").toExternalForm());
+                    scene.getStylesheets().add(UI.class.getResource("/dark-mode.css").toExternalForm());
 
                     stage.setScene(scene);
                 }
