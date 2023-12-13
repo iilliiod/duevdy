@@ -14,6 +14,9 @@ import javafx.collections.FXCollections;
 import org.kordamp.ikonli.javafx.FontIcon;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 import duevdy.Logger;
 import duevdy.DbStore;
@@ -97,10 +100,20 @@ public class Nav {
         sideBar.getChildren().add(sideBarStack);
     }
     public void setProgressBar() {
-        Label label = new Label("To-Do Progress:", progressIcon);
+        Label label = new Label();
+        label.setGraphic(progressIcon);
         label.setId("nav-progress-label");
+
         DoubleProperty completedTasks = new SimpleDoubleProperty(DbStore.getInstance().getCompletedTodoCnt());
         DoubleProperty totalTasks = new SimpleDoubleProperty(DbStore.getInstance().queryTodo().size());
+
+        StringProperty progressText = new SimpleStringProperty();
+        progressText.bind(Bindings.concat(
+                    completedTasks.divide(totalTasks).multiply(100).asString("%.0f"),
+                    "%"
+                    ));
+        label.textProperty().bind(Bindings.concat("To-Do Progress: \t\t\t", progressText));
+
         logger.out(DbStore.getInstance().getCompletedTodoCnt() + "/" + DbStore.getInstance().queryTodo().size());
         ProgressBar progressBar = new ProgressBar();
         progressBar.setId("nav-progress-bar");
@@ -125,5 +138,6 @@ public class Nav {
         sideBar.getChildren().add(content);
         sideBar.setId("nav-side-bar");
     }
+
 
 }

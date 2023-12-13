@@ -240,7 +240,6 @@ public class Card {
         StackPane.setAlignment(cardBG, Pos.TOP_LEFT);
         StackPane.setAlignment(cardBox, Pos.CENTER_RIGHT);
         cardPane.setId("card-pane");
-        cardPane.setPrefHeight(200);
 
         StackPane datePickerElements = new StackPane(datePicker, datePickerBtn);
         VBox utilBtnBox = new VBox(datePickerElements, delBtn);

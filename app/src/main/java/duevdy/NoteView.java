@@ -134,8 +134,10 @@ public class NoteView {
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setText(null);
+                    setId("nav-empty-custom-list-cell");
                 } else {
                     setText(item.getTitle());
+                    setId("nav-custom-list-cell");
                 }
             }
         });
