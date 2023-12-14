@@ -122,7 +122,7 @@ public class UI {
                 if(scene == null) {
                     scene = new Scene(root, 300, 600);
                     // setColorScheme();
-                    scene.getStylesheets().add(UI.class.getResource("/dark-mode.css").toExternalForm());
+                    scene.getStylesheets().add(UI.class.getResource("/light-mode.css").toExternalForm());
 
                     stage.setScene(scene);
                 }
@@ -156,7 +156,7 @@ public class UI {
                 if(scene == null) {
                     scene = new Scene(root, 300, 600);
                     // setColorScheme();
-                    scene.getStylesheets().add(UI.class.getResource("/dark-mode.css").toExternalForm());
+                    scene.getStylesheets().add(UI.class.getResource("/light-mode.css").toExternalForm());
 
                     stage.setScene(scene);
                 }
@@ -170,9 +170,7 @@ public class UI {
     private void load(TilePane cardContainer) {
         if(DbStore.getInstance().queryTodo().size() <= 0) {
             System.out.println("no existing data found, initializing defaults...");
-            dbStore.addTodo("Test", this.dateToday);
-            dbStore.addTodo("Test!", this.dateToday);
-            dbStore.addTodo("Test2", this.dateToday);
+            dbStore.addTodo("New Todo...", this.dateToday);
         }
 
         for (Todo c : dbStore.queryTodo()) {

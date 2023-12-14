@@ -16,12 +16,12 @@
   -fx-background-color: -fx-primary-color;
   -fx-font-family: "Mona Sans", "sans-serif";
   -fx-font-weight: 600;
-  -fx-font-size: 1em;
+  -fx-font-size: 1.1em;
   -fx-border-color: transparent;
 }
 
 #header {
-  -fx-font-size: 36px;
+  -fx-font-size: 38px;
   -fx-font-weight: bold;
   -fx-padding: 20 0 10 30;
 }
@@ -193,6 +193,10 @@
   -fx-background-radius: 10px;
   -fx-opacity: 0.8;
   -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
+  -fx-pref-width: 150;
+  -fx-pref-height: 75;
+  -fx-max-width: 150;
+  -fx-max-height: 75;
 }
 
 #tile-pane {
@@ -211,7 +215,7 @@
   -fx-background-color: transparent;
 }
 #todo-name-field:focused {
-  -fx-background-color: -fx-black;
+  -fx-background-color: -fx-light-grey-color;
 }
 #new-todo-name-field,
 #new-todo-date-field {
@@ -292,6 +296,19 @@
 #nav-notes-list {
   -fx-border-color: transparent;
 }
+
+#nav-custom-list-cell,
+#nav-empty-custom-list-cell {
+  -fx-background-color: transparent;
+  -fx-text-fill: -fx-black;
+}
+
+#nav-custom-list-cell:hover {
+  -fx-border-style: dashed;
+  -fx-border-color: -fx-black;
+  -fx-border-radius: 30px;
+}
+
 #nav-progress-bar {
   -fx-accent: -fx-green;
   -fx-pref-height: 15px;
@@ -316,7 +333,7 @@
 #editor-new-note-title {
   -fx-background-color: -fx-white;
   -fx-font-weight: bold;
-  -fx-font-size: 20px;
+  -fx-font-size: 26px;
   -fx-padding: 5;
 }
 #editor-container-box {

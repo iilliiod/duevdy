@@ -21,7 +21,7 @@
 }
 
 #header {
-  -fx-font-size: 36px;
+  -fx-font-size: 38px;
   -fx-font-weight: bold;
   -fx-padding: 20 0 10 30;
   -fx-text-fill: -fx-white;
@@ -386,7 +386,7 @@
 
 #nav-custom-list-cell:hover {
   -fx-border-style: dashed;
-  -fx-border-color: white;
+  -fx-border-color: -fx-white;
   -fx-border-radius: 30px;
 }
 
@@ -425,7 +425,7 @@
 #editor-new-note-title {
   -fx-background-color: -fx-black;
   -fx-font-weight: bold;
-  -fx-font-size: 20px;
+  -fx-font-size: 26px;
   -fx-padding: 5;
 }
 
