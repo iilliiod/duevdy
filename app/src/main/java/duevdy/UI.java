@@ -1,5 +1,8 @@
 package duevdy;
 
+import javafx.scene.Node;
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Separator;
@@ -12,8 +15,10 @@ import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.geometry.Insets;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.StackPane;
 import javafx.geometry.Orientation;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
@@ -32,6 +37,7 @@ public class UI {
     private static Nav nav;
     private static Stage stage;
     private static BorderPane root = new BorderPane();
+    private static AnchorPane base = new AnchorPane();
     private static Scene scene; 
     private static ScrollPane scrollPane;
     private static DbStore dbStore = DbStore.getInstance();
@@ -42,6 +48,7 @@ public class UI {
     private static Label header;
     private static Settings settings;
     private static Region spacer = new Region();
+    private static Search searchBar;
     private static final LocalDate dateToday = LocalDate.now();
     
     static enum ProgramState {
@@ -53,6 +60,28 @@ public class UI {
 
     UI(Stage stage) {
         this.stage = stage;
+
+        base.setId("base");
+        AnchorPane.setTopAnchor(root, 0.0);
+        AnchorPane.setBottomAnchor(root, 0.0);
+        AnchorPane.setLeftAnchor(root, 0.0);
+        AnchorPane.setRightAnchor(root, 0.0);
+        base.getChildren().add(root);
+    }
+
+    public static void addSearchToBase(Node node) {
+        base.getChildren().remove(node);
+
+        // get x and y of search bar
+        AnchorPane.setTopAnchor(node, 60.0);
+        AnchorPane.setRightAnchor(node, 0.0);
+
+        base.getChildren().add(node);
+    }
+    public static void removeSearchFromBase(Node node) {
+        // TODO : review, kinda weird
+        base.getChildren().clear();
+        base.getChildren().add(root);
     }
 
     public void init() {
@@ -105,10 +134,11 @@ public class UI {
 
                 header = new Label("Notes");
                 headerBox = new HBox(header);
+                searchBar = new Search(ProgramState.NOTES.toString());
                 HBox noteTodoBox = new HBox(noteView.getDeleteButton(), noteView.getAddNewNoteButton());
                 noteTodoBox.setId("header-btn-box");
                 HBox.setHgrow(spacer, Priority.ALWAYS);
-                headerBox.getChildren().addAll(spacer, noteTodoBox);
+                headerBox.getChildren().addAll(spacer, noteTodoBox, searchBar.getSearch());
                 header.setId("header");
                 headerBox.setId("header-box");
 
@@ -120,7 +150,9 @@ public class UI {
                 nav.setNavBarContent(noteView.getLayout());
 
                 if(scene == null) {
-                    scene = new Scene(root, 300, 600);
+                    base.getChildren().clear();
+                    base.getChildren().add(root);
+                    scene = new Scene(base, 300, 600);
                     // setColorScheme();
                     scene.getStylesheets().add(UI.class.getResource("/light-mode.css").toExternalForm());
 
@@ -131,10 +163,11 @@ public class UI {
                 System.out.println("state: TODO");
                 header = new Label("To-Do");
                 headerBox = new HBox(header);
+                searchBar = new Search(ProgramState.TODO.toString());
                 HBox cardTodoBox = new HBox(card.getTodoAddBtn());
                 cardTodoBox.setId("header-btn-box");
                 HBox.setHgrow(spacer, Priority.ALWAYS);
-                headerBox.getChildren().addAll(spacer, cardTodoBox);
+                headerBox.getChildren().addAll(spacer, cardTodoBox, searchBar.getSearch());
                 header.setId("header");
                 headerBox.setId("header-box");
 
@@ -154,7 +187,9 @@ public class UI {
                 DbStore.getInstance().completedTodoCntProperty().addListener(listener);
 
                 if(scene == null) {
-                    scene = new Scene(root, 300, 600);
+                    base.getChildren().clear();
+                    base.getChildren().add(root);
+                    scene = new Scene(base, 300, 600);
                     // setColorScheme();
                     scene.getStylesheets().add(UI.class.getResource("/light-mode.css").toExternalForm());
 
@@ -165,6 +200,10 @@ public class UI {
                 stage.setScene(scene);
         }
         stage.show();
+    }
+
+    public static Scene getScene() {
+        return scene;
     }
 
     private void load(TilePane cardContainer) {
