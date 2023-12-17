@@ -29,8 +29,10 @@
 
 #header-box {
   -fx-background-color: transparent;
+  -fx-alignment: center;
 }
 
+#search-btn,
 #header-box #add-new-btn,
 #delete-btn {
   -fx-opacity: 0.8;
@@ -244,7 +246,7 @@
 #header-btn-box {
   -fx-background-color: transparent;
   -fx-alignment: center;
-  -fx-padding: 0 30 0 0;
+  -fx-padding: 0 0 0 0;
 }
 
 #card-hbox:hover {
@@ -456,6 +458,8 @@
   -fx-border-color: -fx-black;
 }
 
+#icon-dark-mode,
+#icon-light-mode,
 #icon-add,
 #icon-delete,
 #icon-date-picker,
@@ -463,7 +467,8 @@
 #icon-unchecked,
 #icon-todo,
 #icon-progress,
-#icon-note {
+#icon-note,
+#icon-search {
   -fx-icon-size: 16px;
   -fx-fill: -fx-white;
 }
@@ -471,4 +476,34 @@
 #icon-delete:hover {
   -fx-fill: -fx-red;
   -fx-border-color: -fx-red;
+}
+
+#search-box {
+  -fx-alignment: center;
+  -fx-padding: 0 15 0 0;
+}
+
+#search-field,
+#search-btn {
+  -fx-background-color: transparent;
+  -fx-border-color: transparent;
+  -fx-border-style: dashed;
+  -fx-border-radius: 30px;
+}
+#search-field:hover,
+#search-field:focused {
+  -fx-border-color: -fx-white;
+  -fx-text-fill: -fx-white;
+}
+#search-btn:hover {
+  -fx-border-color: -fx-white;
+}
+#search-result-list {
+  -fx-background-color: -fx-black;
+  -fx-padding: 12px;
+  -fx-border-color: transparent;
+}
+
+#change-theme-btn {
+  -fx-background-color: transparent;
 }

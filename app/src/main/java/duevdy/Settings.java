@@ -22,10 +22,6 @@ public class Settings implements AppElement {
         return instance;
     }
 
-    enum ProgramTheme {
-        LIGHT,
-        DARK
-    }
 
     ProgramTheme theme; 
 

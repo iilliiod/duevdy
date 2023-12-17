@@ -28,8 +28,10 @@
 
 #header-box {
   -fx-background-color: transparent;
+  -fx-alignment: center;
 }
 #header-box #add-new-btn,
+#search-btn,
 #delete-btn {
   -fx-opacity: 0.8;
   -fx-border-style: dashed;
@@ -148,6 +150,7 @@
   -fx-font-weight: bold;
 }
 #scroll-pane {
+  -fx-padding: 0;
   -fx-background-color: transparent;
   -fx-border-color: transparent;
 }
@@ -355,6 +358,8 @@
   -fx-background-color: transparent;
 }
 
+#icon-dark-mode,
+#icon-light-mode,
 #icon-add,
 #icon-delete,
 #icon-date-picker,
@@ -391,9 +396,22 @@
 #search-btn:hover {
   -fx-border-color: -fx-black;
 }
+#search-result-list {
+  -fx-background-color: -fx-white;
+  -fx-padding: 12px;
+  -fx-border-color: transparent;
+}
 #anchor {
-  -fx-background-color: red;
+  -fx-background-color: transparent;
 }
 #base {
+  -fx-background-color: orange;
+}
+#root {
+  -fx-background-color: magenta;
+}
+
+#change-theme-btn {
   -fx-background-color: transparent;
+  -fx-opacity: 0.8;
 }

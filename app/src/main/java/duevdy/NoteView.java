@@ -118,12 +118,12 @@ public class NoteView {
         Editor.display();
 
         notesList.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            System.out.println("selected: " + newSelection.getID());
+            System.out.println("SELECTED: " + newSelection.getID());
             // show note contents
             Editor.display(newSelection.getID());
 
             deleteButton.setOnAction(event -> {
-                System.out.println("clicked button");
+                System.out.println("clicked delete button");
                 notesList.getItems().remove(newSelection);
             });
         });

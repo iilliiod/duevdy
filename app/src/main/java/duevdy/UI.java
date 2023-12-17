@@ -24,7 +24,8 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
-
+import javafx.collections.FXCollections;
+import org.kordamp.ikonli.javafx.FontIcon;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
@@ -50,29 +51,41 @@ public class UI {
     private static Region spacer = new Region();
     private static Search searchBar;
     private static final LocalDate dateToday = LocalDate.now();
+    private static ProgramTheme currentTheme = ProgramTheme.LIGHT;
+    private static Button changeThemeBtn;
+    private static FontIcon darkModeIcon = new FontIcon("mdi-weather-night");
+    private static FontIcon lightModeIcon = new FontIcon("mdi-white-balance-sunny");
     
     static enum ProgramState {
         INIT,
         NOTES,
         TODO
     }
+
     public static ProgramState state = ProgramState.INIT;
 
     UI(Stage stage) {
         this.stage = stage;
 
+        lightModeIcon.setId("icon-light-mode");
+        darkModeIcon.setId("icon-dark-mode");
+
+        root.setId("root");
         base.setId("base");
+        setColorSchemeBtn();
+
         AnchorPane.setTopAnchor(root, 0.0);
         AnchorPane.setBottomAnchor(root, 0.0);
         AnchorPane.setLeftAnchor(root, 0.0);
         AnchorPane.setRightAnchor(root, 0.0);
+
         base.getChildren().add(root);
+        init();
     }
 
     public static void addSearchToBase(Node node) {
         base.getChildren().remove(node);
 
-        // get x and y of search bar
         AnchorPane.setTopAnchor(node, 60.0);
         AnchorPane.setRightAnchor(node, 0.0);
 
@@ -104,22 +117,33 @@ public class UI {
         updateScene();
     }
 
-    private void setColorScheme() {
+    private static void setColorSchemeBtn() {
         // read from settings file
-        // int val = 0;
-        // switch (val) {
-        //     case 1:
-        //         theme = ProgramTheme.DARK;
-        //         scene.getStylesheets().add(UI.class().getResource("/light-mode.css").toExternalForm());
-        //         break;
-        //     case 0:
-        //         theme = ProgramTheme.LIGHT;
-        //         scene.getStylesheets().add(UI.class().getResource("/light-mode.css").toExternalForm());
-        //         break;
-        //     default:
-        //         theme = ProgramTheme.DARK;
-        //         scene.getStylesheets().add(UI.class().getResource("/light-mode.css").toExternalForm());
-        // }
+        changeThemeBtn = new Button();
+        changeThemeBtn.setId("change-theme-btn");
+
+        if (currentTheme == ProgramTheme.LIGHT) {
+            changeThemeBtn.setGraphic(lightModeIcon);
+        } else {
+            changeThemeBtn.setGraphic(darkModeIcon);
+        }
+
+        Library.createScaleTransition(changeThemeBtn, 0.5);
+
+        changeThemeBtn.setOnAction(event -> {
+            // monitoring changes
+            System.out.println(currentTheme.toString());
+
+            currentTheme = (currentTheme == ProgramTheme.LIGHT) ? ProgramTheme.DARK : ProgramTheme.LIGHT;
+            currentTheme.setTheme(scene);
+
+            if (currentTheme == ProgramTheme.LIGHT) {
+                changeThemeBtn.setGraphic(lightModeIcon);
+            } else {
+                changeThemeBtn.setGraphic(darkModeIcon);
+            }
+
+        });
     }
 
     public static void updateScene() {
@@ -138,7 +162,7 @@ public class UI {
                 HBox noteTodoBox = new HBox(noteView.getDeleteButton(), noteView.getAddNewNoteButton());
                 noteTodoBox.setId("header-btn-box");
                 HBox.setHgrow(spacer, Priority.ALWAYS);
-                headerBox.getChildren().addAll(spacer, noteTodoBox, searchBar.getSearch());
+                headerBox.getChildren().addAll(changeThemeBtn, spacer, noteTodoBox, searchBar.getSearch());
                 header.setId("header");
                 headerBox.setId("header-box");
 
@@ -153,8 +177,8 @@ public class UI {
                     base.getChildren().clear();
                     base.getChildren().add(root);
                     scene = new Scene(base, 300, 600);
-                    // setColorScheme();
-                    scene.getStylesheets().add(UI.class.getResource("/light-mode.css").toExternalForm());
+                    currentTheme.setTheme(scene);
+                    // scene.getStylesheets().add(UI.class.getResource("/light-mode.css").toExternalForm());
 
                     stage.setScene(scene);
                 }
@@ -167,7 +191,7 @@ public class UI {
                 HBox cardTodoBox = new HBox(card.getTodoAddBtn());
                 cardTodoBox.setId("header-btn-box");
                 HBox.setHgrow(spacer, Priority.ALWAYS);
-                headerBox.getChildren().addAll(spacer, cardTodoBox, searchBar.getSearch());
+                headerBox.getChildren().addAll(changeThemeBtn, spacer, cardTodoBox, searchBar.getSearch());
                 header.setId("header");
                 headerBox.setId("header-box");
 
@@ -190,8 +214,8 @@ public class UI {
                     base.getChildren().clear();
                     base.getChildren().add(root);
                     scene = new Scene(base, 300, 600);
-                    // setColorScheme();
-                    scene.getStylesheets().add(UI.class.getResource("/light-mode.css").toExternalForm());
+                    currentTheme.setTheme(scene);
+                    // scene.getStylesheets().add(UI.class.getResource("/light-mode.css").toExternalForm());
 
                     stage.setScene(scene);
                 }

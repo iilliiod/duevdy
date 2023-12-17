@@ -3,6 +3,8 @@ package duevdy;
 import javafx.animation.FadeTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.animation.Timeline;
+import javafx.animation.Interpolator;
 import javafx.animation.ScaleTransition;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.Alert;
@@ -56,7 +58,6 @@ public class Library {
         return confirmed;
     }
 
-    // Create a scale transition
     public static void createScaleTransition(Node node, double seconds) {
         ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(seconds), node);
         scaleTransition.setFromX(1.0);
@@ -64,7 +65,10 @@ public class Library {
         scaleTransition.setFromY(1.0);
         scaleTransition.setToY(1.2);
         scaleTransition.setAutoReverse(true);
-        scaleTransition.setCycleCount(ScaleTransition.INDEFINITE);
+        scaleTransition.setCycleCount(Timeline.INDEFINITE);
+        scaleTransition.setInterpolator(Interpolator.SPLINE(0.25, 0.1, 0.25, 1.0));
+        scaleTransition.setInterpolator(Interpolator.EASE_BOTH);
+        // scaleTransition.setCycleCount(ScaleTransition.INDEFINITE);
 
         // Start the animation on hover
         node.setOnMouseEntered(event -> scaleTransition.play());
