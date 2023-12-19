@@ -7,11 +7,20 @@ public class Note implements AppElement {
     private String title = "";
     private LocalDate dateModified;
     private final String ID;
+    private Boolean isSelected;
 
     public Note(String uuid, String title, LocalDate dateModified) {
         this.ID = uuid;
         this.title = title;
         this.dateModified = dateModified;
+        this.isSelected = false;
+    }
+
+    public void setSelected(Boolean selected) {
+        this.isSelected = selected;
+    }
+    public Boolean getSelected() {
+        return this.isSelected;
     }
 
     public String getTitle() {

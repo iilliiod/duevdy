@@ -18,6 +18,7 @@ import java.time.LocalDate;
 
 import duevdy.DbStore;
 import duevdy.Logger;
+import duevdy.UI;
 
 public class Editor {
     private static Logger logger = new Logger();
@@ -87,7 +88,7 @@ public class Editor {
     private static void change(String uuid, String title) {
         System.out.println("editing note " + uuid + " title is: " + title);
         String updatedContent = textArea.getText();
-        if (!updatedContent.isEmpty()) {
+        if (!updatedContent.isEmpty() && !updatedContent.equals("Content...")) {
             DbStore.getInstance().updateNote(uuid, title, updatedContent, LocalDate.now());
         } else {
             System.out.println("editor content?");
@@ -161,7 +162,7 @@ public class Editor {
                     System.out.println("added " + newNote.getID());
                     new NoteView().loadNote(newNote.getID());
                     logger.out(newNote.toString());
-                    UI.updateScene();
+                    UI.reload();
                 }
             } else {
                 logger.out("EDITOR ERROR: updating header");
@@ -189,7 +190,7 @@ public class Editor {
                         System.out.println("added " + newNote.getID());
                         new NoteView().loadNote(newNote.getID());
                         logger.out(newNote.toString());
-                        UI.updateScene();
+                        UI.reload();
                     }
                 } else {
                     System.out.println("invalid args");

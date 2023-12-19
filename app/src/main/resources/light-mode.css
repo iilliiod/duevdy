@@ -149,6 +149,14 @@
 #note-label {
   -fx-font-weight: bold;
 }
+#note-selected-multi {
+  -fx-background-color: transparent;
+  -fx-text-fill: -fx-black;
+  -fx-opactiy: 0.5;
+}
+#note-selected-multi .text {
+  -fx-strikethrough: true;
+}
 #scroll-pane {
   -fx-padding: 0;
   -fx-background-color: transparent;
@@ -414,4 +422,7 @@
 #change-theme-btn {
   -fx-background-color: transparent;
   -fx-opacity: 0.8;
+}
+#stroke-transition {
+  -fx-stroke-dash-array: 12 2 4 2;
 }

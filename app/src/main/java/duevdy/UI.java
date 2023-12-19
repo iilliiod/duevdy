@@ -1,5 +1,7 @@
 package duevdy;
 
+import javafx.scene.Parent;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
@@ -37,14 +39,14 @@ import duevdy.Nav;
 public class UI {
     private static Nav nav;
     private static Stage stage;
-    private static BorderPane root = new BorderPane();
-    private static AnchorPane base = new AnchorPane();
+    private static BorderPane root;
+    private static AnchorPane base;
     private static Scene scene; 
     private static ScrollPane scrollPane;
     private static DbStore dbStore = DbStore.getInstance();
     private static Logger logger = new Logger();
     private static Card card;
-    private static NoteView noteView = new NoteView();
+    private static NoteView noteView;
     private static HBox headerBox;
     private static Label header;
     private static Settings settings;
@@ -53,33 +55,11 @@ public class UI {
     private static final LocalDate dateToday = LocalDate.now();
     private static ProgramTheme currentTheme = ProgramTheme.LIGHT;
     private static Button changeThemeBtn;
-    private static FontIcon darkModeIcon = new FontIcon("mdi-weather-night");
-    private static FontIcon lightModeIcon = new FontIcon("mdi-white-balance-sunny");
+    private static FontIcon darkModeIcon;
+    private static FontIcon lightModeIcon;
     
-    static enum ProgramState {
-        INIT,
-        NOTES,
-        TODO
-    }
-
-    public static ProgramState state = ProgramState.INIT;
-
     UI(Stage stage) {
         this.stage = stage;
-
-        lightModeIcon.setId("icon-light-mode");
-        darkModeIcon.setId("icon-dark-mode");
-
-        root.setId("root");
-        base.setId("base");
-        setColorSchemeBtn();
-
-        AnchorPane.setTopAnchor(root, 0.0);
-        AnchorPane.setBottomAnchor(root, 0.0);
-        AnchorPane.setLeftAnchor(root, 0.0);
-        AnchorPane.setRightAnchor(root, 0.0);
-
-        base.getChildren().add(root);
         init();
     }
 
@@ -97,7 +77,29 @@ public class UI {
         base.getChildren().add(root);
     }
 
-    public void init() {
+    public static void init() {
+        root = new BorderPane(); 
+        base = new AnchorPane(); 
+        lightModeIcon = new FontIcon("mdi-white-balance-sunny");
+        darkModeIcon = new FontIcon("mdi-weather-night");
+        noteView = new NoteView();
+
+        lightModeIcon.setId("icon-light-mode");
+        darkModeIcon.setId("icon-dark-mode");
+
+        root.setId("root");
+        base.setId("base");
+        base.getChildren().clear();
+        root.getChildren().clear();
+
+        setColorSchemeBtn();
+
+        AnchorPane.setTopAnchor(root, 0.0);
+        AnchorPane.setBottomAnchor(root, 0.0);
+        AnchorPane.setLeftAnchor(root, 0.0);
+        AnchorPane.setRightAnchor(root, 0.0);
+
+        base.getChildren().add(root);
         // set up main cardContainer
         TilePane cardContainer = new TilePane();
         cardContainer.setId("tile-pane");
@@ -112,7 +114,7 @@ public class UI {
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
         scrollPane.setId("scroll-pane");
-        nav = new Nav(this);
+        nav = new Nav();
 
         updateScene();
     }
@@ -123,9 +125,9 @@ public class UI {
         changeThemeBtn.setId("change-theme-btn");
 
         if (currentTheme == ProgramTheme.LIGHT) {
-            changeThemeBtn.setGraphic(lightModeIcon);
-        } else {
             changeThemeBtn.setGraphic(darkModeIcon);
+        } else {
+            changeThemeBtn.setGraphic(lightModeIcon);
         }
 
         Library.createScaleTransition(changeThemeBtn, 0.5);
@@ -138,17 +140,33 @@ public class UI {
             currentTheme.setTheme(scene);
 
             if (currentTheme == ProgramTheme.LIGHT) {
-                changeThemeBtn.setGraphic(lightModeIcon);
-            } else {
                 changeThemeBtn.setGraphic(darkModeIcon);
+            } else {
+                changeThemeBtn.setGraphic(lightModeIcon);
             }
 
         });
     }
 
+    public static void addToHeaderContainer(Node node) {
+        if(headerBox != null) {
+            System.out.println("ADDING TO CONTAINER");
+            headerBox.getChildren().remove(node);
+            headerBox.getChildren().add(3, node);
+            // updateScene();
+        }
+        System.out.println(headerBox.getChildren());
+    }
+    public static void removeFromHeaderContainer(Node node) {
+        if(headerBox != null) {
+            headerBox.getChildren().remove(node);
+            updateScene();
+        }
+    }
+
     public static void updateScene() {
         System.out.println("UPDATING SCENE");
-        switch(state) {
+        switch(Settings.getState()) {
             case INIT:
                 System.out.println("state: INIT");
                 // TODO: create a splash screen
@@ -230,10 +248,10 @@ public class UI {
         return scene;
     }
 
-    private void load(TilePane cardContainer) {
+    private static void load(TilePane cardContainer) {
         if(DbStore.getInstance().queryTodo().size() <= 0) {
             System.out.println("no existing data found, initializing defaults...");
-            dbStore.addTodo("New Todo...", this.dateToday);
+            dbStore.addTodo("New Todo...", dateToday);
         }
 
         for (Todo c : dbStore.queryTodo()) {
@@ -249,4 +267,14 @@ public class UI {
         }
     }
 
+    public static void reload() {
+        scene = null;
+        root.getChildren().clear();
+        base.getChildren().clear();
+        init();
+    }
+
+    public static Stage getStage() {
+        return stage;
+    }
 }

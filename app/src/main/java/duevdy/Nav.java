@@ -10,6 +10,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.Node;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import org.kordamp.ikonli.javafx.FontIcon;
 import javafx.scene.layout.Priority;
@@ -32,15 +33,13 @@ public class Nav {
     private FontIcon todoIcon = new FontIcon("mdi-format-list-bulleted-type");
     private FontIcon noteIcon = new FontIcon("mdi-note-text");
     private FontIcon progressIcon = new FontIcon("mdi-creation");
-    private UI ui;
     private Region spacer = new Region();
 
-    public Nav(UI ui) {
+    public Nav() {
         todoIcon.setId("icon-todo"); 
         noteIcon.setId("icon-note"); 
         progressIcon.setId("icon-progress"); 
 
-        this.ui = ui;
         content = new VBox();
         sideBar = new VBox();
         init();
@@ -50,16 +49,16 @@ public class Nav {
         todoBtn = new Button("To-Do", todoIcon);
         todoBtn.setId("nav-todo-btn");
         todoBtn.setOnAction(event -> {
-            ui.state = UI.ProgramState.TODO;
-            ui.updateScene();
+            Settings.setState(ProgramState.TODO);
+            UI.updateScene();
         });
     }
     public void setNoteBtn() {
         notesBtn = new Button("Notes", noteIcon);
         notesBtn.setId("nav-notes-btn");
         notesBtn.setOnAction(event -> {
-            ui.state = UI.ProgramState.NOTES;
-            ui.updateScene();
+            Settings.setState(ProgramState.NOTES);
+            UI.updateScene();
         });
     }
 
@@ -71,7 +70,7 @@ public class Nav {
     }
 
     public VBox getContainer() {
-        switch (ui.state) {
+        switch (Settings.getState()) {
             case NOTES -> {
                 setTodoBtn();
                 content.getChildren().clear();
@@ -106,6 +105,7 @@ public class Nav {
 
         DoubleProperty completedTasks = new SimpleDoubleProperty(DbStore.getInstance().getCompletedTodoCnt());
         DoubleProperty totalTasks = new SimpleDoubleProperty(DbStore.getInstance().queryTodo().size());
+
 
         StringProperty progressText = new SimpleStringProperty();
         progressText.bind(Bindings.concat(

@@ -1,5 +1,6 @@
 package duevdy;
 
+import javafx.scene.input.MouseButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -16,12 +17,15 @@ import javafx.geometry.Pos;
 import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 import javafx.animation.AnimationTimer;
-
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Card {
     private Logger logger = new Logger();
@@ -56,6 +60,11 @@ public class Card {
     private VBox newTodoLayout;
     private int todoViewInstance = 0;
     private Button newTodoDatePickerBtn = new Button();
+    private AtomicBoolean selectModeActive = new AtomicBoolean(false);
+    private ObservableList<Todo> todos = FXCollections.observableArrayList();
+    private ArrayList<Todo> buffer = new ArrayList<>(todos);
+    private FontIcon multiDeleteIcon = new FontIcon("mdi-delete");
+    private Button multiSelectDelBtn = new Button("", multiDeleteIcon);
 
     public Card(Pane container, Todo todo) {
         addIcon.setId("icon-add");
@@ -65,9 +74,36 @@ public class Card {
         unCheckedBoxIcon.setId("icon-unchecked"); 
         checkedBoxIcon.setId("icon-checked"); 
 
+        setTodosList();
         setTodo(todo);
         setContainer(container);
         init();
+    }
+
+    private void setTodosList() {
+        for (Todo todo : DbStore.getInstance().queryTodo()) {
+            todos.add(todo);
+        }
+
+        todos.addListener((ListChangeListener<? super Todo>) change -> {
+            while (change.next()) {
+                if (change.wasAdded()) {
+                    for (Todo addedTodo : change.getAddedSubList()) {
+                        if (addedTodo.getSelected()) {
+                            buffer.add(addedTodo);
+                        }
+                    }
+                }
+                System.out.println(change.getAddedSubList());
+
+
+                if (change.wasRemoved()) {
+                    for (Todo removedTodo : change.getRemoved()) {
+                        buffer.remove(removedTodo);
+                    }
+                }
+            }
+        });
     }
 
     private void setTodo(Todo todo) {
@@ -85,7 +121,13 @@ public class Card {
     }
 
     private TextField setTodoDateTextField(LocalDate todoDate) {
-        todoDateTextField = new TextField(todoDate.toString());
+        // slight mod to the date display
+        String date = todoDate
+            .toString()
+            .replace('-', '.')
+            .substring(5);
+
+        todoDateTextField = new TextField(date);
         todoDateTextField.setId("todo-date-field");
         todoDateTextField.setEditable(false); // NOTE: set this to false to disable editing
         return todoDateTextField;
@@ -181,14 +223,9 @@ public class Card {
     private void createDelBtn() {
         delBtn = new Button();
         delBtn.setOnAction(event -> {
-            Library.showConfirmationDialog("You sure?")
-                    .thenAccept(result -> {
-                        if (result) {
-                            System.out.println("clicked delete on " + todo.toString());
-                            DbStore.getInstance().deleteTodo(todo);
-                            container.getChildren().remove(cardHbox);
-                        }
-                    });
+            DbStore.getInstance().deleteTodo(todo);
+            container.getChildren().remove(cardHbox);
+            // TODO: update/refresh
         });
         delBtn.setId("del-btn");
         delBtn.setGraphic(deleteIcon);
@@ -234,6 +271,30 @@ public class Card {
         return checkBox;
     }
 
+    private void setUIDeleteBtn() {
+        multiDeleteIcon.setId("icon-delete");
+        multiSelectDelBtn.setId("del-btn");
+
+        multiSelectDelBtn.setOnAction(event -> {
+            if(buffer.isEmpty()) {
+                DbStore.getInstance().deleteTodo(todo);
+                container.getChildren().remove(cardHbox);
+                // selectable.set(false);
+            } else {
+                for(Todo todo : buffer) {
+                    System.out.println("REMOVING ..." + todo.toString());
+                    DbStore.getInstance().deleteTodo(todo);
+                    container.getChildren().remove(cardHbox);
+                }
+                // buffer.clear();
+                // selectModeActive.set(false);
+            }
+            // TODO: update/refresh
+        });
+
+        UI.addToHeaderContainer(multiSelectDelBtn);
+    }
+
     private void setCardPane() {
         cardPane = new StackPane();
         cardPane.getChildren().addAll(cardContent, cardBox);
@@ -248,6 +309,7 @@ public class Card {
         utilBtnBox.setVisible(false);
         cardHbox.setId("card-hbox");
         checkCompleted.setSelected(todo.getCompleted());
+
         cardHbox.setOnMouseClicked(event -> {
             boolean selected = checkCompleted.isSelected();
             try {
@@ -257,20 +319,51 @@ public class Card {
                     checkCompleted.setSelected(false);
                     DbStore.getInstance().setIncompletedTodoCnt();
                     logger.out("set to: not completed");
-                    // System.out.println("set to: completed");
 
                 } else {
                     todo.setCompleted(true);
                     checkCompleted.setSelected(true);
                     logger.out("set to: completed");
-                    // System.out.println("set to: not completed");
                 }
                 DbStore.getInstance().update(todo);
                 setCheckBoxIcon();
+
+                // shift click
+                if(!selectModeActive.get()) {
+
+                    System.out.println(todos + "\nSEL MODE: " + selectModeActive.get() + "\nTODO: " + todo + "\nBuffer: " + buffer);
+
+                    if(event.isShiftDown() && event.getButton() == MouseButton.PRIMARY) {
+
+                        if (todo != null) {
+                            // selectable.set(true);
+                            todo.setSelected(true);
+                            if(!buffer.contains(todo)) buffer.add(todo);
+                            System.out.println(buffer);
+                            Library.createSelectScaleTransition(cardHbox, 0.5);
+                            // if(todo.getSelected()) {
+                            //
+                            //     todo.setSelected(false);
+                            //     if(buffer.contains(todo)) {
+                            //         buffer.remove((todo));
+                            //     }
+                            //
+                            //     System.out.println("IN THE MODE " + todo.getSelected() + buffer.toString() + buffer.size());
+                            //     // refreshNotesList();
+                            // } 
+
+                            if(buffer.size() > 1) {
+                                setUIDeleteBtn();
+                            }
+                        }
+                    }
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
+
+        // TODO: add refresh
 
         cardHbox.setOnMouseEntered(event -> {
             // display the utilBtnBox
@@ -288,17 +381,12 @@ public class Card {
                 public void handle(long now) {
                     long elapsedTime = System.currentTimeMillis() - startTime;
                     if (elapsedTime >= delayMillis) {
-                        // Call the method or perform the desired action
-                        System.out.println("opacity value: " + utilBtnBox.getOpacity());
-
-                        // Stop the timer
                         stop();
                         utilBtnBox.setVisible(false);
                     }
                 }
             };
 
-            // Start the timer
             timer.start();
 
         });
@@ -313,7 +401,7 @@ public class Card {
     private void createNewTodoView() {
         if (todoViewInstance == 0) {
             newTodoLayout = new VBox(10);
-            Button submitBtn = new Button("Submit");
+            Button submitBtn = new Button("Add");
             submitBtn.setId("submit-btn");
             createNewTodo();
             System.out.println("in the bayou");
@@ -344,12 +432,14 @@ public class Card {
                     newTodoDatePicker.setValue(null);
                     // add to database (returns a Todo object)
                     Todo newTodo = DbStore.getInstance().addTodo(todoName, todoDate);
+                    todos.add(newTodo);
                     if (newTodo != null) {
                         Card addedCard = new Card(container, newTodo);
                         System.out.println("out the bayou");
                         container.getChildren().remove(newTodoLayout);
                         todoViewInstance--;
                         logger.out(todo.toString());
+                        // UI.reload();
                     }
                 }
             });
@@ -358,7 +448,6 @@ public class Card {
 
     private void createAddButton() {
         addBtn = new Button("", addIcon);
-        // addBtn.setText("Add");
         addBtn.setId("add-new-btn");
         addBtn.setOnAction(event -> {
             // might need to ensure only a single view is created
@@ -391,7 +480,7 @@ public class Card {
         newTodoNameTextField.setMaxWidth(100);
         newTodoNameTextField.setMaxHeight(50);
 
-        Library.createTooltip(newTodoNameTextField, "Gotta have a name buddy.");
+        Library.createTooltip(newTodoNameTextField, "Gotta have a name.");
         newTodoNameTextField.setOnMouseClicked((MouseEvent event) -> {
             if (newTodoNameTextField.getText().equals("Todo Name")) {
                 newTodoNameTextField.clear();
@@ -442,7 +531,7 @@ public class Card {
         setCardBox();
         setCardPane();
         createAddButton();
-        container.getChildren().addAll(getCardHbox());
+        container.getChildren().add(getCardHbox());
     }
 
 }

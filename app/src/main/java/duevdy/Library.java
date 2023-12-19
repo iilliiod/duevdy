@@ -1,5 +1,6 @@
 package duevdy;
 
+import javafx.scene.input.MouseButton;
 import javafx.animation.FadeTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -68,7 +69,6 @@ public class Library {
         scaleTransition.setCycleCount(Timeline.INDEFINITE);
         scaleTransition.setInterpolator(Interpolator.SPLINE(0.25, 0.1, 0.25, 1.0));
         scaleTransition.setInterpolator(Interpolator.EASE_BOTH);
-        // scaleTransition.setCycleCount(ScaleTransition.INDEFINITE);
 
         // Start the animation on hover
         node.setOnMouseEntered(event -> scaleTransition.play());
@@ -79,6 +79,29 @@ public class Library {
             node.setScaleX(1.0);
             node.setScaleY(1.0);
         });
+    }
+    public static void createSelectScaleTransition(Node node, double seconds) {
+        Boolean selectMode = false;
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(seconds), node);
+        scaleTransition.setFromX(1.0);
+        scaleTransition.setToX(1.075);
+        scaleTransition.setFromY(1.0);
+        scaleTransition.setToY(1.075);
+        scaleTransition.setAutoReverse(true);
+        scaleTransition.setCycleCount(Timeline.INDEFINITE);
+        scaleTransition.setInterpolator(Interpolator.SPLINE(0.25, 0.1, 0.25, 1.0));
+        scaleTransition.setInterpolator(Interpolator.EASE_BOTH);
+
+        if(!selectMode) {
+            scaleTransition.play();
+            selectMode = true;
+        } else {
+            node.setOnMouseClicked(event -> {
+                scaleTransition.stop();
+                node.setScaleX(1.0);
+                node.setScaleY(1.0);
+            });
+        }
     }
 
     public static void fadeOutTransition(Node node) {

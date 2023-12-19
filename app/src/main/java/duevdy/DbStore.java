@@ -99,7 +99,6 @@ public class DbStore {
             System.out.println("settings file not loaded");
         } else System.out.println("settings loaded.");
 
-        // clean up on aisle title
         Settings.getInstance();
         logger.out("loaded " + file.getName());
     }
@@ -276,7 +275,6 @@ public class DbStore {
             logger.out(note.toString() + " note record request sent.");
             if (storeNote(note, content)) {
                 logger.out("stored " + note.toString() + " as " + this.filename);
-                System.out.println("stored " + note.toString() + " as " + this.filename);
                 this.notes.addLast(note);
                 return note;
             }
@@ -286,9 +284,45 @@ public class DbStore {
         return note;
     }
 
-    public void deleteData(Todo todo) {
+    private void deleteFile(AppElement element) {
+        // find file based on uuid
+        // use dirpaths
+        // delete file if it exists
+
+        String uuid = element.getID();
+        File[] files;
+
+        if(element instanceof Note) {
+            files = noteDir.listFiles();
+        } else {
+            files = todoDir.listFiles();
+        }
+
+        if (files != null) {
+            for (File file : files) {
+                String fileName = file.getName();
+
+                // Check if the file name contains the ID
+                if (fileName.startsWith(uuid)) {
+                    // Delete the file
+                    if (file.delete()) {
+                        System.out.println("File with ID " + uuid + " deleted successfully.");
+                    } else {
+                        System.out.println("Failed to delete the file with ID " + uuid);
+                    }
+                    break; 
+                }
+            }
+        }
+    }
+
+    public void deleteData(AppElement element) {
         // add robustness
-        this.todos.remove(todo);
+        if(element instanceof Todo) {
+            Todo todo = (Todo) element;
+            this.todos.remove(todo);
+        } 
+        deleteFile(element);
     }
 
     public LinkedList<Todo> queryTodo() {
@@ -375,16 +409,13 @@ public class DbStore {
         c++;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            System.out.println(c);
             String line;
             int lineCount = 0;
             while((line = reader.readLine()) != null) {
-                System.out.println("lines: " + line);
                 if(lineCount < 1) {
                     title = line;
                 }
                 lineCount++;
-                System.out.println("the line is: " + line);
                 if(lineCount >= 1) {
                     content.append(line).append("\n");
                 }
@@ -393,8 +424,8 @@ public class DbStore {
             e.printStackTrace();
         }
 
-        System.out.println("note title: " + title);
-        System.out.println("content: " + content.substring(content.indexOf("\n") + 1).toString());
+        // System.out.println("note title: " + title);
+        // System.out.println("content: " + content.substring(content.indexOf("\n") + 1).toString());
 
         output[0] = title;
         output[1] = content.substring(content.indexOf("\n") + 1).toString().trim();

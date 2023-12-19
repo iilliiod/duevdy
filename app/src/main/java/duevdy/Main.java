@@ -14,7 +14,6 @@ public class Main extends Application {
         primaryStage.setHeight(WINDOW_HEIGHT);
 
         this.ui = new UI(primaryStage);
-        // this.ui.init();
     }
 
     public static void main(String[] args) {

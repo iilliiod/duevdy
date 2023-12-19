@@ -7,7 +7,7 @@
   -fx-icon-black: #343a40;
   -fx-white: #f8f9fa;
   -fx-red: #e63946;
-  -fx-green: #e7e7e7;
+  -fx-green: #31572c;
   -fx-focus-color: -fx-secondary-color;
 }
 
@@ -210,6 +210,14 @@
   -fx-background-color: -fx-black;
   -fx-font-weight: bold;
 }
+#note-selected-multi {
+  -fx-background-color: transparent;
+  -fx-text-fill: -fx-white;
+  -fx-opactiy: 0.5;
+}
+#note-selected-multi .text {
+  -fx-strikethrough: true;
+}
 
 #scroll-pane {
   -fx-background-color: transparent;
@@ -393,7 +401,7 @@
 }
 
 #nav-progress-bar {
-  -fx-accent: -fx-light-grey-color;
+  -fx-accent: -fx-green;
   -fx-pref-height: 15px;
   -fx-opacity: 0.8;
 }

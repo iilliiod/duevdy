@@ -1,5 +1,6 @@
 package duevdy;
 
+import java.util.concurrent.atomic.AtomicBoolean;
 import javafx.scene.control.ListCell;
 import javafx.scene.Node;
 import javafx.stage.Screen;
@@ -17,7 +18,7 @@ import org.kordamp.ikonli.javafx.FontIcon;
 public class Search {
     private HBox searchBox = new HBox();
     private ScrollPane resultsPane;
-    private ListView searchResultsListView;
+    private ListView<AppElement> searchResultsListView;
     private TextField searchField;
     private DbStore dbStore = DbStore.getInstance();
     private String flag;
@@ -45,24 +46,41 @@ public class Search {
 
 
     public void setBehavior() {
-        searchResultsListView.setCellFactory(param -> new ListCell<String>() {
+        AtomicBoolean isHover = new AtomicBoolean(false);
+
+        searchResultsListView.setCellFactory(param -> new ListCell<>() {
             @Override
-            protected void updateItem(String item, boolean empty) {
+            protected void updateItem(AppElement item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setText(null);
                     setId("nav-empty-custom-list-cell");
                 } else {
-                    setText(item);
+                    if (item instanceof Note) {
+                        Note note = (Note) item;
+                        setText(note.getTitle());
+                    } else {
+                        Todo todo = (Todo) item;
+                        setText(todo.getName());
+                    }
                     setId("nav-custom-list-cell");
                 }
+
+                setOnMouseEntered(event -> {
+                    isHover.set(true);
+                    System.out.println("hovering");
+                });
+                setOnMouseExited(event -> {
+                    isHover.set(false);
+                    System.out.println("not hovering");
+                });
             }
         });
 
         searchBtn.setOnAction(event -> setSearchBox(searchField));
         
         searchField.focusedProperty().addListener((obs, oldVal, newVal) -> {
-            if(!newVal) {
+            if(!newVal && !isHover.get() || oldVal && !isHover.get()) {
                 setSearchBox(searchBtn);
                 // remove results
                 UI.removeSearchFromBase(getResultsContainer());
@@ -76,7 +94,19 @@ public class Search {
             updateSearchResults(newValue);
         });
         searchField.setOnKeyReleased(event -> handleSearch());
-        searchResultsListView.setOnMouseClicked(event -> handleSearchResultClick());
+
+        searchResultsListView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if(newSelection != null) {
+                if(flag.equals("NOTES")) {
+                    // searchField.clear();
+                    Editor.display(newSelection.getID());
+                    // show note contents
+                    UI.removeSearchFromBase(getResultsContainer());
+                } else {
+                    System.out.println("working on the todos");
+                }           
+            }
+        });
     }
 
     private void handleSearch() {
@@ -102,6 +132,7 @@ public class Search {
     }
 
     private LinkedList<Note> searchNoteItems(String query) {
+        // TODO : make a trash bin
         LinkedList<Note> results = new LinkedList<>();
         for (Note note : dbStore.queryNotes()) {
             if (note.getTitle().toLowerCase().contains(query)) {
@@ -116,22 +147,12 @@ public class Search {
 
         for (AppElement element : results) {
             if(element instanceof Todo) {
-                searchResultsListView.getItems().add(((Todo) element).getName());
+                searchResultsListView.getItems().add(((Todo) element));
             } else if (element instanceof Note){
-                searchResultsListView.getItems().add(((Note) element).getTitle());
+                searchResultsListView.getItems().add(((Note) element));
             }
         }
         UI.addSearchToBase(getResultsContainer());
-    }
-
-    private void handleSearchResultClick() {
-    //     String selectedItem = searchResultsListView.getSelectionModel().getSelectedItem();
-    //     if (selectedItem != null) {
-    //         // TODO : notes should open the selected file in the editor
-    //         // TODO : todos should place the selected todo as the first todo in the container
-    //         //        and flash/blink a color to notify the user
-    // 
-    //     }
     }
 
     private void updateSearchResults(String query) {
@@ -139,13 +160,13 @@ public class Search {
 
         for (Todo todo : dbStore.queryTodo()) {
             if (todo.getName().toLowerCase().contains(query.toLowerCase())) {
-                searchResultsListView.getItems().add(todo.getName());
+                searchResultsListView.getItems().add(todo);
             }
         }
 
         for (Note note : dbStore.queryNotes()) {
             if (note.getTitle().toLowerCase().contains(query.toLowerCase())) {
-                searchResultsListView.getItems().add(note.getTitle());
+                searchResultsListView.getItems().add(note);
             }
         }
     }

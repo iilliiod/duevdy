@@ -8,12 +8,21 @@ public class Todo implements AppElement {
     private Boolean completed;
     private String content;
     private final String ID;
+    private Boolean isSelected;
 
     public Todo (String uuid, String name, LocalDate dueDate, Boolean completed) {
+        this.isSelected = false;
         this.ID = uuid;
         this.name = name;
         this.dueDate = dueDate;
         this.completed = completed;
+    }
+
+    public void setSelected(Boolean selected) {
+        this.isSelected = selected;
+    }
+    public Boolean getSelected() {
+        return this.isSelected;
     }
 
     public String getName() {
