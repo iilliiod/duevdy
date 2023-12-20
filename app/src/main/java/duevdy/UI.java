@@ -251,7 +251,7 @@ public class UI {
     private static void load(TilePane cardContainer) {
         if(DbStore.getInstance().queryTodo().size() <= 0) {
             System.out.println("no existing data found, initializing defaults...");
-            dbStore.addTodo("New Todo...", dateToday);
+            dbStore.addTodo("Title...", dateToday);
         }
 
         for (Todo c : dbStore.queryTodo()) {

@@ -34,6 +34,9 @@ public class Nav {
     private FontIcon noteIcon = new FontIcon("mdi-note-text");
     private FontIcon progressIcon = new FontIcon("mdi-creation");
     private Region spacer = new Region();
+    private static StringProperty progressText = new SimpleStringProperty();
+    private static DoubleProperty completedTasks;
+    private static DoubleProperty totalTasks;
 
     public Nav() {
         todoIcon.setId("icon-todo"); 
@@ -98,20 +101,30 @@ public class Nav {
         sideBar.getChildren().remove(sideBarStack);
         sideBar.getChildren().add(sideBarStack);
     }
+
+    private static Integer[] updateData() {
+        Integer[] data = new Integer[2];
+        data[0] = DbStore.getInstance().getCompletedTodoCnt();
+        data[1] = DbStore.getInstance().queryTodo().size();
+        return data;
+    }
+
+    public static void loadProgressBarProperties() {
+        completedTasks = new SimpleDoubleProperty(updateData()[0]);
+        totalTasks = new SimpleDoubleProperty(updateData()[1]);
+
+        progressText.bind(Bindings.when(Bindings.greaterThan(totalTasks,(0.0)))
+                .then(completedTasks.divide(totalTasks).multiply(100).asString("%.0f").concat("%"))
+                .otherwise("--"));
+    }
+
     public void setProgressBar() {
         Label label = new Label();
         label.setGraphic(progressIcon);
         label.setId("nav-progress-label");
 
-        DoubleProperty completedTasks = new SimpleDoubleProperty(DbStore.getInstance().getCompletedTodoCnt());
-        DoubleProperty totalTasks = new SimpleDoubleProperty(DbStore.getInstance().queryTodo().size());
+        loadProgressBarProperties();
 
-
-        StringProperty progressText = new SimpleStringProperty();
-        progressText.bind(Bindings.concat(
-                    completedTasks.divide(totalTasks).multiply(100).asString("%.0f"),
-                    "%"
-                    ));
         label.textProperty().bind(Bindings.concat("To-Do Progress: \t\t\t", progressText));
 
         logger.out(DbStore.getInstance().getCompletedTodoCnt() + "/" + DbStore.getInstance().queryTodo().size());

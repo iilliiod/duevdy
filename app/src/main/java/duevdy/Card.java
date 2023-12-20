@@ -140,7 +140,6 @@ public class Card {
     public TextField getTodoDateTextField() {
         return todoDateTextField;
     }
-
     private void setTextFields() {
         todoName = todo.getName();
         todoDate = todo.getDate();
@@ -220,11 +219,16 @@ public class Card {
         Library.createTooltip(datePickerBtn, "Yes, this changes the date.");
     }
 
+    private void updateCardBehavior() {
+        Nav.loadProgressBarProperties();
+    }
+
     private void createDelBtn() {
         delBtn = new Button();
         delBtn.setOnAction(event -> {
             DbStore.getInstance().deleteTodo(todo);
             container.getChildren().remove(cardHbox);
+            updateCardBehavior();
             // TODO: update/refresh
         });
         delBtn.setId("del-btn");
@@ -338,7 +342,15 @@ public class Card {
                         if (todo != null) {
                             // selectable.set(true);
                             todo.setSelected(true);
-                            if(!buffer.contains(todo)) buffer.add(todo);
+                            if(!buffer.contains(todo)) {
+                                for(Todo t : todos) {
+                                    System.out.println("we be in the loop");
+                                    if(t.equals(todo)) {
+                                        System.out.println("we be in the buffer" + buffer);
+                                        buffer.add(t);
+                                    }
+                                }
+                            }
                             System.out.println(buffer);
                             Library.createSelectScaleTransition(cardHbox, 0.5);
                             // if(todo.getSelected()) {
@@ -439,7 +451,7 @@ public class Card {
                         container.getChildren().remove(newTodoLayout);
                         todoViewInstance--;
                         logger.out(todo.toString());
-                        // UI.reload();
+                        updateCardBehavior();
                     }
                 }
             });
